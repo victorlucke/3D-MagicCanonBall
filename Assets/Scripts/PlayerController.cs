@@ -1,9 +1,12 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
+using FirstGearGames.SmoothCameraShaker;
 
 public class PlayerController : MonoBehaviour
 {
+    public ShakeData enemyShakeData;
+    public bool playerMove;
     public float speed;
     public TextMeshProUGUI countText;
     public TextMeshProUGUI endGameText;
@@ -24,6 +27,8 @@ public class PlayerController : MonoBehaviour
         finalPhaseMenu.SetActive(false);
         finalPhase.SetActive(false);
         SetCountText();
+
+        AudioManager.instance.ChangeMusic("Phase1Music");
     }
 
     void OnMove(InputValue movementValue)
@@ -32,6 +37,8 @@ public class PlayerController : MonoBehaviour
 
         movementX = MovementVector.x;
         movementY = MovementVector.y;
+
+        playerMove = true;
     }
 
     void FinalPhase()
@@ -39,6 +46,7 @@ public class PlayerController : MonoBehaviour
         Time.timeScale = 0;
         finalPhase.SetActive(true);
         finalPhaseMenu.SetActive(true);
+        AudioManager.instance.ChangeMusic("Phase3Music");
     }
 
     void SetCountText()
@@ -47,6 +55,7 @@ public class PlayerController : MonoBehaviour
         if(count >= 9)
         {
             EndGame("You Win!");
+            AudioManager.instance.ChangeMusic("WinnerMusic");
         }else if (count == 8)
         {
             FinalPhase();
@@ -57,7 +66,8 @@ public class PlayerController : MonoBehaviour
     {
         endGameScreen.SetActive(true);
         endGameText.text = test;
-        Time.timeScale = 0;
+        gameObject.SetActive(false);
+        //Time.timeScale = 0;
     }
 
     void FixedUpdate()
@@ -91,6 +101,7 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Enemy"))
         {
             EndGame("You Lose!");
+            CameraShakerHandler.Shake(enemyShakeData);
             Destroy(gameObject);
         }
     }
