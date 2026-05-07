@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     public GameObject endGameScreen;
     public GameObject finalPhase;
     public GameObject finalPhaseMenu;
+    public Vector3 oppositeDirection;
     private Rigidbody rb;
     [SerializeField] private int count;
     private float movementX;
@@ -75,6 +76,7 @@ public class PlayerController : MonoBehaviour
         if (onGround)
         {
             Vector3 movement = new Vector3(movementX, 0.0f, movementY);
+            oppositeDirection = -movement + gameObject.transform.position;
 
             rb.AddForce(movement * speed);
         }
