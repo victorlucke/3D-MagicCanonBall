@@ -6,19 +6,19 @@ using FirstGearGames.SmoothCameraShaker;
 public class PlayerController : MonoBehaviour
 {
     public ShakeData enemyShakeData;
-    public bool playerMove;
-    public float speed;
     public TextMeshProUGUI countText;
     public TextMeshProUGUI endGameText;
     public GameObject endGameScreen;
     public GameObject finalPhase;
     public GameObject finalPhaseMenu;
     public Vector3 oppositeDirection;
+    public bool playerMove;
+    public bool onGround;
+    public float speed;
     private Rigidbody rb;
     [SerializeField] private int count;
     private float movementX;
     private float movementY;
-    [SerializeField] private bool onGround;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
