@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
-    public static AudioManager instance;
+    public static AudioManager Instance;
     public List<AudioClip> audioClip;
     private Dictionary<string, AudioClip> musicLoopDicionary = new Dictionary<string, AudioClip>();
     private AudioSource audioSource;
 
     void Awake()
     {
-        if (instance == null)
+        if (Instance == null)
         {
-            instance = this;
+            Instance = this;
             DontDestroyOnLoad(gameObject);
         }
         else
@@ -22,18 +22,6 @@ public class AudioManager : MonoBehaviour
         SaveAllMusics();
 
         audioSource = GetComponent<AudioSource>();
-    }
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     /// <summary>

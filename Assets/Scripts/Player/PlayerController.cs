@@ -2,15 +2,14 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
 using FirstGearGames.SmoothCameraShaker;
+using UnityEditor;
 
 public class PlayerController : MonoBehaviour
 {
+    public MenuController menuController;
     public ShakeData enemyShakeData;
     public TextMeshProUGUI countText;
-    public TextMeshProUGUI endGameText;
-    public GameObject endGameScreen;
     public GameObject finalPhase;
-    public GameObject finalPhaseMenu;
     public Vector3 oppositeDirection;
     public bool playerMove;
     public bool onGround;
@@ -22,14 +21,17 @@ public class PlayerController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        menuController = GameObject.Find("MenuUI").GetComponent<MenuController>();
+
         rb = GetComponent<Rigidbody>();
+
         count = 0;
-        endGameScreen.SetActive(false);
-        finalPhaseMenu.SetActive(false);
+        
         finalPhase.SetActive(false);
+
         SetCountText();
 
-        AudioManager.instance.ChangeMusic("Phase1Music");
+        AudioManager.Instance.ChangeMusic("Phase1Music");
     }
 
     void OnMove(InputValue movementValue)
@@ -44,10 +46,9 @@ public class PlayerController : MonoBehaviour
 
     void FinalPhase()
     {
-        Time.timeScale = 0;
+        menuController.AccessMenu(MenuController.MenuActivate.Pause);
         finalPhase.SetActive(true);
-        finalPhaseMenu.SetActive(true);
-        AudioManager.instance.ChangeMusic("Phase3Music");
+        AudioManager.Instance.ChangeMusic("Phase3Music");
     }
 
     void SetCountText()
@@ -55,20 +56,12 @@ public class PlayerController : MonoBehaviour
         countText.text = "Count: " + count.ToString();
         if(count >= 9)
         {
-            EndGame("You Win!");
-            AudioManager.instance.ChangeMusic("WinnerMusic");
+            menuController.AccessMenu(MenuController.MenuActivate.Win);
+            AudioManager.Instance.ChangeMusic("WinnerMusic");
         }else if (count == 8)
         {
             FinalPhase();
         }
-    }
-
-    void EndGame(string test)
-    {
-        endGameScreen.SetActive(true);
-        endGameText.text = test;
-        gameObject.SetActive(false);
-        //Time.timeScale = 0;
     }
 
     void FixedUpdate()
@@ -82,7 +75,7 @@ public class PlayerController : MonoBehaviour
         }
         if (transform.position.y < 0)
         {
-            EndGame("You Lose!");
+            menuController.AccessMenu(MenuController.MenuActivate.Lose);
         }
     }
 
@@ -102,7 +95,7 @@ public class PlayerController : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            EndGame("You Lose!");
+            menuController.AccessMenu(MenuController.MenuActivate.Lose);
             CameraShakerHandler.Shake(enemyShakeData);
             Destroy(gameObject);
         }
