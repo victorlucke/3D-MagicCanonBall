@@ -1,14 +1,7 @@
 fileFormatVersion: 2
-guid: cfa570707f90a144e9f2d59aabcaa705
+guid: ad5576c9587c58f4db3666ef5e8146fe
 PrefabImporter:
   externalObjects: {}
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 360808
-  packageName: Stylized Character Pack
-  packageVersion: 1.0
-  assetPath: Assets/StylizedCharacterPack/Prefabs/Characters/Sloth.prefab
-  uploadId: 861256
