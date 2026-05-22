@@ -1,7 +1,14 @@
 fileFormatVersion: 2
-guid: 9508ccae6dd32b54cb61bd81eda00380
+guid: 1d3a375b9afc3d14eae31e10d901bfb1
+AssetOrigin:
+  serializedVersion: 1
+  productId: 326043
+  packageName: Human Spellcasting Animations FREE
+  packageVersion: 1.0
+  assetPath: Assets/Kevin Iglesias/Human Animations/Animations/Male/Idles/HumanM@Idle03.fbx
+  uploadId: 825286
 ModelImporter:
-  serializedVersion: 22200
+  serializedVersion: 24200
   internalIDToNameTable: []
   externalObjects: {}
   materials:
@@ -16,8 +23,6 @@ ModelImporter:
     optimizeGameObjects: 0
     removeConstantScaleCurves: 0
     motionNodeName: 
-    rigImportErrors: 
-    rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 
@@ -33,18 +38,18 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: HumanM@Idle02
+      name: HumanTired
       takeName: Untitled
       internalID: 3094330708855449807
       firstFrame: 0
-      lastFrame: 81
+      lastFrame: 80
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 1
+      loopTime: 0
       loopBlend: 0
       loopBlendOrientation: 1
       loopBlendPositionY: 1
@@ -205,6 +210,9 @@ ModelImporter:
     maxBonesPerVertex: 4
     minBoneWeight: 0.001
     optimizeBones: 1
+    generateMeshLods: 0
+    meshLodGenerationFlags: 0
+    maximumMeshLod: -1
     meshOptimizationFlags: -1
     indexFormat: 0
     secondaryUVAngleDistortion: 8
@@ -646,18 +654,18 @@ ModelImporter:
         length: 0
         modified: 0
     skeleton:
-    - name: Human_DummyModel_M(Clone)
+    - name: HumanM_Model(Clone)
       parentName: 
       position: {x: -0, y: 0, z: 0}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: HumanM_BodyMesh
-      parentName: Human_DummyModel_M(Clone)
+      parentName: HumanM_Model(Clone)
       position: {x: -0, y: 0, z: 0}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: Rig
-      parentName: Human_DummyModel_M(Clone)
+      parentName: HumanM_Model(Clone)
       position: {x: -0, y: 0, z: 0}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
@@ -953,8 +961,7 @@ ModelImporter:
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1
-  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 2faa610713d3b3c439473daa55e8c60a,
-    type: 3}
+  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 2faa610713d3b3c439473daa55e8c60a, type: 3}
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 3
   humanoidOversampling: 1
@@ -966,10 +973,3 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 326043
-  packageName: Human Spellcasting Animations FREE
-  packageVersion: 1.0
-  assetPath: Assets/Kevin Iglesias/Human Animations/Animations/Male/Idles/HumanM@Idle02.fbx
-  uploadId: 825286

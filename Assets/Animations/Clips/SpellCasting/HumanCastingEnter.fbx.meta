@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: 02f82df7d301d274883b41f32dca59a0
+guid: 2f6016e9e7e6ff247b2c268a733fe053
 AssetOrigin:
   serializedVersion: 1
   productId: 326043
   packageName: Human Spellcasting Animations FREE
   packageVersion: 1.0
-  assetPath: Assets/Kevin Iglesias/Human Animations/Animations/Male/Idles/HumanM@Idle01-Idle02.fbx
+  assetPath: Assets/Kevin Iglesias/Human Animations/Animations/Male/Combat/Spellcasting/HumanM@CastingEnter01.fbx
   uploadId: 825286
 ModelImporter:
   serializedVersion: 24200
@@ -38,11 +38,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: HumanM@Idle01-Idle02
+      name: HumanCastingEnter
       takeName: Untitled
       internalID: 3094330708855449807
       firstFrame: 0
-      lastFrame: 20
+      lastFrame: 21
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -654,18 +654,18 @@ ModelImporter:
         length: 0
         modified: 0
     skeleton:
-    - name: Human_DummyModel_M(Clone)
+    - name: HumanM_Model(Clone)
       parentName: 
       position: {x: -0, y: 0, z: 0}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: HumanM_BodyMesh
-      parentName: Human_DummyModel_M(Clone)
+      parentName: HumanM_Model(Clone)
       position: {x: -0, y: 0, z: 0}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: Rig
-      parentName: Human_DummyModel_M(Clone)
+      parentName: HumanM_Model(Clone)
       position: {x: -0, y: 0, z: 0}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}

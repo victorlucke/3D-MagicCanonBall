@@ -1,7 +1,14 @@
 fileFormatVersion: 2
-guid: b98582042c1292a4e81193a2e417a4d2
+guid: 9508ccae6dd32b54cb61bd81eda00380
+AssetOrigin:
+  serializedVersion: 1
+  productId: 326043
+  packageName: Human Spellcasting Animations FREE
+  packageVersion: 1.0
+  assetPath: Assets/Kevin Iglesias/Human Animations/Animations/Male/Idles/HumanM@Idle02.fbx
+  uploadId: 825286
 ModelImporter:
-  serializedVersion: 22200
+  serializedVersion: 24200
   internalIDToNameTable: []
   externalObjects: {}
   materials:
@@ -17,12 +24,7 @@ ModelImporter:
     removeConstantScaleCurves: 0
     motionNodeName: 
     animationImportErrors: 
-    animationImportWarnings: "\nClip 'Untitled' has import animation warnings that
-      might lower retargeting quality:\nNote: Activate translation DOF on avatar
-      to improve retargeting quality.\n\t'B-thigh.R' has scale animation that will
-      be discarded.\n\t'B-shin.R' has scale animation that will be discarded.\n\t'B-foot.R'
-      has scale animation that will be discarded.\n\t'B-toe.R' has scale animation
-      that will be discarded.\n"
+    animationImportWarnings: 
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
@@ -36,18 +38,18 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: HumanM@MagicAttackOmni01
+      name: HumanAngry
       takeName: Untitled
       internalID: 3094330708855449807
       firstFrame: 0
-      lastFrame: 47
+      lastFrame: 81
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 1
       loopBlendPositionY: 1
@@ -208,6 +210,9 @@ ModelImporter:
     maxBonesPerVertex: 4
     minBoneWeight: 0.001
     optimizeBones: 1
+    generateMeshLods: 0
+    meshLodGenerationFlags: 0
+    maximumMeshLod: -1
     meshOptimizationFlags: -1
     indexFormat: 0
     secondaryUVAngleDistortion: 8
@@ -649,18 +654,18 @@ ModelImporter:
         length: 0
         modified: 0
     skeleton:
-    - name: HumanM_Model(Clone)
+    - name: Human_DummyModel_M(Clone)
       parentName: 
       position: {x: -0, y: 0, z: 0}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: HumanM_BodyMesh
-      parentName: HumanM_Model(Clone)
+      parentName: Human_DummyModel_M(Clone)
       position: {x: -0, y: 0, z: 0}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: Rig
-      parentName: HumanM_Model(Clone)
+      parentName: Human_DummyModel_M(Clone)
       position: {x: -0, y: 0, z: 0}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
@@ -956,8 +961,7 @@ ModelImporter:
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1
-  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 2faa610713d3b3c439473daa55e8c60a,
-    type: 3}
+  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 2faa610713d3b3c439473daa55e8c60a, type: 3}
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 3
   humanoidOversampling: 1
@@ -969,10 +973,3 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 326043
-  packageName: Human Spellcasting Animations FREE
-  packageVersion: 1.0
-  assetPath: Assets/Kevin Iglesias/Human Animations/Animations/Male/Combat/Spellcasting/MagicAttacks/Omnidirectional/HumanM@MagicAttackOmni01.fbx
-  uploadId: 825286
