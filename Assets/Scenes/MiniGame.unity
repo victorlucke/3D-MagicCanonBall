@@ -2916,14 +2916,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: MenuUI
       objectReference: {fileID: 0}
-    - target: {fileID: 1533668712387534031, guid: 8539d20fe6dae0e49ab71702615e073f, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3368018289285800849, guid: 8539d20fe6dae0e49ab71702615e073f, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8648641989729284743, guid: 8539d20fe6dae0e49ab71702615e073f, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
