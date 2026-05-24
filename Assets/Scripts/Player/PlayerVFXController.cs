@@ -1,4 +1,6 @@
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerVFXController : MonoBehaviour
 {
@@ -56,13 +58,13 @@ public class PlayerVFXController : MonoBehaviour
 
         skidDustObject.transform.position = dustFinalPosition;
 
-        // if (playerCurrentSpeed > maxSpeedToDust / 2 && playerCurrentSpeed < maxSpeedToDust)
-        // {
-        skidDustObject.transform.LookAt(playerController.oppositeDirection);
+        if (playerController.playerMove)
+        {
+            skidDustObject.transform.LookAt(playerController.oppositeDirection);
 
-        skidDustObject.GetComponent<ParticleSystem>().Stop();
-        skidDustObject.GetComponent<ParticleSystem>().Play();
-        // }
+            skidDustObject.GetComponent<ParticleSystem>().Stop();
+            skidDustObject.GetComponent<ParticleSystem>().Play();
+        }
     }
     void PlayDustOnMove()
     {
@@ -82,7 +84,7 @@ public class PlayerVFXController : MonoBehaviour
             }
             else if (IsSlowingDown() && playerCurrentSpeed > minSpeedToDust)
             {
-                Debug.Log(playerCurrentSpeed);
+                //Debug.Log(playerCurrentSpeed);
                 SkidDustVFX();
             }
             else
@@ -112,7 +114,7 @@ public class PlayerVFXController : MonoBehaviour
         // {
         if (!isPlayingVFX)
         {
-            Debug.Log("Stop Loop");
+            //Debug.Log("Stop Loop");
 
             SetDustModulesVFX(initialLoop, initialCycle);
 
@@ -142,7 +144,7 @@ public class PlayerVFXController : MonoBehaviour
 
         if (!isPlayingVFX)
         {
-            Debug.Log("Start Loop");
+            //Debug.Log("Start Loop");
 
             SetDustModulesVFX(newLoop, newCycle);
 

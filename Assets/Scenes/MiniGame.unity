@@ -2916,14 +2916,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: MenuUI
       objectReference: {fileID: 0}
-    - target: {fileID: 1533668712387534031, guid: 8539d20fe6dae0e49ab71702615e073f, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3368018289285800849, guid: 8539d20fe6dae0e49ab71702615e073f, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8648641989729284743, guid: 8539d20fe6dae0e49ab71702615e073f, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -10941,19 +10933,19 @@ PrefabInstance:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 406916096}
   - {fileID: 37171475}
   - {fileID: 561060744}
-  - {fileID: 1252910213}
+  - {fileID: 1290552586}
+  - {fileID: 1027682788}
   - {fileID: 1459894891}
+  - {fileID: 1322461744}
+  - {fileID: 1252910213}
+  - {fileID: 145571480}
+  - {fileID: 1999444466}
+  - {fileID: 147353282}
   - {fileID: 1878927580}
   - {fileID: 2056993893}
   - {fileID: 287720773}
-  - {fileID: 1322461744}
-  - {fileID: 1999444466}
   - {fileID: 2125919122}
-  - {fileID: 147353282}
-  - {fileID: 145571480}
-  - {fileID: 1027682788}
-  - {fileID: 406916096}
-  - {fileID: 1290552586}
   - {fileID: 507486659}

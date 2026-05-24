@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
 
         count = 0;
-        
+
         finalPhase.SetActive(false);
 
         SetCountText();
@@ -36,12 +36,17 @@ public class PlayerController : MonoBehaviour
 
     void OnMove(InputValue movementValue)
     {
-        Vector2 MovementVector = movementValue.Get<Vector2>();
+        Vector2 movementVector = movementValue.Get<Vector2>();
 
-        movementX = MovementVector.x;
-        movementY = MovementVector.y;
+        movementX = movementVector.x;
+        movementY = movementVector.y;
+        
+        if (movementX != 0 || movementY != 0)
+            playerMove = true;
+        else
+            playerMove = false;
 
-        playerMove = true;
+        Debug.Log(playerMove);
     }
 
     void FinalPhase()
@@ -54,11 +59,12 @@ public class PlayerController : MonoBehaviour
     void SetCountText()
     {
         countText.text = "Count: " + count.ToString();
-        if(count >= 9)
+        if (count >= 9)
         {
             menuController.AccessMenu(MenuController.MenuActivate.Win);
             AudioManager.Instance.ChangeMusic("WinnerMusic");
-        }else if (count == 8)
+        }
+        else if (count == 8)
         {
             FinalPhase();
         }
