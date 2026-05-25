@@ -46,7 +46,7 @@ public class PlayerController : MonoBehaviour
         else
             playerMove = false;
 
-        Debug.Log(playerMove);
+        //Debug.Log(playerMove);
     }
 
     void FinalPhase()

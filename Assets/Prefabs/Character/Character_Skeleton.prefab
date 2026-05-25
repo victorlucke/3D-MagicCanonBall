@@ -947,7 +947,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6305894385888242128}
-  - component: {fileID: 99964694479139754}
   m_Layer: 0
   m_Name: SkeletonModel
   m_TagString: Untagged
@@ -973,28 +972,6 @@ Transform:
   - {fileID: 1597394719595127452}
   m_Father: {fileID: 1009910873593459530}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &99964694479139754
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6685832396401537898}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: a0c184e9e8578c34d8d5c720292ba8fe, type: 3}
-  m_Controller: {fileID: 9100000, guid: 25cfccb6f5ea5864aa2e1aa3fa4a4c63, type: 2}
-  m_CullingMode: 1
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 1
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &6698187518851458044
 GameObject:
   m_ObjectHideFlags: 0
