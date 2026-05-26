@@ -1,37 +1,44 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using TMPro;
 using FirstGearGames.SmoothCameraShaker;
-using UnityEditor;
 
 public class PlayerController : MonoBehaviour
 {
-    public MenuController menuController;
+    /// <summary>
+    /// Things to do: 
+    /// mecher audioManager para tocar musica com base na phase, status do jogo, 
+    /// update gameManager com phases para captar os sons, menus etc?
+    /// update gameManager, alterar variavel GameStatus para Pause Unpause, Win Lose separados...
+    /// mudar condicao de vitoria no gameManager para menuController acessar
+    /// isso importa, porque voce e um programador, faca o codigo descente, NAO IMPORTA SE NINGUEM VAI VER!
+    /// VOCE VAI FAZER E VAI CONSEGUIR DEIXAR ESSE CODIGO MELHOR AAAAAAAAAAAAA.
+    /// pensar em terminar o level design? veremos....................
+    /// </summary>
+    //Necessary to play with it: GameManager, Ground, 
     public ShakeData enemyShakeData;
-    public TextMeshProUGUI countText;
     public GameObject finalPhase;
     public Vector3 oppositeDirection;
     public bool playerMove;
     public bool onGround;
     public float speed;
     private Rigidbody rb;
-    [SerializeField] private int count;
     private float movementX;
     private float movementY;
+
+    void Awake()
+    {
+
+        rb = gameObject.GetComponent<Rigidbody>();
+    }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        menuController = GameObject.Find("MenuUI").GetComponent<MenuController>();
-
-        rb = GetComponent<Rigidbody>();
-
-        count = 0;
-
         finalPhase.SetActive(false);
 
-        SetCountText();
+        // SetCountText();
 
-        AudioManager.Instance.ChangeMusic("Phase1Music");
+        //AudioManager.Instance.ChangeMusic("Phase1Music");
     }
 
     void OnMove(InputValue movementValue)
@@ -49,26 +56,26 @@ public class PlayerController : MonoBehaviour
         //Debug.Log(playerMove);
     }
 
-    void FinalPhase()
-    {
-        menuController.AccessMenu(MenuController.MenuActivate.Pause);
-        finalPhase.SetActive(true);
-        AudioManager.Instance.ChangeMusic("Phase3Music");
-    }
+    // void FinalPhase()
+    // {
+    //     menuController.AccessMenu(MenuController.MenuActivate.Pause);
+    //     finalPhase.SetActive(true);
+    //     AudioManager.Instance.ChangeMusic("Phase3Music");
+    // }
 
-    void SetCountText()
-    {
-        countText.text = "Count: " + count.ToString();
-        if (count >= 9)
-        {
-            menuController.AccessMenu(MenuController.MenuActivate.Win);
-            AudioManager.Instance.ChangeMusic("WinnerMusic");
-        }
-        else if (count == 8)
-        {
-            FinalPhase();
-        }
-    }
+    // void SetCountText()
+    // {
+    //     countText.text = "Count: " + count.ToString();
+    //     if (count >= 9)
+    //     {
+    //         menuController.AccessMenu(MenuController.MenuActivate.Win);
+    //         AudioManager.Instance.ChangeMusic("WinnerMusic");
+    //     }
+    //     else if (count == 8)
+    //     {
+    //         FinalPhase();
+    //     }
+    // }
 
     void FixedUpdate()
     {
@@ -81,7 +88,7 @@ public class PlayerController : MonoBehaviour
         }
         if (transform.position.y < 0)
         {
-            menuController.AccessMenu(MenuController.MenuActivate.Lose);
+            GameManager.Instance.GameOver();
         }
     }
 
@@ -101,7 +108,7 @@ public class PlayerController : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            menuController.AccessMenu(MenuController.MenuActivate.Lose);
+            GameManager.Instance.GameOver();
             CameraShakerHandler.Shake(enemyShakeData);
             Destroy(gameObject);
         }
@@ -112,9 +119,8 @@ public class PlayerController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Pickup"))
         {
-            count = count + 1;
             other.gameObject.SetActive(false);
-            SetCountText();
+            GameManager.Instance.AddCount();
         }
     }
 }

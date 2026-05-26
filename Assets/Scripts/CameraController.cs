@@ -4,6 +4,11 @@ public class CameraController : MonoBehaviour
 {
     public GameObject player;
     private Vector3 offset;
+
+    void Awake()
+    {
+        player = GameObject.Find("Player").gameObject;
+    }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {

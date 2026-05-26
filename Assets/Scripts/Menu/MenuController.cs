@@ -17,15 +17,15 @@ public class MenuController : MonoBehaviour
         loserMenuObject = GameObject.Find("LoserMenu");
         winnerMenuObject = GameObject.Find("WinnerMenu");
         finalPhaseMenuObject = GameObject.Find("FinalPhaseMenu");
-
     }
-
 
     void Start()
     {
         AccessMenu(MenuActivate.Main);
     }
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
+    void OnEnable() => GameManager.OnGameOver += GameOverMenu;
+
     public void RestartGame()
     {
         SceneManager.LoadScene(0);
@@ -38,36 +38,9 @@ public class MenuController : MonoBehaviour
         GameManager.Instance.UnpauseGame();
     }
 
-    private void ShowMainMenu(bool isToShow)
+    void GameOverMenu()
     {
-        mainMenuObject.SetActive(isToShow);
-    }
-
-    private void ShowLoserMenu(bool isToShow)
-    {
-        loserMenuObject.SetActive(isToShow);
-    }
-
-    private void ShowWinnerMenu(bool isToShow)
-    {
-        winnerMenuObject.SetActive(isToShow);
-    }
-
-    private void ShowPauseMenu(bool isToShow)
-    {
-        finalPhaseMenu.SetActive(isToShow);
-    }
-
-    private void DeactivateAllMenus()
-    {
-        int numberOfMenus;
-
-        numberOfMenus = transform.childCount;
-
-        for (int i = 0; i < numberOfMenus; i++)
-        {
-            transform.GetChild(i).gameObject.SetActive(false);
-        }
+        AccessMenu(MenuActivate.Lose);
     }
 
     /// <summary>
@@ -98,5 +71,36 @@ public class MenuController : MonoBehaviour
                 ShowPauseMenu(true);
                 break;
         }
+    }
+    private void DeactivateAllMenus()
+    {
+        int numberOfMenus;
+
+        numberOfMenus = transform.childCount;
+
+        for (int i = 0; i < numberOfMenus; i++)
+        {
+            transform.GetChild(i).gameObject.SetActive(false);
+        }
+    }
+
+    private void ShowMainMenu(bool isToShow)
+    {
+        mainMenuObject.SetActive(isToShow);
+    }
+
+    private void ShowLoserMenu(bool isToShow)
+    {
+        loserMenuObject.SetActive(isToShow);
+    }
+
+    private void ShowWinnerMenu(bool isToShow)
+    {
+        winnerMenuObject.SetActive(isToShow);
+    }
+
+    private void ShowPauseMenu(bool isToShow)
+    {
+        finalPhaseMenu.SetActive(isToShow);
     }
 }

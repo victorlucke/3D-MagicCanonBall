@@ -1,9 +1,16 @@
+using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
-    public enum GameStatus { Unpause, Pause }
+    public enum GamePhase { phase1 }
+    public enum GameStatus { Unpause, Pause, Win, Over }
+    public static event Action<int> OnCountChanged;
+    public static event Action OnGameOver;
+    public int maxCount;
+    public int count { get; private set; }
     private GameStatus currentGameStatus;
 
     void Awake()
@@ -17,6 +24,23 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
 
         currentGameStatus = GameStatus.Pause;
+
+        maxCount = GameObject.FindGameObjectsWithTag("Pickup").Length;
+    }
+
+    /// <summary>
+    /// Add to the count value and call for the event that change UI
+    /// </summary>
+    public void AddCount()
+    {
+        count++;
+
+        OnCountChanged?.Invoke(count);
+    }
+
+    public void GameOver()
+    {
+        ChangeGameStatus(GameStatus.Over);
     }
 
     /// <summary>
@@ -50,6 +74,9 @@ public class GameManager : MonoBehaviour
                 break;
             case GameStatus.Unpause:
                 Time.timeScale = 1;
+                break;
+            case GameStatus.Over:
+                OnGameOver?.Invoke();
                 break;
         }
     }

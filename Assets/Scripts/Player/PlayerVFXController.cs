@@ -1,9 +1,8 @@
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class PlayerVFXController : MonoBehaviour
 {
+    
     public GameObject dustObject;
     public GameObject skidDustObject;
     public float minSpeedToDust;
