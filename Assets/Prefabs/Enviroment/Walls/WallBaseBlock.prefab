@@ -48,6 +48,8 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8563603312333461941, guid: 90f3f378b452496429d027e375ed0e76, type: 3}
       propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 299564714296829301, guid: 90f3f378b452496429d027e375ed0e76, type: 3}
       propertyPath: m_Name
       value: WallBase

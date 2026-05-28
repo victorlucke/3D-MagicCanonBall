@@ -186,15 +186,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5783f4c651350e49a3d60700051da9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  menuController: {fileID: 0}
   enemyShakeData: {fileID: 11400000, guid: f3fbad4920dbc7748aed27ec13faaf8f, type: 2}
-  countText: {fileID: 0}
   finalPhase: {fileID: 0}
   oppositeDirection: {x: 0, y: 0, z: 0}
   playerMove: 0
   onGround: 0
   speed: 20
-  count: 7
 --- !u!114 &3927595592212866669
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -24,26 +24,27 @@ public class EnemyMovement : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        // if (animator != null)
-        // {
-        //     animator.Rebind();
-        //     animator.Update(0f);
-        // }
-        animator.SetBool("SawEnemy", sawEnemy);
+        if (animator != null)
+            animator.SetBool("SawEnemy", sawEnemy);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(playerController.playerMove && !startChasing)
+        StartPursue();
+    }
+
+    void StartPursue()
+    {
+        if (playerController.playerMove && !startChasing)
             startChasing = true;
 
-        if(player != null && startChasing)
+        if (player != null && startChasing)
         {
             float currentSpeed = navMeshAgent.velocity.magnitude;
-            animator.SetFloat("Speed", currentSpeed);
+            if (animator != null)
+                animator.SetFloat("Speed", currentSpeed);
             navMeshAgent.SetDestination(player.position);
         }
-        
     }
 }
