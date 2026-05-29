@@ -13,7 +13,7 @@ public class SummoningSpell : MonoBehaviour
 
     void Awake()
     {
-        spellDuration = 2;
+        spellDuration = 10;
         isSpellOn = false;
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created

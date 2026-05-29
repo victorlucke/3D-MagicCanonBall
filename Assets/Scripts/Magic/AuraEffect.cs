@@ -23,7 +23,6 @@ public class AuraEffect : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        Debug.Log(insideAuraObjects.Count);
         StartCoroutine(AuraLifeTime());
     }
 
@@ -103,7 +102,6 @@ public class AuraEffect : MonoBehaviour
         else
         {
             insideAuraObjects.Add(newObject);
-            Debug.Log("Saving" + newObject);
         }
     }
 
@@ -125,7 +123,6 @@ public class AuraEffect : MonoBehaviour
         if (isSame)
         {
             insideAuraObjects.Remove(newObject);
-            Debug.Log("Unsaving" + newObject);
         }
     }
 
@@ -137,7 +134,6 @@ public class AuraEffect : MonoBehaviour
         foreach (GameObject obj in insideAuraObjects)
         {
             obj.GetComponent<Rigidbody>().linearDamping -= dampingForce;
-            Debug.Log("Reseting condition");
         }
     }
 

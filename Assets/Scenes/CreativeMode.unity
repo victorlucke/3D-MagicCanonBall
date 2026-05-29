@@ -2514,6 +2514,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 41712157121681609, guid: ad5576c9587c58f4db3666ef5e8146fe, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 01dc7f251ae302b40ba7c93d9b675f38, type: 2}
+    - target: {fileID: 6229635146466738867, guid: ad5576c9587c58f4db3666ef5e8146fe, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6229635146466738867, guid: ad5576c9587c58f4db3666ef5e8146fe, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6229635146466738867, guid: ad5576c9587c58f4db3666ef5e8146fe, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2.5
+      objectReference: {fileID: 0}
     - target: {fileID: 6229635146466738867, guid: ad5576c9587c58f4db3666ef5e8146fe, type: 3}
       propertyPath: m_LocalPosition.x
       value: -11.07096
@@ -2558,32 +2574,19 @@ PrefabInstance:
       propertyPath: m_Name
       value: SlothMage
       objectReference: {fileID: 0}
+    - target: {fileID: 6719314038444005385, guid: ad5576c9587c58f4db3666ef5e8146fe, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7386825334977711783, guid: ad5576c9587c58f4db3666ef5e8146fe, type: 3}
+      propertyPath: knowingSpell
+      value: 
+      objectReference: {fileID: 6187285916708512812, guid: d658e95a703b8ae458f1598848aab4b8, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6719314038444005385, guid: ad5576c9587c58f4db3666ef5e8146fe, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 472494968}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ad5576c9587c58f4db3666ef5e8146fe, type: 3}
---- !u!1 &472494967 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6719314038444005385, guid: ad5576c9587c58f4db3666ef5e8146fe, type: 3}
-  m_PrefabInstance: {fileID: 472494966}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &472494968
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 472494967}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa155339cf511034182c7fb5cc9576e2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CastSpells
-  knowingSpell: {fileID: 6187285916708512812, guid: d658e95a703b8ae458f1598848aab4b8, type: 3}
 --- !u!1 &479478878
 GameObject:
   m_ObjectHideFlags: 0
@@ -3000,6 +3003,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
+    - target: {fileID: 551084529602040435, guid: 0a9989cefe193e44eb1524d24fa6e9e7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5345005370124500950, guid: 0a9989cefe193e44eb1524d24fa6e9e7, type: 3}
       propertyPath: m_LocalPosition.x
       value: -17.0928
@@ -3259,6 +3266,10 @@ PrefabInstance:
     - target: {fileID: 5625579872930438857, guid: f43f2dda930c859409312022f7e610f5, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 5625579872930438857, guid: f43f2dda930c859409312022f7e610f5, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7541,6 +7552,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pickup
       objectReference: {fileID: 0}
+    - target: {fileID: 2657635752130993400, guid: a38816b76778b78458449f15cbd7ed7c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4136124416011505602, guid: a38816b76778b78458449f15cbd7ed7c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.68
@@ -9291,6 +9306,10 @@ PrefabInstance:
     - target: {fileID: 3918169372547329906, guid: cdc42596b14c6334db78c33cdefb79a3, type: 3}
       propertyPath: m_Name
       value: AudioManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 3918169372547329906, guid: cdc42596b14c6334db78c33cdefb79a3, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6745482303709754262, guid: cdc42596b14c6334db78c33cdefb79a3, type: 3}
       propertyPath: m_LocalPosition.x

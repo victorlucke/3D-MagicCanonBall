@@ -5,17 +5,17 @@ using UnityEngine.AI;
 public class EnemyMovement : MonoBehaviour
 {
     public PlayerController playerController;
-    public Transform player;
+    public Transform playerTransform;
     public float speed;
     private NavMeshAgent navMeshAgent;
-    private Animator animator;
-    private bool sawEnemy;
+    protected private Animator animator;
+    protected bool sawEnemy;
     private bool startChasing;
 
     void Awake()
     {
         playerController = GameObject.Find("Player").GetComponent<PlayerController>();
-        player = GameObject.Find("Player").gameObject.transform;
+        playerTransform = GameObject.Find("Player").gameObject.transform;
         navMeshAgent = GetComponent<NavMeshAgent>();
         animator = GetComponentInChildren<Animator>();
         sawEnemy = true;
@@ -24,8 +24,7 @@ public class EnemyMovement : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        if (animator != null)
-            animator.SetBool("SawEnemy", sawEnemy);
+        AnimatorSawEnemy("SawEnemy", sawEnemy);
     }
 
     // Update is called once per frame
@@ -34,17 +33,38 @@ public class EnemyMovement : MonoBehaviour
         StartPursue();
     }
 
-    void StartPursue()
+    protected virtual void StartPursue()
     {
         if (playerController.playerMove && !startChasing)
             startChasing = true;
 
-        if (player != null && startChasing)
+        if (playerTransform != null && startChasing)
         {
             float currentSpeed = navMeshAgent.velocity.magnitude;
-            if (animator != null)
-                animator.SetFloat("Speed", currentSpeed);
-            navMeshAgent.SetDestination(player.position);
+
+            AnimatorCurrentSpeed("Speed", currentSpeed);
+
+            navMeshAgent.SetDestination(playerTransform.position);
         }
+    }
+
+    /// <summary>
+    /// Change the parameter Speed On Animator
+    /// </summary>
+    /// <param name="currentSpeed">the speed.magnitude of the object</param>
+    protected virtual void AnimatorCurrentSpeed(string parameterName,float currentSpeed)
+    {
+        if (animator != null)
+            animator.SetFloat(parameterName, currentSpeed);
+    }
+
+    /// <summary>
+    /// Change the parameter SawEnemy On Animator
+    /// </summary>
+    /// <param name="isSaw"></param>
+    protected virtual void AnimatorSawEnemy(string parameterName, bool isSaw)
+    {
+        if (animator != null)
+            animator.SetBool(parameterName, isSaw);
     }
 }
