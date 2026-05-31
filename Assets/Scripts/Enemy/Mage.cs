@@ -8,7 +8,7 @@ public class Mage : EnemyMovement
     public GameObject spellSlot;
     private bool isCastingAlready;
     private bool isHurt;
-    public bool isStopCast;
+    public bool isCastCooldown;
     int i;
 
     void Awake()
@@ -46,14 +46,16 @@ public class Mage : EnemyMovement
 
     void StartAnimations(bool isToStart)
     {
+        bool changeAnimation = isToStart;
+
         if (animator != null)
         {
-            if (animator.GetBool("SawPlayer") != isToStart)
-                SetAnimatorSawPlayer(isToStart);
+            if (animator.GetBool("SawPlayer") != changeAnimation)
+                SetAnimatorSawPlayer(changeAnimation);
 
-            if (animator.GetBool("IsCasting") != isToStart)
+            if (animator.GetBool("IsCasting") != changeAnimation)
             {
-                AnimatorEnterCastMode(isToStart);
+                AnimatorEnterCastMode(changeAnimation);
             }
 
             if (animator.GetBool("IsCasting"))
@@ -86,23 +88,24 @@ public class Mage : EnemyMovement
 
     void AnimatorCastSpell()
     {
-        if (spellSlot == null)
+        if (!isCastCooldown)
         {
-            float distanceToPlayer = (playerTransform.position - transform.position).magnitude;
-            //Debug.Log("Player Distance: " + distanceToPlayer);
-
-            if (distanceToPlayer >= 10)
+            if (spellSlot == null)
             {
-                animator.SetFloat("RandomSpell", Random.Range(0, 3));
-            }
-            else
-                animator.SetFloat("EnemyDistance", 5);
+                float distanceToPlayer = (playerTransform.position - transform.position).magnitude;
+                //Debug.Log("Player Distance: " + distanceToPlayer);
 
-            if (!isStopCast)
-            {
-                StartCoroutine(WaitBeforeCastAgain());
+                if (distanceToPlayer >= 10)
+                {
+                    animator.SetFloat("RandomSpell", Random.Range(0, 3));
+                }
+                else
+                    animator.SetFloat("EnemyDistance", 5);
+
                 animator.SetTrigger("CastSpell");
                 Debug.Log(i++);
+
+                StartCoroutine(WaitBeforeCastAgain());
             }
         }
 
@@ -110,11 +113,11 @@ public class Mage : EnemyMovement
 
     IEnumerator WaitBeforeCastAgain()
     {
-        isStopCast = true;
+        isCastCooldown = true;
 
         yield return new WaitForSeconds(1);
 
-        isStopCast = false;
+        isCastCooldown = false;
     }
 
     public void CastSpell(GameObject spell)

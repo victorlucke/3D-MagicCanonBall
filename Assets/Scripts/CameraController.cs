@@ -7,19 +7,34 @@ public class CameraController : MonoBehaviour
 
     void Awake()
     {
-        player = GameObject.Find("Player").gameObject;
+        offset = new Vector3(0, 10, -10);
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        offset = transform.position - player.transform.position;
-        //Debug.Log("offset "+offset);
+        FindPlayer();
     }
 
     // Update is called once per frame
     void LateUpdate()
     {
-        if(player != null)
-            transform.position = player.transform.position + offset;
+        if (player != null)
+            PositionCamera();
+        else
+            FindPlayer();
+    }
+
+    void FindPlayer()
+    {
+        if (GameObject.Find("Player").gameObject)
+        {
+            player = GameObject.Find("Player").gameObject;
+        }
+    }
+
+    void PositionCamera()
+    {
+        
+        transform.position = player.transform.position + offset;
     }
 }
