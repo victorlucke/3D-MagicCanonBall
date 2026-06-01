@@ -27,6 +27,47 @@ public class PlayerVFXController : MonoBehaviour
     }
 
     /// <summary>
+    /// Start animation on move, based on current speed of player
+    /// </summary>
+    void PlayDustOnMove()
+    {
+        playerCurrentSpeed = playerRigidbody.linearVelocity.magnitude;
+        ParticleSystem dustParticleSystem = dustObject.GetComponent<ParticleSystem>();
+        ParticleSystem skidDustParticleSystem = skidDustObject.GetComponent<ParticleSystem>();
+
+        if (playerController.onGround)
+        {
+
+            if (playerCurrentSpeed > minSpeedToDust && playerCurrentSpeed < minSpeedToDust + 0.5)
+                MovingDustVFX(dustParticleSystem);
+
+            else if (playerCurrentSpeed > maxSpeedToDust && !IsSlowingDown())
+            {
+                MovingDustVFX(dustParticleSystem, true);
+            }
+            else if (IsSlowingDown() && playerCurrentSpeed > minSpeedToDust)
+            {
+                //Debug.Log(playerCurrentSpeed);
+                SkidDustVFX();
+            }
+            else
+            {
+                isPlayingVFX = false;
+                dustParticleSystem.Stop();
+                skidDustParticleSystem.Stop();
+            }
+        }
+        else
+        {
+            isPlayingVFX = false;
+            dustParticleSystem.Stop();
+            skidDustParticleSystem.Stop();
+        }
+
+        playerCurrentSpeed = 0;
+    }
+
+    /// <summary>
     /// verify if aceleration is increasing or decreasing
     /// </summary>
     /// <returns>true if is false if isnt</returns>
@@ -51,6 +92,9 @@ public class PlayerVFXController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Position and iniciate the visual effect Skid
+    /// </summary>
     void SkidDustVFX()
     {
         Vector3 dustFinalPosition = gameObject.transform.position;
@@ -65,55 +109,20 @@ public class PlayerVFXController : MonoBehaviour
             skidDustObject.GetComponent<ParticleSystem>().Play();
         }
     }
-    void PlayDustOnMove()
-    {
-        playerCurrentSpeed = playerRigidbody.linearVelocity.magnitude;
-        ParticleSystem dustParticleSystem = dustObject.GetComponent<ParticleSystem>();
-        ParticleSystem skidDustParticleSystem = skidDustObject.GetComponent<ParticleSystem>();
-
-        if (playerController.onGround)
-        {
-
-            if (playerCurrentSpeed > minSpeedToDust && playerCurrentSpeed < minSpeedToDust + 0.5)
-                MovingDustVFX(dustParticleSystem, minSpeedToDust);
-
-            else if (playerCurrentSpeed > maxSpeedToDust && !IsSlowingDown())
-            {
-                MovingDustVFX(dustParticleSystem, maxSpeedToDust, true);
-            }
-            else if (IsSlowingDown() && playerCurrentSpeed > minSpeedToDust)
-            {
-                //Debug.Log(playerCurrentSpeed);
-                SkidDustVFX();
-            }
-            else
-            {
-                isPlayingVFX = false;
-                dustParticleSystem.Stop();
-                skidDustParticleSystem.Stop();
-            }
-        }
-
-        playerCurrentSpeed = 0;
-    }
 
     /// <summary>
-    /// play the dust visual effect when player start moving
+    /// Position and start the dust visual effect once
     /// </summary>
-    /// <param name="minSpeed">min speed in magnitude to play the particles  (1 is the lower)</param>
-    void MovingDustVFX(ParticleSystem dustPS, float minSpeed)
+    /// <param name="dustPS"></param>
+    void MovingDustVFX(ParticleSystem dustPS)
     {
         Vector3 dustFinalPosition = gameObject.transform.position;
         bool initialLoop = false;
         int initialCycle = 10;
         dustObject.transform.position = dustFinalPosition;
 
-
-        // if (playerCurrentSpeed > minSpeed && playerCurrentSpeed < minSpeed + 0.5)
-        // {
         if (!isPlayingVFX)
         {
-            //Debug.Log("Stop Loop");
 
             SetDustModulesVFX(initialLoop, initialCycle);
 
@@ -123,39 +132,37 @@ public class PlayerVFXController : MonoBehaviour
 
             isPlayingVFX = true;
         }
-        // }
-        // else if (playerCurrentSpeed < minSpeed)
-        //     isPlayingVFX = false;
     }
 
-
-    void MovingDustVFX(ParticleSystem dustPS, float maxSpeed, bool startLoop)
+    /// <summary>
+    /// Position and start the dust visual effect in loop
+    /// </summary>
+    /// <param name="dustPS"></param>
+    /// <param name="startLoop">true value recommended</param>
+    void MovingDustVFX(ParticleSystem dustPS, bool startLoop)
     {
         Vector3 dustFinalPosition = gameObject.transform.position;
-        bool newLoop = true;
         int newCycle = 0;
 
         dustObject.transform.position = dustFinalPosition;
 
-        // if (playerCurrentSpeed > maxSpeed)
-        // {
         dustObject.transform.LookAt(playerController.oppositeDirection);
 
         if (!isPlayingVFX)
         {
-            //Debug.Log("Start Loop");
-
-            SetDustModulesVFX(newLoop, newCycle);
+            SetDustModulesVFX(startLoop, newCycle);
 
             dustPS.Play();
 
             isPlayingVFX = true;
         }
-        // }
-        // else
-        //     isPlayingVFX = false;
     }
 
+    /// <summary>
+    /// change parameters of particle to loop and cycle continuosly
+    /// </summary>
+    /// <param name="looping"></param>
+    /// <param name="cycles"></param>
     void SetDustModulesVFX(bool looping, int cycles)
     {
         ParticleSystem dustParticleSystem = dustObject.GetComponent<ParticleSystem>();

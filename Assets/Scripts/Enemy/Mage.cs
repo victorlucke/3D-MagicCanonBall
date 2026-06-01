@@ -50,7 +50,7 @@ public class Mage : EnemyMovement
 
         if (animator != null)
         {
-            if (animator.GetBool("SawPlayer") != changeAnimation)
+            if (animator.GetBool("SawEnemy") != changeAnimation)
                 SetAnimatorSawPlayer(changeAnimation);
 
             if (animator.GetBool("IsCasting") != changeAnimation)
@@ -67,7 +67,7 @@ public class Mage : EnemyMovement
 
     void SetAnimatorSawPlayer(bool isSaw)
     {
-        animator.SetBool("SawPlayer", isSaw);
+        animator.SetBool("SawEnemy", isSaw);
     }
 
     void AnimatorEnterCastMode(bool isToCast)
@@ -95,12 +95,12 @@ public class Mage : EnemyMovement
                 float distanceToPlayer = (playerTransform.position - transform.position).magnitude;
                 //Debug.Log("Player Distance: " + distanceToPlayer);
 
-                if (distanceToPlayer >= 10)
-                {
-                    animator.SetFloat("RandomSpell", Random.Range(0, 3));
-                }
-                else
-                    animator.SetFloat("EnemyDistance", 5);
+                // if (distanceToPlayer >= 10)
+                // {
+                //     animator.SetFloat("RandomSpell", Random.Range(0, 3));
+                // }
+                // else
+                animator.SetFloat("EnemyDistance", 5);
 
                 animator.SetTrigger("CastSpell");
                 Debug.Log(i++);
