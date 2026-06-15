@@ -41,13 +41,23 @@ public class PlayerController : MonoBehaviour
         //AudioManager.Instance.ChangeMusic("Phase1Music");
     }
 
+    void OnEnable()
+    {
+        GameManager.OnGameOver += DestroyPlayer;
+    }
+
+    void OnDisable()
+    {
+        GameManager.OnGameOver -= DestroyPlayer;
+    }
+
     void OnMove(InputValue movementValue)
     {
         Vector2 movementVector = movementValue.Get<Vector2>();
 
         movementX = movementVector.x;
         movementY = movementVector.y;
-        
+
         if (movementX != 0 || movementY != 0)
             playerMove = true;
         else
@@ -92,6 +102,12 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    void DestroyPlayer()
+    {
+        CameraShakerHandler.Shake(enemyShakeData);
+        Destroy(gameObject);
+    }
+
     void OnCollisionExit(Collision collision)
     {
         if (collision.gameObject.CompareTag("Ground"))
@@ -102,15 +118,18 @@ public class PlayerController : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Ground"))
-        {
-            onGround = true;
-        }
         if (collision.gameObject.CompareTag("Enemy"))
         {
             GameManager.Instance.GameOver();
-            CameraShakerHandler.Shake(enemyShakeData);
-            Destroy(gameObject);
+        }
+    }
+
+    void OnCollisionStay(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            if (!onGround)
+                onGround = true;
         }
     }
 

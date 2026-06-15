@@ -26,7 +26,7 @@ public class CameraController : MonoBehaviour
 
     void FindPlayer()
     {
-        if (GameObject.Find("Player").gameObject)
+        if (GameObject.Find("Player") != null)
         {
             player = GameObject.Find("Player").gameObject;
         }
@@ -34,7 +34,7 @@ public class CameraController : MonoBehaviour
 
     void PositionCamera()
     {
-        
+
         transform.position = player.transform.position + offset;
     }
 }
