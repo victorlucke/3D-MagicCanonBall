@@ -5,6 +5,7 @@ public class Cannon : MonoBehaviour
 {
     public Transform CannonMouthTransform;
     public GameObject interactIcon;
+    public float shootStrenght;
     private InputAction interactAction;
     private InputAction fireAction;
     private bool isReloaded;
@@ -14,6 +15,8 @@ public class Cannon : MonoBehaviour
     {
         interactAction = InputSystem.actions.FindAction("Interact");
         fireAction = InputSystem.actions.FindAction("Attack");
+
+        shootStrenght = 50.0f;
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -101,7 +104,7 @@ public class Cannon : MonoBehaviour
             ChangeKinematic(ammo, false);
             PositionAmmunition(ammo, false);
 
-            ammoRigidbody.AddForce(-transform.right * 50, ForceMode.Impulse);
+            ammoRigidbody.AddForce(CannonMouthTransform.forward * shootStrenght, ForceMode.Impulse);
 
             Debug.Log("direction " + transform.right);
 
