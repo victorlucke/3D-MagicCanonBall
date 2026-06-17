@@ -1,26 +1,24 @@
-using System;
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class ColliderDetector : MonoBehaviour
+public class AimLayer : MonoBehaviour
 {
-    public Transform aimPoint;
+     public Transform aimPoint;
     public LayerMask layerToDetect;
 
 
 
-    public GameObject ReturnDetectCollider()
+    public GameObject ReturnDetectObject()
     {
         RaycastHit hit;
         if (Physics.Raycast(aimPoint.position, aimPoint.TransformVector(Vector3.forward), out hit, 100, layerToDetect))
         {
             if (hit.distance < 10)
             {
-                GameObject breakableObject;
+                GameObject objectDetected;
 
-                breakableObject = hit.collider.gameObject;
+                objectDetected = hit.collider.gameObject;
 
-                return breakableObject;
+                return objectDetected;
             }
             else
                 return null;
@@ -30,25 +28,29 @@ public class ColliderDetector : MonoBehaviour
         //if(Physics.Raycast(transform.position, transform.forward))
     }
 
-    public void DetectCollider()
+    /// <summary>
+    /// Check the object layer in front of aimPoint, and trigger GameEvent passing this object.
+    /// </summary>
+    public void DetectObject()
     {
         RaycastHit hit;
         if (Physics.Raycast(aimPoint.position, aimPoint.TransformVector(Vector3.forward), out hit, 100, layerToDetect))
         {
             if (hit.distance < 10)
             {
-                GameObject breakableObject;
+                GameObject objectDetected;
 
-                breakableObject = hit.collider.gameObject;
+                objectDetected = hit.collider.gameObject;
 
-                breakableObject.GetComponent<BreakObject>().IdentifyBreakObjects();
+                GameEvents.TriggerOnAimingLayer(objectDetected);
             }
-        }
+        }else
+            GameEvents.TriggerOnAimingLayer(null);
         //if(Physics.Raycast(transform.position, transform.forward))
     }
 
     void FixedUpdate()
     {
-        DetectCollider();
+        DetectObject();
     }
 }

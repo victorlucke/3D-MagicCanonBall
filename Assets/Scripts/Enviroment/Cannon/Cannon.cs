@@ -1,6 +1,11 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+/// <summary>
+/// UPDATE ****************
+/// remover interacao do script canhao, criar um novo so para interagir
+/// remover disparar o canhao como acao e colocar como timer. atira apos xSegundos
+/// </summary>
 public class Cannon : MonoBehaviour
 {
     public Transform CannonMouthTransform;
@@ -106,7 +111,7 @@ public class Cannon : MonoBehaviour
 
             ammoRigidbody.AddForce(CannonMouthTransform.forward * shootStrenght, ForceMode.Impulse);
 
-            Debug.Log("direction " + transform.right);
+            GameEvents.TriggerOnCannonFired(ammo);
 
             loadedObject = null;
             isReloaded = false;

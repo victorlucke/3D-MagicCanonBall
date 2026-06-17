@@ -169,7 +169,7 @@ PrefabInstance:
       addedObject: {fileID: 6397386926458709964}
     - targetCorrespondingSourceObject: {fileID: 100000, guid: 0b021b01c75d442d7b75b546e9dafeef, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 3543382953003425034}
+      addedObject: {fileID: 1795708168684635844}
     - targetCorrespondingSourceObject: {fileID: 100000, guid: 0b021b01c75d442d7b75b546e9dafeef, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7344565651044843762}
@@ -205,7 +205,7 @@ MonoBehaviour:
   interactIcon: {fileID: 6202880252691109692}
   shootStrenght: 0
   loadedObject: {fileID: 0}
---- !u!114 &3543382953003425034
+--- !u!114 &1795708168684635844
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -214,9 +214,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 4589192662293517255}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 472b6543b7fb6f345b7f8d8bd400c49a, type: 3}
+  m_Script: {fileID: 11500000, guid: 1ed48b32bfa187243854e18b743840f7, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ColliderDetector
+  m_EditorClassIdentifier: Assembly-CSharp::AimLayer
   aimPoint: {fileID: 5611407310168400877}
   layerToDetect:
     serializedVersion: 2
