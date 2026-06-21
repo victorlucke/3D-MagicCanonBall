@@ -1,5 +1,5 @@
+using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Rendering;
 using UnityEngine;
 
 public class BreakObject : MonoBehaviour
@@ -9,15 +9,14 @@ public class BreakObject : MonoBehaviour
     public List<string> tagOfObjectBreakers;
     public bool isToBreak;
     public bool IsTargtingMe;
-
-    public void VerifyIsTargtingMe(GameObject teste)
+    public void VerifyIsTargtingMe(GameObject currentTarget)
     {
-        IsTargtingMe = teste == gameObject;
+        IsTargtingMe = currentTarget == gameObject;
     }
 
-    public void VerifyIsToBreak(GameObject tagDoObjeto)
+    public void VerifyIsToBreak(GameObject objectColliding)
     {
-        if (IsTargtingMe && tagOfObjectBreakers.Contains(tagDoObjeto.tag))
+        if (IsTargtingMe && tagOfObjectBreakers.Contains(objectColliding.tag))
             isToBreak = true;
 
     }
@@ -28,6 +27,13 @@ public class BreakObject : MonoBehaviour
     public void StartBreak()
     {
         IdentifyBreakObjects();
+        StartCoroutine(WaitToRemoveParentCollider());
+    }
+
+    private IEnumerator WaitToRemoveParentCollider()
+    {
+        yield return new WaitForSeconds(0.5f);
+
         RemoveParentCollider();
     }
 
@@ -74,17 +80,20 @@ public class BreakObject : MonoBehaviour
     {
         if (isToBreak)
         {
+            //check if collider exist to enable, else creates it
+            if (myObj.GetComponent<Collider>() == null)
+            {
+                myObj.AddComponent<MeshCollider>();
+                myObj.GetComponent<MeshCollider>().convex = true;
+            }
+            else
+                myObj.GetComponent<Collider>().enabled = true;
+
             //check if rigidbody exist to disable kinematic, else creates it
             if (myObj.GetComponent<Rigidbody>() == null)
                 myObj.AddComponent<Rigidbody>();
             else
-                myObj.GetComponent<Rigidbody>().isKinematic = false
-                ;
-            //check if collider exist to enable, else creates it
-            if (myObj.GetComponent<Collider>() == null)
-                myObj.AddComponent<MeshCollider>();
-            else
-                myObj.GetComponent<Collider>().enabled = true;
+                myObj.GetComponent<Rigidbody>().isKinematic = false;
         }
     }
 
