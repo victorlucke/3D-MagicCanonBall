@@ -8,4 +8,12 @@ public class FloorStone : Floors
     {
         CameraShakerHandler.Shake(floorStoneShake);
     }
+
+    new void OnCollisionStay(Collision collision)
+    {
+        if(collision.gameObject == playerObject)
+        {
+            base.OnCollisionStay(collision);
+        }
+    }
 }

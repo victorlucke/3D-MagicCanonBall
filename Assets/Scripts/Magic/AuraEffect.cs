@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using JetBrains.Annotations;
 using UnityEngine;
-using UnityEngine.AI;
 
 public class AuraEffect : MonoBehaviour
 {
@@ -88,20 +86,23 @@ public class AuraEffect : MonoBehaviour
     void SaveObjectInsideAura(GameObject newObject)
     {
         bool isSame = false;
-        if (insideAuraObjects.Count > 0)
+        if (newObject.GetComponent<Rigidbody>() != null)
         {
-            foreach (GameObject obj in insideAuraObjects)
+            if (insideAuraObjects.Count > 0)
             {
-                if (obj == newObject)
-                    isSame = true;
-            }
+                foreach (GameObject obj in insideAuraObjects)
+                {
+                    if (obj == newObject)
+                        isSame = true;
+                }
 
-            if (!isSame) { }
-            insideAuraObjects.Add(newObject);
-        }
-        else
-        {
-            insideAuraObjects.Add(newObject);
+                if (!isSame) { }
+                insideAuraObjects.Add(newObject);
+            }
+            else
+            {
+                insideAuraObjects.Add(newObject);
+            }
         }
     }
 

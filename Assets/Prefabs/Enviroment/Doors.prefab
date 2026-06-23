@@ -252,8 +252,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BreakObject
   isInsideParents: 0
   objectsToBreak:
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 971128611169801624}
+  - {fileID: 5913236191002725214}
   tagOfObjectBreakers:
   - Player
   isToBreak: 0
@@ -273,7 +273,7 @@ MonoBehaviour:
   OnTargetObjectByLayer:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1999906209246654924}
         m_TargetAssemblyTypeName: BreakObject, Assembly-CSharp
         m_MethodName: VerifyIsTargtingMe
         m_Mode: 0
@@ -288,7 +288,7 @@ MonoBehaviour:
   OnFireCannon:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1999906209246654924}
         m_TargetAssemblyTypeName: BreakObject, Assembly-CSharp
         m_MethodName: VerifyIsToBreak
         m_Mode: 0
