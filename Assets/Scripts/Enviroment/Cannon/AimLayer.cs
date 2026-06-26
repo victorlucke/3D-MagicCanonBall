@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class AimLayer : MonoBehaviour
 {
-     public Transform aimPoint;
+    public Transform aimPoint;
     public LayerMask layerToDetect;
 
 

@@ -22,8 +22,8 @@ public class PlayerController : MonoBehaviour
     public bool onGround;
     public float speed;
     private Rigidbody rb;
-    private float movementX;
-    private float movementY;
+    public float movementX;
+    public float movementY;
 
     void Awake()
     {
@@ -91,15 +91,20 @@ public class PlayerController : MonoBehaviour
     {
         if (onGround)
         {
-            Vector3 movement = new Vector3(movementX, 0.0f, movementY);
-            oppositeDirection = -movement + gameObject.transform.position;
-
-            rb.AddForce(movement * speed);
+            movePlayer();
         }
         if (transform.position.y < 0)
         {
             GameManager.Instance.GameOver();
         }
+    }
+
+    void movePlayer()
+    {
+        Vector3 movement = new Vector3(movementX, 0.0f, movementY);
+        oppositeDirection = -movement + gameObject.transform.position;
+
+        rb.AddForce(movement * speed);
     }
 
     void DestroyPlayer()

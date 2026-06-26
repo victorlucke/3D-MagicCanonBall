@@ -20,8 +20,6 @@ public class Cannon : MonoBehaviour
     {
         interactAction = InputSystem.actions.FindAction("Interact");
         fireAction = InputSystem.actions.FindAction("Attack");
-
-        shootStrenght = 50.0f;
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
