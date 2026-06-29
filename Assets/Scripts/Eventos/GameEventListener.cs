@@ -5,17 +5,20 @@ public class GameEventListener : MonoBehaviour
 {
     public UnityEvent<GameObject> OnTargetObjectByLayer;
     public UnityEvent<GameObject> OnFireCannon;
+    public UnityEvent<GameObject> OnBreakObject;
 
     void OnEnable()
     {
         GameEvents.OnAimingLayer += ReactToAimingLayer;
         GameEvents.OnCannonFired += ReactToCannonFire;
+        GameEvents.OnBreakObject += ReactToBreakObject;
     }
 
     void OnDisable()
     {
         GameEvents.OnAimingLayer -= ReactToAimingLayer;
         GameEvents.OnCannonFired -= ReactToCannonFire;
+        GameEvents.OnBreakObject -= ReactToBreakObject;
     }
 
     void ReactToAimingLayer(GameObject targtedObject)
@@ -26,5 +29,10 @@ public class GameEventListener : MonoBehaviour
     void ReactToCannonFire(GameObject firedObject)
     {
         OnFireCannon?.Invoke(firedObject);
+    }
+
+    void ReactToBreakObject(GameObject brokenObject)
+    {
+        OnBreakObject?.Invoke(brokenObject);
     }
 }

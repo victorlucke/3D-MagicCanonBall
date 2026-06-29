@@ -1,20 +1,22 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 /// <summary>
 /// UPDATE ****************
-/// remover interacao do script canhao, criar um novo so para interagir
+/// remover icone de interacao do script canhao, criar um novo so para interagir
 /// remover disparar o canhao como acao e colocar como timer. atira apos xSegundos
 /// </summary>
-public class Cannon : MonoBehaviour
+public class Cannon : BasicFunctionalities
 {
+    public EscolhaEvento evento;
     public Transform CannonMouthTransform;
     public GameObject interactIcon;
     public float shootStrenght;
     private InputAction interactAction;
     private InputAction fireAction;
     private bool isReloaded;
-    [SerializeField]private GameObject loadedObject;
+    [SerializeField] private GameObject loadedObject;
 
     void Awake()
     {
@@ -93,7 +95,6 @@ public class Cannon : MonoBehaviour
         }
     }
 
-
     void ShootCannon(GameObject ammo)
     {
         if (isReloaded)
@@ -109,7 +110,9 @@ public class Cannon : MonoBehaviour
 
             ammoRigidbody.AddForce(CannonMouthTransform.forward * shootStrenght, ForceMode.Impulse);
 
-            GameEvents.TriggerOnCannonFired(ammo);
+            evento.Invoke(ammo);
+
+            PlaySoundEffect();
 
             loadedObject = null;
             isReloaded = false;

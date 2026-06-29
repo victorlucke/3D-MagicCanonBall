@@ -304,13 +304,13 @@ PrefabInstance:
       addedObject: {fileID: 1795708168684635844}
     - targetCorrespondingSourceObject: {fileID: 100000, guid: 0b021b01c75d442d7b75b546e9dafeef, type: 3}
       insertIndex: -1
+      addedObject: {fileID: 3842438683772740625}
+    - targetCorrespondingSourceObject: {fileID: 100000, guid: 0b021b01c75d442d7b75b546e9dafeef, type: 3}
+      insertIndex: -1
       addedObject: {fileID: 7344565651044843762}
     - targetCorrespondingSourceObject: {fileID: 100000, guid: 0b021b01c75d442d7b75b546e9dafeef, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4791620620833310512}
-    - targetCorrespondingSourceObject: {fileID: 100000, guid: 0b021b01c75d442d7b75b546e9dafeef, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 3842438683772740625}
   m_SourcePrefab: {fileID: 100100000, guid: 0b021b01c75d442d7b75b546e9dafeef, type: 3}
 --- !u!4 &4589192662293286887 stripped
 Transform:
@@ -339,6 +339,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c87dc8b3f29242438f0c7a57da6ed2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Cannon
+  evento:
+    eventName: OnCannonFired
+  audioEffect: {fileID: 8300000, guid: b481fb1c9ffd1478dbdbafd5441e0b84, type: 3}
   CannonMouthTransform: {fileID: 5611407310168400877}
   interactIcon: {fileID: 6202880252691109692}
   shootStrenght: 40
@@ -359,6 +362,26 @@ MonoBehaviour:
   layerToDetect:
     serializedVersion: 2
     m_Bits: 8192
+--- !u!114 &3842438683772740625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4589192662293517255}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afc2fcffc8cc71f4bbfff6de284c963b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MoveCannon
+  CannonMouth: {fileID: 207001764874126108}
+  TireLeft: {fileID: 4589192662293517267}
+  TireRight: {fileID: 4589192662293517271}
+  speed: 10
+  tiredRotationSpeed: 250
+  rotationSpeed: 150
+  isMoveEnable: 0
+  playerController: {fileID: 0}
 --- !u!65 &7344565651044843762
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -407,26 +430,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &3842438683772740625
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4589192662293517255}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: afc2fcffc8cc71f4bbfff6de284c963b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MoveCannon
-  CannonMouth: {fileID: 207001764874126108}
-  TireLeft: {fileID: 4589192662293517267}
-  TireRight: {fileID: 4589192662293517271}
-  speed: 10
-  tiredRotationSpeed: 250
-  rotationSpeed: 150
-  isMoveEnable: 0
-  playerController: {fileID: 0}
 --- !u!1 &4589192662293517267 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100020, guid: 0b021b01c75d442d7b75b546e9dafeef, type: 3}

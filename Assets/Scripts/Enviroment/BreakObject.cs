@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BreakObject : MonoBehaviour
+public class BreakObject : BasicFunctionalities
 {
     public bool isInsideParents;
     public GameObject[] objectsToBreak;
@@ -21,6 +21,14 @@ public class BreakObject : MonoBehaviour
 
     }
 
+    void OnCollisionEnter(Collision collision)
+    {
+        if (isToBreak)
+        {
+            StartBreak();
+        }
+    }
+
     /// <summary>
     /// call the necessary function to make object breakable
     /// </summary>
@@ -28,6 +36,7 @@ public class BreakObject : MonoBehaviour
     {
         IdentifyBreakObjects();
         StartCoroutine(WaitToRemoveParentCollider());
+        PlaySoundEffect();
     }
 
     private IEnumerator WaitToRemoveParentCollider()
@@ -94,14 +103,6 @@ public class BreakObject : MonoBehaviour
                 myObj.AddComponent<Rigidbody>();
             else
                 myObj.GetComponent<Rigidbody>().isKinematic = false;
-        }
-    }
-
-    void OnCollisionEnter(Collision collision)
-    {
-        if (isToBreak)
-        {
-            StartBreak();
         }
     }
 }
