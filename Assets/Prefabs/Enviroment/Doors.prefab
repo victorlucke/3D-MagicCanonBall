@@ -250,6 +250,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0964d06d1740f3489950a68c8d4065d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BreakObject
+  audioEffect:
+  - {fileID: 8300000, guid: da30ba99d8a9a794cac0807e018c6159, type: 3}
+  - {fileID: 8300000, guid: 7acc8ace4a733cc4eb94910f5e1a84ed, type: 3}
   isInsideParents: 0
   objectsToBreak:
   - {fileID: 971128611169801624}
@@ -300,6 +303,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  OnBreakObject:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &5913236191002725214
 GameObject:
   m_ObjectHideFlags: 0

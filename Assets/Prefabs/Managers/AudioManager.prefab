@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3eacf34f31dc8d944a9e4980407a669e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AudioManager
-  audioClip:
+  musicClips:
   - {fileID: 8300000, guid: 68555d1896b9aac418853a35be8b19f4, type: 3}
   - {fileID: 8300000, guid: ac81e521cc4fffd4cb560d4ddc70d306, type: 3}
   - {fileID: 8300000, guid: 6b99e4ca54feb1c499bd45b2c95dfde1, type: 3}

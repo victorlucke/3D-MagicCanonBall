@@ -34,9 +34,9 @@ public class BreakObject : BasicFunctionalities
     /// </summary>
     public void StartBreak()
     {
+        PlaySoundEffect();
         IdentifyBreakObjects();
         StartCoroutine(WaitToRemoveParentCollider());
-        PlaySoundEffect();
     }
 
     private IEnumerator WaitToRemoveParentCollider()

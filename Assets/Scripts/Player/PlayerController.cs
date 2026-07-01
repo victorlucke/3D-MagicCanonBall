@@ -93,6 +93,15 @@ public class PlayerController : MonoBehaviour
         {
             movePlayer();
         }
+
+        VerifyFallingDeath();
+    }
+
+    /// <summary>
+    /// If fall below limit, game over
+    /// </summary>
+    void VerifyFallingDeath()
+    {
         if (transform.position.y < 0)
         {
             GameManager.Instance.GameOver();

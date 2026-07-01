@@ -1,16 +1,22 @@
-using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class BasicFunctionalities : MonoBehaviour
 {
-    [SerializeField] protected AudioClip audioEffect;
+    [Header("AudioCongigs")]
+    [SerializeField] protected List<AudioClip> audioEffect;
 
+    /// <summary>
+    /// Play audio clip using abstract class AudioPlayer
+    /// </summary>
     protected void PlaySoundEffect()
     {
-        AudioPlayer playSoundEffect = new AudioPlayer();
+        int randomAudio = Random.Range(0, audioEffect.Count);
 
-        if (audioEffect != null)
-            playSoundEffect.PlaySound(gameObject, audioEffect);
+        if (audioEffect[randomAudio])
+        {
+            AudioManager.Instance.PlayClipEffect(gameObject, audioEffect[randomAudio]);
+        }
         else
             Debug.Log("No AudioClip in " + gameObject.name);
     }

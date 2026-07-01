@@ -339,9 +339,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c87dc8b3f29242438f0c7a57da6ed2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Cannon
+  audioEffect:
+  - {fileID: 8300000, guid: c01bbab8442e45146be860df82582360, type: 3}
+  - {fileID: 8300000, guid: 879e730a6ca97ae4898f59711107f5eb, type: 3}
   evento:
     eventName: OnCannonFired
-  audioEffect: {fileID: 8300000, guid: b481fb1c9ffd1478dbdbafd5441e0b84, type: 3}
   CannonMouthTransform: {fileID: 5611407310168400877}
   interactIcon: {fileID: 6202880252691109692}
   shootStrenght: 40

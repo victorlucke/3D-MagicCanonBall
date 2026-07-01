@@ -22025,6 +22025,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.y
       value: -90
       objectReference: {fileID: 0}
+    - target: {fileID: 6397386926458709964, guid: e096123980936c74b9f7a8f61be60f7c, type: 3}
+      propertyPath: audioEffect
+      value: 
+      objectReference: {fileID: 8300000, guid: 21d73725c2ba0804f97ad566a46cbd13, type: 3}
+    - target: {fileID: 6397386926458709964, guid: e096123980936c74b9f7a8f61be60f7c, type: 3}
+      propertyPath: audioEffect.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

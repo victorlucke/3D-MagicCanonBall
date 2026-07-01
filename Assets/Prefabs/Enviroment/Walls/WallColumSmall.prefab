@@ -70,7 +70,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0964d06d1740f3489950a68c8d4065d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BreakObject
-  audioEffect: {fileID: 8300000, guid: d1586046be4bc416097c1853a2b649ea, type: 3}
+  audioEffect:
+  - {fileID: 8300000, guid: d1586046be4bc416097c1853a2b649ea, type: 3}
   isInsideParents: 1
   objectsToBreak:
   - {fileID: 1098943353756495777}
