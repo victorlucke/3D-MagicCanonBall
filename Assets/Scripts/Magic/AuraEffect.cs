@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AuraEffect : MonoBehaviour
+public class AuraEffect : BasicFunctionalities
 {
     public float speed;
     public float speedRotation;
@@ -21,6 +21,7 @@ public class AuraEffect : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        PlayLoopSoundEffect();
         StartCoroutine(AuraLifeTime());
     }
 

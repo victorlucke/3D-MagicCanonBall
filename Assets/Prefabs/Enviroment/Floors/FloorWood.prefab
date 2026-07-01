@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3035133543306795784}
   - component: {fileID: 8909499039792066514}
   - component: {fileID: 5517237096508002217}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: FloorWood
   m_TagString: Ground
   m_Icon: {fileID: 0}

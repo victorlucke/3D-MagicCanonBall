@@ -45,6 +45,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f8ed8d055a9fed42abc51314c7e0718, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SummoningSpell
+  audioEffect:
+  - {fileID: 8300000, guid: 113a0f1929ad74dcba20169a2eaa5e57, type: 3}
   auraFinished: 0
   spellEffectObject: {fileID: 339158821923109191, guid: 108ca465382c11742bd2c91fe4fdb13f, type: 3}
   monsterObject: {fileID: 8079444773405177413, guid: a088d08d681235542b1219dbec5159ee, type: 3}
@@ -102,6 +104,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8816232978908422670, guid: 3fbecf2c11b1b58408d1691c78e4a370, type: 3}
+      propertyPath: audioEffect.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8816232978908422670, guid: 3fbecf2c11b1b58408d1691c78e4a370, type: 3}
+      propertyPath: 'audioEffect.Array.data[0]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 98de3d39d7681544ea9581cc548d1e6d, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

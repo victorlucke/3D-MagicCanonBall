@@ -1,8 +1,7 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.UIElements;
 
-public class SummoningSpell : MonoBehaviour
+public class SummoningSpell : BasicFunctionalities
 {
     public bool auraFinished;
     public GameObject spellEffectObject;
@@ -27,6 +26,7 @@ public class SummoningSpell : MonoBehaviour
     {
         if(auraFinished && !isSpellOn)
         {
+            PlaySoundEffect();
             StartCoroutine(SpellLifeTime(spawnPosition));
             isSpellOn = true;
         }

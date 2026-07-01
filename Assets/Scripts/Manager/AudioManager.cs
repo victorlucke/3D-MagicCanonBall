@@ -58,7 +58,7 @@ public class AudioManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Play a Music effect in the object that call
+    /// Play a sound effect in the object that call it
     /// </summary>
     /// <param name="myObject">the object source of the audio</param>
     /// <param name="newAudioClip">the audio to play</param>
@@ -69,6 +69,24 @@ public class AudioManager : MonoBehaviour
         if (otherAudioSource)
         {
             otherAudioSource.clip = newAudioClip;
+            otherAudioSource.Play();
+        }
+    }
+
+    /// <summary>
+    /// Play a loop sound effect in the object that call it
+    /// </summary>
+    /// <param name="myObject">the object source of the audio</param>
+    /// <param name="newAudioClip">the audio to play</param>
+    /// <param name="loop">Loop value</param>
+    public void PlayClipEffect(GameObject myObject, AudioClip newAudioClip, bool loop)
+    {
+        AudioSource otherAudioSource = CheckForAudioSource(myObject);
+
+        if (otherAudioSource)
+        {
+            otherAudioSource.clip = newAudioClip;
+            otherAudioSource.loop = loop;
             otherAudioSource.Play();
         }
     }
