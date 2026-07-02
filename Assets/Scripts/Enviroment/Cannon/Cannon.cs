@@ -112,7 +112,7 @@ public class Cannon : BasicFunctionalities
 
             evento.Invoke(ammo);
 
-            PlaySoundEffect();
+            PlaySoundEffect(audioEffect);
 
             loadedObject = null;
             isReloaded = false;

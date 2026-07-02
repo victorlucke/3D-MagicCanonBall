@@ -83,11 +83,21 @@ public class AudioManager : MonoBehaviour
     {
         AudioSource otherAudioSource = CheckForAudioSource(myObject);
 
-        if (otherAudioSource)
+        if (otherAudioSource && !otherAudioSource.isPlaying)
         {
             otherAudioSource.clip = newAudioClip;
             otherAudioSource.loop = loop;
             otherAudioSource.Play();
+        }
+    }
+
+    public void StopClipEffect(GameObject myObject)
+    {
+        AudioSource otherAudioSource = CheckForAudioSource(myObject);
+
+        if (otherAudioSource)
+        {
+            otherAudioSource.Stop();
         }
     }
 

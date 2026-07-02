@@ -26,7 +26,7 @@ public class SummoningSpell : BasicFunctionalities
     {
         if(auraFinished && !isSpellOn)
         {
-            PlaySoundEffect();
+            PlaySoundEffect(audioEffect);
             StartCoroutine(SpellLifeTime(spawnPosition));
             isSpellOn = true;
         }

@@ -5,8 +5,8 @@ public class PlayerVFXController : MonoBehaviour
     
     public GameObject dustObject;
     public GameObject skidDustObject;
-    public float minSpeedToDust;
-    public float maxSpeedToDust;
+    public float minSpeedToDust; //standard 1
+    public float maxSpeedToDust; //standard 15
     private PlayerController playerController;
     private Rigidbody playerRigidbody;
     private bool isPlayingVFX;
