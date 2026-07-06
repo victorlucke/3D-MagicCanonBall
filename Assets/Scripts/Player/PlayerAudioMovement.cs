@@ -1,3 +1,5 @@
+using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 //ROLING SOUND TERRAIN BY CHANGING PITCH
@@ -15,20 +17,22 @@ public class PlayerAudioMovement : BasicFunctionalities
     private AudioClip audioBallFall;
     private AudioClip audioBallRoll;
     private AudioClip audioBallRolling;
+    private AudioSource audioSource;
 
     void Awake()
     {
         playerController = GetComponent<PlayerController>();
         playerRigidbody = GetComponent<Rigidbody>();
+        audioSource = GetComponent<AudioSource>();
         audioBallRolling = audioEffect[0];
-        minSpeed = 1;
+        audioBallFall = audioEffect[1];
+        minSpeed = 0.09f;
         maxSpeed = 6;
     }
 
     void FixedUpdate()
     {
         CheckMovementAudio();
-        ChangeAudioVolumePerSpeed();
     }
 
     void CheckMovementAudio()
@@ -36,11 +40,14 @@ public class PlayerAudioMovement : BasicFunctionalities
         float playerSpeed = playerRigidbody.linearVelocity.magnitude;
         bool isOnGround = playerController.onGround;
 
+        ChangeAudioVolumePerSpeed(audioSource);
+
         if (!played)
-        { 
+        {
             if (playerSpeed >= minSpeed && isOnGround)
             {
                 PlayLoopSoundEffect(audioBallRolling);
+
                 played = true;
             }
         }
@@ -48,34 +55,56 @@ public class PlayerAudioMovement : BasicFunctionalities
         {
             if (playerSpeed <= minSpeed || !isOnGround)
             {
-                AudioSource thisAudioSource = GetComponent<AudioSource>();
-                thisAudioSource.volume = 0;
-                StopSoundEffect();
+                ChangeAudioVolumePerSpeed(audioSource);
                 played = false;
             }
         }
     }
 
-    void ChangeAudioVolumePerSpeed()
+    void ChangeAudioVolumePerSpeed(AudioSource thisAudioSource)
     {
         float playerSpeed = playerRigidbody.linearVelocity.magnitude;
+        bool isOnGround = playerController.onGround;
 
-        if(playerSpeed < maxSpeed)
+        if (playerSpeed < maxSpeed && isOnGround)
         {
-            float distanceToMaxSpeed = playerSpeed / maxSpeed;
-            AudioSource thisAudioSource = GetComponent<AudioSource>();
-            thisAudioSource.volume = distanceToMaxSpeed;
-            Debug.Log(distanceToMaxSpeed);
+            if (playerSpeed >= minSpeed)
+            {
+                float distanceToMaxSpeed = playerSpeed / maxSpeed;
+                thisAudioSource.volume = distanceToMaxSpeed;
+            }
+        }
+        else if (playerSpeed <= minSpeed || !isOnGround)
+        {
+            thisAudioSource.volume = 0;
         }
     }
 
-    void CheckPlayerInAir()
+    void PlayNewClip(AudioClip myClip)
     {
-        //if(isongro)
+        AudioSource newAudioSource;
+
+        CreateAudioObject(myClip.name);
+
+        newAudioSource = transform.Find(myClip.name).GetComponent<AudioSource>();
+        newAudioSource.clip = myClip;
+        newAudioSource.Play();
+    }
+
+    void CreateAudioObject(String newName)
+    {
+        if (!transform.Find(newName))
+        {
+            new GameObject(newName).transform.SetParent(gameObject.transform);
+            transform.Find(newName).AddComponent<AudioSource>();
+        }
     }
 
     void OnCollisionEnter(Collision collision)
     {
-        
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            PlayNewClip(audioBallFall);
+        }
     }
 }

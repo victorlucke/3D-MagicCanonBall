@@ -1703,6 +1703,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorWood (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 5763258601636619710, guid: a32d54f5d473a7249a3dc232af400281, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5107,6 +5111,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorWood (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 5763258601636619710, guid: a32d54f5d473a7249a3dc232af400281, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7006,8 +7014,16 @@ PrefabInstance:
     m_TransformParent: {fileID: 1506012775}
     m_Modifications:
     - target: {fileID: 2591203691102657839, guid: a32d54f5d473a7249a3dc232af400281, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 2591203691102657839, guid: a32d54f5d473a7249a3dc232af400281, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 2591203691102657839, guid: a32d54f5d473a7249a3dc232af400281, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2591203691102657839, guid: a32d54f5d473a7249a3dc232af400281, type: 3}
       propertyPath: m_LocalPosition.y
@@ -7015,7 +7031,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2591203691102657839, guid: a32d54f5d473a7249a3dc232af400281, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2591203691102657839, guid: a32d54f5d473a7249a3dc232af400281, type: 3}
       propertyPath: m_LocalRotation.w
@@ -7043,6 +7059,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2591203691102657839, guid: a32d54f5d473a7249a3dc232af400281, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2591203691102657839, guid: a32d54f5d473a7249a3dc232af400281, type: 3}
+      propertyPath: m_ConstrainProportionsScale
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5763258601636619710, guid: a32d54f5d473a7249a3dc232af400281, type: 3}
@@ -8341,6 +8361,10 @@ PrefabInstance:
     - target: {fileID: 5763258601636619710, guid: a32d54f5d473a7249a3dc232af400281, type: 3}
       propertyPath: m_Name
       value: FloorWood (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5763258601636619710, guid: a32d54f5d473a7249a3dc232af400281, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -25840,6 +25864,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAudioMovement
   audioEffect:
   - {fileID: 8300000, guid: 0f20575c42ef02645888c0f578c0b82a, type: 3}
+  - {fileID: 8300000, guid: d523f420d23e9c74692786d6795b45ff, type: 3}
   playerController: {fileID: 0}
   playerRigidbody: {fileID: 0}
 --- !u!82 &8285499846051951777
