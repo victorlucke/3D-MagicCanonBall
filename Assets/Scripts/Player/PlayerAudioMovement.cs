@@ -11,13 +11,15 @@ public class PlayerAudioMovement : BasicFunctionalities
 {
     public PlayerController playerController;
     public Rigidbody playerRigidbody;
+    public AudioSource audioSource;
     private float minSpeed;
     private float maxSpeed;
     private bool played;
+    private string collisionLayer;
     private AudioClip audioBallFall;
     private AudioClip audioBallRoll;
     private AudioClip audioBallRolling;
-    private AudioSource audioSource;
+    private float pitchValue;
 
     void Awake()
     {
@@ -32,21 +34,26 @@ public class PlayerAudioMovement : BasicFunctionalities
 
     void FixedUpdate()
     {
-        CheckMovementAudio();
+        CheckMovementAudio(audioSource);
     }
 
-    void CheckMovementAudio()
+    /// <summary>
+    /// Check if ball player is moving, them play the loop for rolling
+    /// </summary>
+    /// <param name="loopMovementAudioSource">audio source to play the loop clip</param>
+    void CheckMovementAudio(AudioSource loopMovementAudioSource)
     {
         float playerSpeed = playerRigidbody.linearVelocity.magnitude;
         bool isOnGround = playerController.onGround;
 
-        ChangeAudioVolumePerSpeed(audioSource);
+        ChangeAudioVolumePerSpeed(loopMovementAudioSource);
+        ChangeAudioPitch(loopMovementAudioSource);
 
         if (!played)
         {
             if (playerSpeed >= minSpeed && isOnGround)
             {
-                PlayLoopSoundEffect(audioBallRolling);
+                PlayLoopSoundEffect(loopMovementAudioSource.gameObject, audioBallRolling);
 
                 played = true;
             }
@@ -55,12 +62,16 @@ public class PlayerAudioMovement : BasicFunctionalities
         {
             if (playerSpeed <= minSpeed || !isOnGround)
             {
-                ChangeAudioVolumePerSpeed(audioSource);
+                ChangeAudioVolumePerSpeed(loopMovementAudioSource);
                 played = false;
             }
         }
     }
 
+    /// <summary>
+    /// Change volume of audiosource based on speed for rolling ball experience
+    /// </summary>
+    /// <param name="thisAudioSource">audio source responsible for rolling audio</param>
     void ChangeAudioVolumePerSpeed(AudioSource thisAudioSource)
     {
         float playerSpeed = playerRigidbody.linearVelocity.magnitude;
@@ -80,6 +91,19 @@ public class PlayerAudioMovement : BasicFunctionalities
         }
     }
 
+    /// <summary>
+    /// change the pitch value of audio to simulate diferent material you moving in
+    /// </summary>
+    /// <param name="thisAudioSource">audio source you want to apply the changes</param>
+    void ChangeAudioPitch(AudioSource thisAudioSource)
+    {
+        thisAudioSource.pitch = pitchValue;
+    }
+
+    /// <summary>
+    /// play a clip using a new audio source inside a parent object.
+    /// </summary>
+    /// <param name="myClip">clip to play</param>
     void PlayNewClip(AudioClip myClip)
     {
         AudioSource newAudioSource;
@@ -87,11 +111,18 @@ public class PlayerAudioMovement : BasicFunctionalities
         CreateAudioObject(myClip.name);
 
         newAudioSource = transform.Find(myClip.name).GetComponent<AudioSource>();
+
+        ChangeAudioPitch(newAudioSource);
+
         newAudioSource.clip = myClip;
         newAudioSource.Play();
     }
 
-    void CreateAudioObject(String newName)
+    /// <summary>
+    /// Create a new game object with audio source attached to it.
+    /// </summary>
+    /// <param name="newName">name of the new object</param>
+    void CreateAudioObject(string newName)
     {
         if (!transform.Find(newName))
         {
@@ -100,8 +131,31 @@ public class PlayerAudioMovement : BasicFunctionalities
         }
     }
 
+    /// <summary>
+    /// Verify the layers in search of "terrain materials" to create ilusion of diferent sounds changing pitch value of audio source.
+    /// </summary>
+    /// <param name="layerName">the layer name you are checking</param>
+    void VerifyLayer(string layerName)
+    {
+        switch (layerName)
+        {
+            case "Wood":
+                pitchValue = .6f;
+                break;
+            case "Stone":
+                pitchValue = .5f;
+                break;
+            case "Sand":
+                pitchValue = .7f;
+                break;
+        }
+    }
+
     void OnCollisionEnter(Collision collision)
     {
+        collisionLayer = LayerMask.LayerToName(collision.gameObject.layer);
+        VerifyLayer(collisionLayer);
+
         if (collision.gameObject.CompareTag("Ground"))
         {
             PlayNewClip(audioBallFall);

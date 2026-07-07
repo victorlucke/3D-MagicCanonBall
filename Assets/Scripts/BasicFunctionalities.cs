@@ -58,8 +58,9 @@ public class BasicFunctionalities : MonoBehaviour
     /// <summary>
     /// Play loop audio clip using audioManager.
     /// </summary>
-    /// <param name="myAudioEffect">audio to play</param>
-    protected void PlayLoopSoundEffect(AudioClip myAudioEffect)
+    /// <param name="sourceObject">object with audiosource to play</param>
+    /// <param name="myAudioEffect">clip to play</param>
+    protected void PlayLoopSoundEffect(GameObject sourceObject, AudioClip myAudioEffect)
     {
 
         if (myAudioEffect)
@@ -70,7 +71,7 @@ public class BasicFunctionalities : MonoBehaviour
             Debug.Log("No AudioClip in " + gameObject.name);
     }
 
-    protected void StopSoundEffect()
+    protected void StopSoundEffect(AudioSource myAudioSource)
     {
         AudioManager.Instance.StopClipEffect(gameObject);
     }
