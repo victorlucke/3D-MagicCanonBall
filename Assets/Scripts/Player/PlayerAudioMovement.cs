@@ -28,6 +28,7 @@ public class PlayerAudioMovement : BasicFunctionalities
         audioSource = GetComponent<AudioSource>();
         audioBallRolling = audioEffect[0];
         audioBallFall = audioEffect[1];
+        Debug.Log("Awake audio Fall:  "+audioBallFall.name);
         minSpeed = 0.09f;
         maxSpeed = 6;
     }
@@ -113,9 +114,8 @@ public class PlayerAudioMovement : BasicFunctionalities
         newAudioSource = transform.Find(myClip.name).GetComponent<AudioSource>();
 
         ChangeAudioPitch(newAudioSource);
-
-        newAudioSource.clip = myClip;
-        newAudioSource.Play();
+        
+        newAudioSource.PlayOneShot(myClip);
     }
 
     /// <summary>
@@ -159,6 +159,7 @@ public class PlayerAudioMovement : BasicFunctionalities
         if (collision.gameObject.CompareTag("Ground"))
         {
             PlayNewClip(audioBallFall);
+            Debug.Log("Collision audio Fall:  "+audioBallFall.name);
         }
     }
 }

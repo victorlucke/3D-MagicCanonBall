@@ -239,9 +239,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAudioMovement
   audioEffect:
   - {fileID: 8300000, guid: 0f20575c42ef02645888c0f578c0b82a, type: 3}
-  - {fileID: 8300000, guid: d523f420d23e9c74692786d6795b45ff, type: 3}
+  - {fileID: 8300000, guid: eec0893cadc30da44a903bb0bb278d54, type: 3}
   playerController: {fileID: 0}
   playerRigidbody: {fileID: 0}
+  audioSource: {fileID: 0}
 --- !u!82 &5976073876197270008
 AudioSource:
   m_ObjectHideFlags: 0
