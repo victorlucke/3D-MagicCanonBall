@@ -159,7 +159,6 @@ public class PlayerAudioMovement : BasicFunctionalities
         if (collision.gameObject.CompareTag("Ground"))
         {
             PlayNewClip(audioBallFall);
-            Debug.Log("Collision audio Fall:  "+audioBallFall.name);
         }
     }
 }
