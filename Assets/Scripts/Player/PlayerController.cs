@@ -19,11 +19,14 @@ public class PlayerController : MonoBehaviour
     public GameObject finalPhase;
     public Vector3 oppositeDirection;
     public bool playerMove;
+    public bool playerMouseMove;
+    public bool player;
     public bool onGround;
     public float speed;
-    private Rigidbody rb;
     public float movementX;
     public float movementY;
+    private Rigidbody rb;
+    private Vector3 targetPosition;
 
     void Awake()
     {
@@ -66,6 +69,34 @@ public class PlayerController : MonoBehaviour
         //Debug.Log(playerMove);
     }
 
+    void DetectMouseClick()
+    {
+        if (Pointer.current.press.isPressed)
+        {
+            string[] groundLayers = new string[3];
+            Vector2 aimPosition;
+            RaycastHit hit;
+            Ray ray;
+            LayerMask groundLayer;
+
+            aimPosition = Pointer.current.position.ReadValue();
+            ray = Camera.main.ScreenPointToRay(aimPosition);
+            groundLayers[0] = "Wood";
+            groundLayers[1] = "Stone";
+            groundLayers[2] = "Sand";
+            groundLayer = LayerMask.GetMask(groundLayers);
+
+            Debug.DrawRay(ray.origin, ray.direction * 50, Color.yellow);
+
+            if (Physics.Raycast(ray, out hit, 100, groundLayer))
+            {
+                targetPosition = hit.point;
+                playerMouseMove = true;
+            }
+        }else 
+            playerMouseMove = false;
+    }
+
     // void FinalPhase()
     // {
     //     menuController.AccessMenu(MenuController.MenuActivate.Pause);
@@ -87,11 +118,19 @@ public class PlayerController : MonoBehaviour
     //     }
     // }
 
+    void Update()
+    {
+        DetectMouseClick();
+    }
+
     void FixedUpdate()
     {
         if (onGround)
         {
-            movePlayer();
+            movePlayer(movementX, 0, movementY);
+
+            if(playerMouseMove)
+                movePlayerOnMouseClick();
         }
 
         VerifyFallingDeath();
@@ -108,12 +147,22 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void movePlayer()
+    void movePlayer(float directionX, float directionY, float directionZ)
     {
-        Vector3 movement = new Vector3(movementX, 0.0f, movementY);
-        oppositeDirection = -movement + gameObject.transform.position;
+        Vector3 direction = new Vector3(directionX, directionY, directionZ);
+        oppositeDirection = -direction + gameObject.transform.position;
 
-        rb.AddForce(movement * speed);
+        rb.AddForce(direction * speed);
+    }
+
+    void movePlayerOnMouseClick()
+    {
+        Vector3 direction = new Vector3 (targetPosition.x - rb.position.x, 0, targetPosition.z - rb.position.z);
+        direction.Normalize();
+
+        oppositeDirection = -direction + gameObject.transform.position;
+
+        rb.AddForce(direction * speed);
     }
 
     void DestroyPlayer()
