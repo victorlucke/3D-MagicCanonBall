@@ -69,34 +69,6 @@ public class PlayerController : MonoBehaviour
         //Debug.Log(playerMove);
     }
 
-    void DetectMouseClick()
-    {
-        if (Pointer.current.press.isPressed)
-        {
-            string[] groundLayers = new string[3];
-            Vector2 aimPosition;
-            RaycastHit hit;
-            Ray ray;
-            LayerMask groundLayer;
-
-            aimPosition = Pointer.current.position.ReadValue();
-            ray = Camera.main.ScreenPointToRay(aimPosition);
-            groundLayers[0] = "Wood";
-            groundLayers[1] = "Stone";
-            groundLayers[2] = "Sand";
-            groundLayer = LayerMask.GetMask(groundLayers);
-
-            Debug.DrawRay(ray.origin, ray.direction * 50, Color.yellow);
-
-            if (Physics.Raycast(ray, out hit, 100, groundLayer))
-            {
-                targetPosition = hit.point;
-                playerMouseMove = true;
-            }
-        }else 
-            playerMouseMove = false;
-    }
-
     // void FinalPhase()
     // {
     //     menuController.AccessMenu(MenuController.MenuActivate.Pause);
@@ -129,11 +101,43 @@ public class PlayerController : MonoBehaviour
         {
             movePlayer(movementX, 0, movementY);
 
-            if(playerMouseMove)
+            if (playerMouseMove)
                 movePlayerOnMouseClick();
         }
 
         VerifyFallingDeath();
+    }
+
+    /// <summary>
+    /// detect ground layer types as terrains to move around.
+    /// </summary>
+    void DetectMouseClick()
+    {
+        if (Pointer.current.press.isPressed)
+        {
+            string[] groundLayers = new string[3];
+            Vector2 aimPosition;
+            RaycastHit hit;
+            Ray ray;
+            LayerMask groundLayer;
+
+            aimPosition = Pointer.current.position.ReadValue();
+            ray = Camera.main.ScreenPointToRay(aimPosition);
+            groundLayers[0] = "Wood";
+            groundLayers[1] = "Stone";
+            groundLayers[2] = "Sand";
+            groundLayer = LayerMask.GetMask(groundLayers);
+
+            Debug.DrawRay(ray.origin, ray.direction * 50, Color.yellow);
+
+            if (Physics.Raycast(ray, out hit, 100, groundLayer))
+            {
+                targetPosition = hit.point;
+                playerMouseMove = true;
+            }
+        }
+        else
+            playerMouseMove = false;
     }
 
     /// <summary>
@@ -157,7 +161,7 @@ public class PlayerController : MonoBehaviour
 
     void movePlayerOnMouseClick()
     {
-        Vector3 direction = new Vector3 (targetPosition.x - rb.position.x, 0, targetPosition.z - rb.position.z);
+        Vector3 direction = new Vector3(targetPosition.x - rb.position.x, 0, targetPosition.z - rb.position.z);
         direction.Normalize();
 
         oppositeDirection = -direction + gameObject.transform.position;
@@ -193,16 +197,6 @@ public class PlayerController : MonoBehaviour
         {
             if (!onGround)
                 onGround = true;
-        }
-    }
-
-    //Detect if player has collected itens
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("Pickup"))
-        {
-            other.gameObject.SetActive(false);
-            GameManager.Instance.AddCount();
         }
     }
 }

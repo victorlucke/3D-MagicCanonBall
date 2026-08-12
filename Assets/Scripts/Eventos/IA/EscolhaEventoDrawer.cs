@@ -19,6 +19,12 @@ public class EscolhaEventoDrawer : PropertyDrawer
 {
     string[] eventNames;
 
+    /// <summary>
+    /// create an dropdown UI with each event name present in GameEvents, to be selected in the inspector
+    /// </summary>
+    /// <param name="position"></param>
+    /// <param name="property"></param>
+    /// <param name="label"></param>
     public override void OnGUI(Rect position,
         SerializedProperty property,
         GUIContent label)

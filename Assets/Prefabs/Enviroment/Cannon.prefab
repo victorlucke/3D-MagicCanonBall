@@ -331,6 +331,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 100000, guid: 0b021b01c75d442d7b75b546e9dafeef, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4791620620833310512}
+    - targetCorrespondingSourceObject: {fileID: 100014, guid: 0b021b01c75d442d7b75b546e9dafeef, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4906082911838584464}
   m_SourcePrefab: {fileID: 100100000, guid: 0b021b01c75d442d7b75b546e9dafeef, type: 3}
 --- !u!4 &4589192662293286887 stripped
 Transform:
@@ -402,8 +405,10 @@ MonoBehaviour:
   speed: 10
   tiredRotationSpeed: 250
   rotationSpeed: 150
-  isMoveEnable: 0
-  playerController: {fileID: 0}
+  limitRotateY: 15
+  moveEnabled: 0
+  rotateZEnabled: 1
+  rotateYEnabled: 0
 --- !u!65 &7344565651044843762
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -452,6 +457,33 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!1 &4589192662293517257 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100014, guid: 0b021b01c75d442d7b75b546e9dafeef, type: 3}
+  m_PrefabInstance: {fileID: 4589192662293419367}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4906082911838584464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4589192662293517257}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afc2fcffc8cc71f4bbfff6de284c963b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MoveCannon
+  CannonMouth: {fileID: 207001764874126108}
+  TireLeft: {fileID: 4589192662293517267}
+  TireRight: {fileID: 4589192662293517271}
+  speed: 10
+  tiredRotationSpeed: 250
+  rotationSpeed: 150
+  limitRotateY: 15
+  moveEnabled: 0
+  rotateZEnabled: 0
+  rotateYEnabled: 1
 --- !u!1 &4589192662293517267 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100020, guid: 0b021b01c75d442d7b75b546e9dafeef, type: 3}

@@ -1,6 +1,7 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
-public class MoveCannon : MonoBehaviour
+public class QuaternionTests : MonoBehaviour
 {
     [Header("Essentials")]
     public GameObject CannonMouth;
@@ -15,7 +16,7 @@ public class MoveCannon : MonoBehaviour
     public bool rotateZEnabled;
     public bool rotateYEnabled;
     private bool isMoveEnable;
-    private PlayerController playerController;
+    [SerializeField] private PlayerController playerController;
     private Rigidbody addedComponent;
 
     // Update is called once per frame
@@ -59,37 +60,26 @@ public class MoveCannon : MonoBehaviour
     /// </summary>
     void VerifyMoveCondition()
     {
-        SearchPlayerControllerOnCannonMouth(CannonMouth);
+        isMoveEnable = true;
+        float moveDirectionAxis = playerController.movementY;
+        float rotateDirectionAxis = playerController.movementX;
 
-        if (isMoveEnable)
+        //CreateEssentialComponent();
+
+        if (moveEnabled && VerifyIsMoving(moveDirectionAxis, rotateDirectionAxis))
         {
-            float moveDirectionAxis = playerController.movementY;
-            float rotateDirectionAxis = playerController.movementX;
-
-            //CreateEssentialComponent();
-
-            if (moveEnabled && VerifyIsMoving(moveDirectionAxis, rotateDirectionAxis))
-            {
-                Move(moveDirectionAxis);
-                RotateTires(moveDirectionAxis, rotateDirectionAxis);
-            }
-            else if (rotateYEnabled && VerifyIsMoving(moveDirectionAxis, rotateDirectionAxis))
-            {
-                RotateY(0, moveDirectionAxis, 0);
-            }
-
-            if (rotateZEnabled && VeriftIsRotating(moveDirectionAxis, rotateDirectionAxis))
-            {
-                Rotate(0, 0, rotateDirectionAxis);
-                RotateTires(moveDirectionAxis, rotateDirectionAxis);
-            }
+            Move(moveDirectionAxis);
+            RotateTires(moveDirectionAxis, rotateDirectionAxis);
         }
-        else
+        else if (rotateYEnabled && VerifyIsMoving(moveDirectionAxis, rotateDirectionAxis))
         {
-            if (addedComponent)
-                DeleteEssentialComponent();
+            RotateY(moveDirectionAxis);
+        }
 
-            playerController = null;
+        if (rotateZEnabled && VeriftIsRotating(moveDirectionAxis, rotateDirectionAxis))
+        {
+            Rotate(0, 0, rotateDirectionAxis);
+            RotateTires(moveDirectionAxis, rotateDirectionAxis);
         }
     }
 
@@ -181,15 +171,44 @@ public class MoveCannon : MonoBehaviour
         transform.Rotate(currentRotationAngle);
     }
 
-    bool rotateSlowMotion;
+    bool isRotate;
+    Vector3 standardRotateEuler;
 
-    void RotateY(float rotateX, float rotateY, float rotateZ)
+    void RotateY(float rotateY)
     {
-        Vector3 rotateAngle = new Vector3(0, 15, 0) * Time.deltaTime;
+        bool isUp;
+        Vector3 rotateAngle = new Vector3(0, rotateY, 0);
+        float currentEulerY = transform.rotation.eulerAngles.y;
 
-        transform.Rotate(rotateAngle);
-        rotateSlowMotion = false;
-        Debug.Log(rotateSlowMotion);
+        if (rotateY > 0)
+            isUp = true;
+        else
+            isUp = false;
+
+        //move upward
+        if (isUp && (currentEulerY < 15 || currentEulerY > 300))
+        {
+            transform.Rotate(rotateAngle * rotationSpeed * Time.deltaTime);
+        }
+        else if (isUp && currentEulerY > 15)
+        {
+            Vector3 lockRotation = transform.eulerAngles;
+            lockRotation.y = 15;
+            transform.eulerAngles = lockRotation;
+        }
+
+        //move downward
+        if (!isUp && currentEulerY <= 15.5)
+        {
+            transform.Rotate(rotateAngle * rotationSpeed * Time.deltaTime);
+        }
+        else if (!isUp && currentEulerY > 15)
+        {
+            Vector3 lockRotation = transform.eulerAngles;
+            lockRotation.y = 0;
+            transform.eulerAngles = lockRotation;
+        }
+
     }
 
     /// <summary>
@@ -202,3 +221,4 @@ public class MoveCannon : MonoBehaviour
         RotateTires(moveDirection, rotateAxis);
     }
 }
+

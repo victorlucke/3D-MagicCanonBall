@@ -28,7 +28,7 @@ public class PlayerAudioMovement : BasicFunctionalities
         audioSource = GetComponent<AudioSource>();
         audioBallRolling = audioEffect[0];
         audioBallFall = audioEffect[1];
-        Debug.Log("Awake audio Fall:  "+audioBallFall.name);
+        //Debug.Log("Awake audio Fall:  "+audioBallFall.name);
         minSpeed = 0.09f;
         maxSpeed = 6;
     }
