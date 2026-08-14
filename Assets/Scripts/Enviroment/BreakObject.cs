@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class BreakObject : BasicFunctionalities
 {
+    /// <summary>
+    /// this mechanic should be use with EventListener
+    /// </summary>
     public bool isInsideParents;
     public GameObject[] objectsToBreak;
     public List<string> tagOfObjectBreakers;
     public bool isToBreak;
     public bool IsTargtingMe;
+    public bool isToStopLog;
     public void VerifyIsTargtingMe(GameObject currentTarget)
     {
         IsTargtingMe = currentTarget == gameObject;

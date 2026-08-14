@@ -14,10 +14,10 @@ public class BasicFunctionalities : MonoBehaviour
     /// <param name="myAudioEffect">List of audios to be randomly selected</param>
     protected void PlaySoundEffect(List<AudioClip> myAudioEffect)
     {
-        int randomAudio = Random.Range(0, myAudioEffect.Count);
-
-        if (myAudioEffect[randomAudio])
+        if (myAudioEffect.Count > 0)
         {
+            int randomAudio = Random.Range(0, myAudioEffect.Count);
+
             AudioManager.Instance.PlayClipEffect(gameObject, myAudioEffect[randomAudio]);
         }
         else

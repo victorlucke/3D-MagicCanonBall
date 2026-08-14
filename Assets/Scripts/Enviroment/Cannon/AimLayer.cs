@@ -1,3 +1,4 @@
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class AimLayer : MonoBehaviour
@@ -6,11 +7,15 @@ public class AimLayer : MonoBehaviour
     public LayerMask layerToDetect;
 
 
-
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
     public GameObject ReturnDetectObject()
     {
         RaycastHit hit;
-        if (Physics.Raycast(aimPoint.position, aimPoint.TransformVector(Vector3.forward), out hit, 100, layerToDetect))
+        Vector3 direction = Vector3.forward;
+        if (Physics.Raycast(aimPoint.position, aimPoint.TransformVector(direction), out hit, 100, layerToDetect))
         {
             if (hit.distance < 10)
             {

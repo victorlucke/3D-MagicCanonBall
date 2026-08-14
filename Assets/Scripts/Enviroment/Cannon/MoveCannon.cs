@@ -75,7 +75,7 @@ public class MoveCannon : MonoBehaviour
             }
             else if (rotateYEnabled && VerifyIsMoving(moveDirectionAxis, rotateDirectionAxis))
             {
-                RotateY(0, moveDirectionAxis, 0);
+                RotateY(moveDirectionAxis);
             }
 
             if (rotateZEnabled && VeriftIsRotating(moveDirectionAxis, rotateDirectionAxis))
@@ -181,15 +181,44 @@ public class MoveCannon : MonoBehaviour
         transform.Rotate(currentRotationAngle);
     }
 
-    bool rotateSlowMotion;
-
-    void RotateY(float rotateX, float rotateY, float rotateZ)
+    /// <summary>
+    /// rotate in Y axis in a max of "0 and limitRotateY" degress 
+    /// </summary>
+    /// <param name="rotateY">direction +- of the movement</param>
+    void RotateY(float rotateY)
     {
-        Vector3 rotateAngle = new Vector3(0, 15, 0) * Time.deltaTime;
+        bool isUp;
+        Vector3 rotateAxisY = new Vector3(0, rotateY, 0);
+        float currentEulerY = transform.localRotation.eulerAngles.y;
 
-        transform.Rotate(rotateAngle);
-        rotateSlowMotion = false;
-        Debug.Log(rotateSlowMotion);
+        if (rotateY > 0)
+            isUp = true;
+        else
+            isUp = false;
+
+        //move upward
+        if (isUp && (currentEulerY < limitRotateY || currentEulerY > 300))
+        {
+            transform.Rotate(rotateAxisY * rotationSpeed * Time.deltaTime);
+        }
+        else if (isUp && currentEulerY > limitRotateY)
+        {
+            Vector3 lockRotation = transform.localEulerAngles;
+            lockRotation.y = limitRotateY;
+            transform.localEulerAngles = lockRotation;
+        }
+
+        //move downward
+        if (!isUp && currentEulerY <= limitRotateY + .5)
+        {
+            transform.Rotate(rotateAxisY * rotationSpeed * Time.deltaTime);
+        }
+        else if (!isUp && currentEulerY > limitRotateY)
+        {
+            Vector3 lockRotation = transform.localEulerAngles;
+            lockRotation.y = 0;
+            transform.localEulerAngles = lockRotation;
+        }
     }
 
     /// <summary>

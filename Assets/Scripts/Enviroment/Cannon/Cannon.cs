@@ -1,4 +1,4 @@
-    using System;
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -43,7 +43,10 @@ public class Cannon : BasicFunctionalities
 
     void OnTriggerEnter(Collider other)
     {
-        MarkAsInteractable();
+        if (other.gameObject.tag == "Player")
+        {
+            MarkAsInteractable();
+        }
     }
 
     void OnTriggerStay(Collider other)
