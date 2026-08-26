@@ -115,7 +115,7 @@ public class Mage : EnemyMovement
     {
         if (!isCastCooldown)
         {
-            if (spellSlot)
+            if (spellSlot == null)
             {
                 float distanceToPlayer = (playerTransform.position - transform.position).magnitude;
                 //Debug.Log("Player Distance: " + distanceToPlayer);
