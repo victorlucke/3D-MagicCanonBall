@@ -1,17 +1,21 @@
 using System;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
-    public enum GamePhase { phase1 }
+
+    public enum GameDificulty { easy, medium, hard }
+    public enum GamePhase { phase1, phase2, phase3 }
     public enum GameStatus { Unpause, Pause, Win, Over }
     public static event Action<int> OnCountChanged;
     public static event Action OnGameOver;
     public int maxCount;
     public int count { get; private set; }
     private GameStatus currentGameStatus;
+    private GameDificulty currentDificulty;
 
     void Awake()
     {
@@ -79,5 +83,22 @@ public class GameManager : MonoBehaviour
                 OnGameOver?.Invoke();
                 break;
         }
+    }
+
+    public void ChangeDificulty(GameDificulty newDificulty)
+    {
+        currentDificulty = newDificulty;
+        Debug.Log(currentDificulty);
+    }
+
+    public float DificultyMultiplayer()
+    {
+        Debug.Log("running");
+        if (currentDificulty == GameDificulty.hard)
+            return 2f;
+        else if (currentDificulty == GameDificulty.medium)
+            return 2f;
+        else
+            return 1;
     }
 }

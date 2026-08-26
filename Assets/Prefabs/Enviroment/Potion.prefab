@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4512961372641797192}
   - component: {fileID: 1821060896987762818}
   - component: {fileID: 6438241117067829663}
-  - component: {fileID: 2584990682673624714}
+  - component: {fileID: 4847671189896581659}
   - component: {fileID: 747394773482666632}
   m_Layer: 0
   m_Name: Potion
@@ -116,7 +116,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.3586154, y: 0.57478017, z: 0.37710047}
   m_Center: {x: 0.000064611435, y: 0.2964072, z: -0.00000023841858}
---- !u!114 &2584990682673624714
+--- !u!114 &4847671189896581659
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -125,9 +125,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 163617556293284183}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f185090dcb35d8245a6689efbfe6cab4, type: 3}
+  m_Script: {fileID: 11500000, guid: e7c815d578f728947a519424ef6525af, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::IncrementalBuff
+  m_EditorClassIdentifier: Assembly-CSharp::PotionPickup
+  potionValue: 2
 --- !u!114 &747394773482666632
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -140,3 +141,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e9ab04b077399247af5c0c2c8e2fbb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Rotater
+  XRotate: 10
+  YRotate: 35
+  ZRotate: 10

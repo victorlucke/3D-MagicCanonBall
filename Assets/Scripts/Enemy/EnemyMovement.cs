@@ -4,6 +4,8 @@ using UnityEngine.AI;
 
 public class EnemyMovement : MonoBehaviour
 {
+    [Header("ENEMY MOVEMENT CLASS")]
+    [Header("Movement Controller")]
     public PlayerController playerController;
     public Transform playerTransform;
     public float speed;

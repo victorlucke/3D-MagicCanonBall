@@ -10,14 +10,6 @@ public class AuraEffect : BasicFunctionalities
     public float auraDuration;
     private List<GameObject> insideAuraObjects = new List<GameObject>();
 
-    void Awake()
-    {
-        speed = 2;
-        speedRotation = 10;
-        dampingForce = 5;
-        auraDuration = 5;
-    }
-
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -40,7 +32,6 @@ public class AuraEffect : BasicFunctionalities
         if (GameObject.FindWithTag("Player") != null)
         {
             GameObject playerObject = GameObject.FindWithTag("Player").gameObject;
-
 
             Vector3 playerDirection = playerObject.transform.position - transform.position;
 

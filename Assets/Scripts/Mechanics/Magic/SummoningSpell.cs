@@ -1,24 +1,18 @@
-using System.Collections;
+    using System.Collections;
 using UnityEngine;
 
 public class SummoningSpell : BasicFunctionalities
 {
-    public bool auraFinished;
     public GameObject spellEffectObject;
     public GameObject monsterObject;
     public float spellDuration;
-    public Vector3 spawnPosition;
+    public Vector3 spawnPosition { get; set; } 
+    public bool auraFinished { get; set; }
     private bool isSpellOn;
 
     void Awake()
     {
-        spellDuration = 10;
         isSpellOn = false;
-    }
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
     }
 
     // Update is called once per frame

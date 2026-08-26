@@ -228,12 +228,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ec2c17e613c74647ae43f03ae8e0b22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AuraEffect
-  monsterObject: {fileID: 8079444773405177413, guid: a088d08d681235542b1219dbec5159ee, type: 3}
-  finishEffectObject: {fileID: 339158821923109191, guid: 108ca465382c11742bd2c91fe4fdb13f, type: 3}
-  speed: 0
-  speedRotation: 0
-  dampingForce: 0
-  spellDuration: 0
+  audioEffect:
+  - {fileID: 8300000, guid: 98de3d39d7681544ea9581cc548d1e6d, type: 3}
+  speed: 2
+  speedRotation: 10
+  dampingForce: 5
+  auraDuration: 5
 --- !u!65 &4582859561824487914
 BoxCollider:
   m_ObjectHideFlags: 0

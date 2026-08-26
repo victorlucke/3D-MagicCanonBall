@@ -9,7 +9,7 @@ using UnityEngine.InputSystem;
 /// </summary>
 public class Cannon : BasicFunctionalities
 {
-    public EscolhaEvento evento;
+    public EscolhaEvento cannonFiringEvent;
     public Transform CannonMouthTransform;
     public GameObject interactIcon;
     public float shootStrenght;
@@ -113,7 +113,7 @@ public class Cannon : BasicFunctionalities
 
             ammoRigidbody.AddForce(CannonMouthTransform.forward * shootStrenght, ForceMode.Impulse);
 
-            evento.Invoke(ammo);
+            GameEvents.TriggerOnCannonFired(ammo);
 
             PlaySoundEffect(audioEffect);
 

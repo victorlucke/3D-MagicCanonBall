@@ -47,11 +47,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SummoningSpell
   audioEffect:
   - {fileID: 8300000, guid: 113a0f1929ad74dcba20169a2eaa5e57, type: 3}
-  auraFinished: 0
   spellEffectObject: {fileID: 339158821923109191, guid: 108ca465382c11742bd2c91fe4fdb13f, type: 3}
   monsterObject: {fileID: 8079444773405177413, guid: a088d08d681235542b1219dbec5159ee, type: 3}
-  spellDuration: 0
-  spawnPosition: {x: 0, y: 0, z: 0}
+  spellDuration: 5
 --- !u!1001 &5860295481929433031
 PrefabInstance:
   m_ObjectHideFlags: 0
