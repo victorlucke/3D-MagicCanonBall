@@ -192,6 +192,8 @@ MonoBehaviour:
   finalPhase: {fileID: 0}
   oppositeDirection: {x: 0, y: 0, z: 0}
   playerMove: 0
+  playerMouseMove: 0
+  player: 0
   onGround: 0
   speed: 20
   movementX: 0
@@ -221,8 +223,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b5d9f2c1abf34b4fa4d259d8e2c8600, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerVFXController
-  dustObject: {fileID: 0}
-  skidDustObject: {fileID: 0}
+  dustObject: {fileID: 1076038271464201785, guid: 624d5f9ceda0f9041a2830bf0e8b36cd, type: 3}
+  skidDustObject: {fileID: 8327708077808113830, guid: 465a7fc954c611744b3565ad8e3068e1, type: 3}
   minSpeedToDust: 1
   maxSpeedToDust: 15
 --- !u!114 &4806764730006900149

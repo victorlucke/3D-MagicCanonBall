@@ -1,17 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO.IsolatedStorage;
+using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Mage : EnemyMovement
 {
     [Header("MAGE CLASS")]
     [Header("Mage Controller")]
-    public GameObject knowingSpell;
-    public GameObject spellSlot;
     public List<GameObject> knowingSpellTest;
     public List<GameObject> spellSlotTest;
-    public bool isCastCooldown;
+    public int spellCoolDown;
+    private bool isCastCooldown;
     private bool isCastingAlready;
     private bool isHurt;
 
@@ -27,6 +28,7 @@ public class Mage : EnemyMovement
     void Update()
     {
         LookPlayer();
+        UpdateSpellSlotRange((int)GameManager.Instance.DificultyMultiplayer());
         SeeingPlayer();
     }
 
@@ -38,6 +40,24 @@ public class Mage : EnemyMovement
         if (playerTransform == null)
             if (GameObject.FindWithTag("Player") != null)
                 playerTransform = GameObject.FindWithTag("Player").gameObject.transform;
+    }
+
+
+    void UpdateSpellSlotRange(int newRange)
+    {
+        if (spellSlotTest.Count < newRange)
+        {
+            for(int i = spellSlotTest.Count; i < newRange; i++)
+            {
+                spellSlotTest.Add(null);
+            }
+        }else if(newRange < spellSlotTest.Count)
+        {
+            for(int i = newRange; i < spellSlotTest.Count; i++)
+            {
+                spellSlotTest.RemoveAt(spellSlotTest.Count - 1);
+            }
+        }
     }
 
     /// <summary>
@@ -115,7 +135,7 @@ public class Mage : EnemyMovement
     {
         if (!isCastCooldown)
         {
-            if (spellSlot == null)
+            if (CheckSpellSlots(spellSlotTest) >= 0)
             {
                 float distanceToPlayer = (playerTransform.position - transform.position).magnitude;
                 //Debug.Log("Player Distance: " + distanceToPlayer);
@@ -139,7 +159,7 @@ public class Mage : EnemyMovement
     {
         isCastCooldown = true;
 
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(spellCoolDown);
 
         isCastCooldown = false;
     }
@@ -163,7 +183,30 @@ public class Mage : EnemyMovement
     /// <param name="spell">prefab of the spell you want to cast</param>
     public void CastSpell(GameObject spell)
     {
-        if (playerTransform != null && spellSlot == null)
-            spellSlot = Instantiate(spell, playerTransform.position, spell.transform.rotation);
+        if (playerTransform != null)
+        {
+            if (CheckSpellSlots(spellSlotTest) >= 0)
+            {
+                spellSlotTest[CheckSpellSlots(spellSlotTest)] = Instantiate(spell, playerTransform.position, spell.transform.rotation);
+            }
+        }
+    }
+
+    /// <summary>
+    /// if find a empty space in spellSlots return its index, else return -1
+    /// </summary>
+    /// <param name="mySpellSlotList">list of spellSlot</param>
+    /// <returns> index of null slot or -1 if all full</returns>
+    public int CheckSpellSlots(List<GameObject> mySpellSlotList)
+    {
+        for (int i = 0; i < mySpellSlotList.Count; i++)
+        {
+            if (mySpellSlotList[i] == null)
+            {
+                return i;
+                break;
+            }
+        }
+        return -1;
     }
 }

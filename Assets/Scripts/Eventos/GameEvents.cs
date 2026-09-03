@@ -10,21 +10,21 @@ public static class GameEvents
     public static void TriggerOnCannonFired(GameObject projectile) => OnCannonFired?.Invoke(projectile);
 
     /// <summary>
-    /// Is used to check if the object in front of a aime is of the corresponding layer 
+    /// Check if the object in front of a aime is of the corresponding layer 
     /// before realize aditional action
     /// </summary>
     public static Action<GameObject> OnAimingLayer;
     public static void TriggerOnAimingLayer(GameObject objectTargetLayer) => OnAimingLayer?.Invoke(objectTargetLayer);
 
     /// <summary>
-    /// Is used to start the breaking process of an object breakable
+    /// Start the breaking process of an object breakable
     /// </summary>
     public static Action<GameObject> OnBreakObject;
     public static void TriggerOnBreakObject(GameObject objectBroken) => OnBreakObject?.Invoke(objectBroken);
 
     /// <summary>
-    /// Is used to increase values of a slider bar
+    /// Increase values of a slider bar
     /// </summary>
     public static Action<float> OnFillBar;
-    public static void TriggerOnFillBar(float pickupValue) => OnFillBar?.Invoke(pickupValue);
+    public static void TriggerOnFillBar(float addValue) => OnFillBar?.Invoke(addValue);
 }

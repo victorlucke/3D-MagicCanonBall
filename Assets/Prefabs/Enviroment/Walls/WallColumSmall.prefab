@@ -81,6 +81,7 @@ MonoBehaviour:
   - Player
   isToBreak: 0
   IsTargtingMe: 0
+  isToStopLog: 0
 --- !u!114 &969319172117978749
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -370,6 +371,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4725355246369057867, guid: 1170bc2472e6d5e4585d7e66b87d8fc4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5901877475755814953, guid: 1170bc2472e6d5e4585d7e66b87d8fc4, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6695084629884163894, guid: 1170bc2472e6d5e4585d7e66b87d8fc4, type: 3}

@@ -1,6 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -45,9 +43,9 @@ public class CameraController : MonoBehaviour
 
     void FindPlayer()
     {
-        if (GameObject.Find("Player") != null)
+        if (GameObject.FindWithTag("Player") != null)
         {
-            player = GameObject.Find("Player").gameObject;
+            player = GameObject.FindWithTag("Player").gameObject;
         }
     }
 

@@ -99,9 +99,14 @@ public class MoveCannon : MonoBehaviour
     /// <param name="parentObject"></param>
     void SearchPlayerControllerOnCannonMouth(GameObject parentObject)
     {
-        if (parentObject.transform.Find("Player"))
+        string childTag = null;
+        
+        if (parentObject.transform.childCount >= 1)
+            childTag = parentObject.transform.GetChild(0).tag;
+
+        if (childTag == "Player")
         {
-            playerController = parentObject.transform.Find("Player").GetComponent<PlayerController>();
+            playerController = parentObject.transform.GetComponentInChildren<PlayerController>();
 
             isMoveEnable = true;
         }

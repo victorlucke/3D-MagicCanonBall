@@ -1,30 +1,8 @@
 using UnityEngine;
-using UnityEngine.AI;
 
 public class Gates : MonoBehaviour
 {
-    private NavMeshObstacle navMeshObstacle;
-    private GameObject objectPressurePlate;
-    private Animator animator;
-
-    void Awake()
-    {
-        objectPressurePlate = transform.Find("PlatePivot").transform.Find("PressurePlate").gameObject;
-
-        animator = GetComponent<Animator>();
-    }
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
+    public Animator animator;
 
     void OnTriggerEnter(Collider other)
     {

@@ -1,7 +1,5 @@
 using System;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 public class GameManager : MonoBehaviour
 {
@@ -14,6 +12,17 @@ public class GameManager : MonoBehaviour
     public static event Action OnGameOver;
     public int maxCount;
     public int count { get; private set; }
+    /// <summary>
+    /// return amount of magic in the current magic bar
+    /// </summary>
+    public float magicAmount
+    {
+        get
+        {
+            return UIManager.Instance.barValue;
+        }
+    }
+
     private GameStatus currentGameStatus;
     private GameDificulty currentDificulty;
 
@@ -95,9 +104,9 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("running");
         if (currentDificulty == GameDificulty.hard)
-            return 2f;
+            return 3;
         else if (currentDificulty == GameDificulty.medium)
-            return 2f;
+            return 2;
         else
             return 1;
     }

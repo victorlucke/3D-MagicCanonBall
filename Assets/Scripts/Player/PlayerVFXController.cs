@@ -15,10 +15,19 @@ public class PlayerVFXController : MonoBehaviour
 
     void Awake()
     {
+        dustObject = Instantiate(dustObject, transform.position, dustObject.transform.rotation);
+        skidDustObject = Instantiate(skidDustObject, transform.position, skidDustObject.transform.rotation);
+
         playerController = gameObject.GetComponent<PlayerController>();
         playerRigidbody = gameObject.GetComponent<Rigidbody>();
 
         pastVelocity = playerRigidbody.linearVelocity;
+    }
+
+    void OnDestroy()
+    {
+        Destroy(dustObject);
+        Destroy(skidDustObject);
     }
 
     void LateUpdate()

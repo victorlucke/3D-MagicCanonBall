@@ -161,7 +161,7 @@ public class Cannon : BasicFunctionalities
     /// </summary>
     /// <param name="ammoOut">the object to reposition</param>
     /// <param name="isLockInPlace">if true the ammo is made a parent of cannon mouth and reset the position to 0
-    /// else, remove the cannon mouth parent</param>
+    /// else, remove the parent</param>
     void PositionAmmunition(GameObject ammoOut, bool isLockInPlace)
     {
         if (isLockInPlace)

@@ -22,15 +22,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f7fcb1cb3098f284da95df9f8b258b3b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 68.04
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f7fcb1cb3098f284da95df9f8b258b3b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 1.3500017
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f7fcb1cb3098f284da95df9f8b258b3b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -37.62
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f7fcb1cb3098f284da95df9f8b258b3b, type: 3}
       propertyPath: m_LocalRotation.w
@@ -104,6 +104,6 @@ MonoBehaviour:
   playerController: {fileID: 0}
   playerTransform: {fileID: 0}
   speed: 0
-  knowingSpell: {fileID: 6187285916708512812, guid: d658e95a703b8ae458f1598848aab4b8, type: 3}
-  spellSlot: {fileID: 0}
-  isCastCooldown: 0
+  knowingSpellTest: []
+  spellSlotTest: []
+  spellCoolDown: 5

@@ -11,7 +11,7 @@ public abstract class CollectObject : MonoBehaviour
         {
             IncrementValue();
             gameObject.SetActive(false);
-            GameManager.Instance.AddCount();
+            //GameManager.Instance.AddCount();
         }
     }
 }
