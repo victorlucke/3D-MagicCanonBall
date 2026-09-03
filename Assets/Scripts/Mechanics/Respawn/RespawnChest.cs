@@ -29,7 +29,6 @@ public class RespawnChest : RespawnPoint
             isPlayerOnSpot = true;
             if (!isRespawnEnabled)
             {
-                Debug.Log(GameManager.Instance.magicAmount);
                 if (GameManager.Instance.magicAmount >= activateCost)
                 {
                     if (enableRespawnCoroutine == null)

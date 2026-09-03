@@ -11,17 +11,16 @@ public class BarFill : MonoBehaviour
     private float firstValue;
     private bool isToStop;
     private UIManager uIManager;
+    private Coroutine currentCoroutine;
 
     void OnEnable()
     {
-        GameEvents.OnFillBar += FillBar;
-        GameEvents.OnEmptyBar += EmptyBar;
+        GameEvents.OnFillBar += ChangeBarValue;
     }
 
     void OnDisable()
     {
-        GameEvents.OnFillBar -= FillBar;
-        GameEvents.OnEmptyBar -= EmptyBar;
+        GameEvents.OnFillBar -= ChangeBarValue;
     }
 
     void Awake()
@@ -37,6 +36,19 @@ public class BarFill : MonoBehaviour
         uIManager.magicBar.maxValue = newMaxValue;
     }
 
+    void Update()
+    {
+        CheckBarValue();
+    }
+
+    public void CheckBarValue()
+    {
+        if (finalValue > uIManager.barValue)
+            FillBar();
+        else if (finalValue < uIManager.barValue)
+            EmptyBar();
+    }
+
     public void ChangeBarValue(float newValue)
     {
         if (uIManager.barValue == firstValue)
@@ -45,74 +57,68 @@ public class BarFill : MonoBehaviour
         {
             float lastValue = finalValue;
             finalValue = lastValue + newValue;
-            Debug.Log(finalValue + " valor final");
         }
-
-
     }
 
     /// <summary>
     /// Used with an GameEvent, to add value every time the event is called
     /// </summary>
-    /// <param name="addValue">new value of pickup</param>
-    public void FillBar(float addValue)
+    public void FillBar()
     {
-        if (uIManager.barValue == firstValue)
-            finalValue = firstValue + addValue;
-        else
+        Debug.Log("enchendo" + finalValue);
+        if (currentCoroutine != null)
         {
-            float lastValue = finalValue;
-            finalValue = lastValue + addValue;
-            Debug.Log(finalValue + " valor final");
-        }
-
-        if (finalValue < newMaxValue)
-            StartCoroutine(IncreaseOverTime(finalValue));
-        else
-        {
-            finalValue = newMaxValue;
-            if (!isToStop)
-            {
-                StartCoroutine(IncreaseOverTime(finalValue));
-                isToStop = true;
-            }
+            StopCoroutine(currentCoroutine);
         }
 
         if (isToStop)
             if (uIManager.barValue < newMaxValue)
                 isToStop = false;
 
+
+        if (finalValue < newMaxValue)
+        {
+            currentCoroutine = StartCoroutine(IncreaseOverTime(finalValue));
+        }
+        else
+        {
+            finalValue = newMaxValue;
+
+            if (!isToStop)
+            {
+                currentCoroutine = StartCoroutine(IncreaseOverTime(finalValue));
+                isToStop = true;
+            }
+        }
     }
 
     /// <summary>
     /// called by an GameEvent, to subtract value from the slider bar
     /// </summary>
-    /// <param name="subtractValue">value to subtract</param>
-    public void EmptyBar(float subtractValue)
+    public void EmptyBar()
     {
-        if (uIManager.barValue == firstValue)
-            finalValue = firstValue + subtractValue;
-        else
+        Debug.Log("esvaziando" + finalValue);
+        if (currentCoroutine != null)
         {
-            float lastValue = finalValue;
-            finalValue = lastValue + subtractValue;
-        }
-
-        if (finalValue > newMinValue)
-            StartCoroutine(DecreaseOverTime(finalValue));
-        else
-        {
-            finalValue = newMinValue;
-            if (!isToStop)
-            {
-                StartCoroutine(DecreaseOverTime(finalValue));
-                isToStop = true;
-            }
+            StopCoroutine(currentCoroutine);
         }
 
         if (isToStop)
             if (uIManager.barValue > newMinValue)
                 isToStop = false;
+
+        if (finalValue > newMinValue)
+            currentCoroutine = StartCoroutine(DecreaseOverTime(finalValue));
+        else
+        {
+            finalValue = newMinValue;
+
+            if (!isToStop)
+            {
+                currentCoroutine = StartCoroutine(DecreaseOverTime(finalValue));
+                isToStop = true;
+            }
+        }
     }
 
     /// <summary>
@@ -135,9 +141,9 @@ public class BarFill : MonoBehaviour
 
                 yield return null;
             }
-            if (uIManager.barValue > finalValue)
-                uIManager.barValue = finalValue;
         }
+        if (uIManager.barValue > finalValue)
+            uIManager.barValue = finalValue;
     }
 
     public IEnumerator DecreaseOverTime(float finalValue)
@@ -155,8 +161,8 @@ public class BarFill : MonoBehaviour
 
                 yield return null;
             }
-            if (uIManager.barValue < finalValue)
-                uIManager.barValue = finalValue;
         }
+        if (uIManager.barValue < finalValue)
+            uIManager.barValue = finalValue;
     }
 }

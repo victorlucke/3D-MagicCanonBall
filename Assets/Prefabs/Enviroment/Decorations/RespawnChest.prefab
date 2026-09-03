@@ -244,7 +244,7 @@ MonoBehaviour:
   enablingTime: 0.1
   timeToOpenChest: 5
   maxAngleOpenChest: 60
-  activateCost: 0
+  activateCost: 5
   isRespawnEnabled: 0
   isPlayerOnSpot: 0
 --- !u!54 &4033755043046647882
