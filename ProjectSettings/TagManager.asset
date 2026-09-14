@@ -10,6 +10,7 @@ TagManager:
   - GatePart
   - PressurePlate
   - Magic
+  - MagicBook
   layers:
   - Default
   - TransparentFX

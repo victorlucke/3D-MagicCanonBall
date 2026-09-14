@@ -9,7 +9,7 @@ public class Mage : EnemyMovement
 {
     [Header("MAGE CLASS")]
     [Header("Mage Controller")]
-    public List<GameObject> knowingSpellTest;
+    //public List<GameObject> knowingSpellTest;
     public List<GameObject> spellSlotTest;
     public int spellCoolDown;
     private bool isCastCooldown;
@@ -42,7 +42,10 @@ public class Mage : EnemyMovement
                 playerTransform = GameObject.FindWithTag("Player").gameObject.transform;
     }
 
-
+    /// <summary>
+    /// change the amount of spells that can be casted based
+    /// </summary>
+    /// <param name="newRange"></param>
     void UpdateSpellSlotRange(int newRange)
     {
         if (spellSlotTest.Count < newRange)

@@ -17,7 +17,7 @@ public abstract class Floors : MonoBehaviour
 
     protected virtual void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag == "Player")
+        if(collision.gameObject.CompareTag("Player"))
             playerObject = collision.gameObject;
     }
 

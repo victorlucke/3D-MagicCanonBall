@@ -30,7 +30,6 @@ public class PlayerController : MonoBehaviour
 
     void Awake()
     {
-
         rb = gameObject.GetComponent<Rigidbody>();
     }
 

@@ -28,17 +28,17 @@ public class FootstepsManager : BasicFunctionalities
 
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        if (hit.transform.tag == "Sand")
+        if (hit.transform.CompareTag("Sand"))
         {
             surface = Surface.sand;
         }
 
-        if (hit.transform.tag == "Stone")
+        if (hit.transform.CompareTag("Stone"))
         {
             surface = Surface.stone;
         }
 
-        if (hit.transform.tag == "Wood")
+        if (hit.transform.CompareTag("Wood"))
         {
             surface = Surface.wood;
         }

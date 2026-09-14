@@ -43,7 +43,7 @@ public class Cannon : BasicFunctionalities
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.CompareTag("Player"))
         {
             MarkAsInteractable();
         }

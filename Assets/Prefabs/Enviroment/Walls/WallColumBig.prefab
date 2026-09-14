@@ -684,6 +684,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6121555335992333178}
+  - component: {fileID: 2682745575675977907}
   m_Layer: 0
   m_Name: WallColumBig
   m_TagString: Untagged
@@ -713,6 +714,27 @@ Transform:
   - {fileID: 6801490012242622602}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: -341.15, z: 0}
+--- !u!65 &2682745575675977907
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1755877833037813401}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.75, y: 5.5, z: 0.75}
+  m_Center: {x: -0.8, y: 2.9, z: 0}
 --- !u!1 &1765051834672579468
 GameObject:
   m_ObjectHideFlags: 0

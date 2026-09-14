@@ -43,21 +43,28 @@ public class BarFill : MonoBehaviour
 
     public void CheckBarValue()
     {
-        if (finalValue > uIManager.barValue)
-            FillBar();
-        else if (finalValue < uIManager.barValue)
-            EmptyBar();
+            if (finalValue > uIManager.barValue)
+                FillBar();
+            else if (finalValue < uIManager.barValue)
+                EmptyBar();
     }
 
     public void ChangeBarValue(float newValue)
     {
         if (uIManager.barValue == firstValue)
+        {
             finalValue = firstValue + newValue;
+        }
         else
         {
             float lastValue = finalValue;
             finalValue = lastValue + newValue;
         }
+
+        if (finalValue > newMaxValue)
+            finalValue = newMaxValue;
+        if (finalValue < newMinValue)
+            finalValue = newMinValue;
     }
 
     /// <summary>
@@ -71,25 +78,9 @@ public class BarFill : MonoBehaviour
             StopCoroutine(currentCoroutine);
         }
 
-        if (isToStop)
-            if (uIManager.barValue < newMaxValue)
-                isToStop = false;
-
-
-        if (finalValue < newMaxValue)
-        {
+        if (finalValue <= newMaxValue)
             currentCoroutine = StartCoroutine(IncreaseOverTime(finalValue));
-        }
-        else
-        {
-            finalValue = newMaxValue;
 
-            if (!isToStop)
-            {
-                currentCoroutine = StartCoroutine(IncreaseOverTime(finalValue));
-                isToStop = true;
-            }
-        }
     }
 
     /// <summary>
@@ -103,22 +94,8 @@ public class BarFill : MonoBehaviour
             StopCoroutine(currentCoroutine);
         }
 
-        if (isToStop)
-            if (uIManager.barValue > newMinValue)
-                isToStop = false;
-
-        if (finalValue > newMinValue)
+        if (finalValue >= newMinValue)
             currentCoroutine = StartCoroutine(DecreaseOverTime(finalValue));
-        else
-        {
-            finalValue = newMinValue;
-
-            if (!isToStop)
-            {
-                currentCoroutine = StartCoroutine(DecreaseOverTime(finalValue));
-                isToStop = true;
-            }
-        }
     }
 
     /// <summary>
@@ -139,11 +116,12 @@ public class BarFill : MonoBehaviour
 
                 uIManager.barValue = currentValue;
 
+                if (uIManager.barValue > finalValue)
+                    uIManager.barValue = finalValue;
+
                 yield return null;
             }
         }
-        if (uIManager.barValue > finalValue)
-            uIManager.barValue = finalValue;
     }
 
     public IEnumerator DecreaseOverTime(float finalValue)
@@ -159,10 +137,11 @@ public class BarFill : MonoBehaviour
 
                 uIManager.barValue = currentValue;
 
+                if (uIManager.barValue < finalValue)
+                    uIManager.barValue = finalValue;
+
                 yield return null;
             }
         }
-        if (uIManager.barValue < finalValue)
-            uIManager.barValue = finalValue;
     }
 }

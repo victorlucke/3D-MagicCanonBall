@@ -2,11 +2,11 @@ using System.Collections;
 using System.Linq;
 using UnityEngine;
 
-public class RespawnPoint : MonoBehaviour
+public abstract class RespawnPoint : MagicFurniture
 {
-    [Header("ParentClass")]
-    [SerializeField] protected GameObject prefab;
-    [SerializeField] protected GameObject RespawnReference;
+    [Header("RespawnPoint")]
+    [SerializeField] protected GameObject prefabToRespawn;
+    [SerializeField] protected GameObject RespawnLocation;
     [SerializeField] protected int remainingNumberToRespawn;
     [SerializeField] protected float respawnTimer;
     protected GameObject respawnReference;
@@ -14,7 +14,7 @@ public class RespawnPoint : MonoBehaviour
     protected void Respawn()
     {
         if (VerifyIsToRespawn())
-            respawnReference = Instantiate(prefab, RespawnReference.transform.position, prefab.transform.rotation);
+            respawnReference = Instantiate(prefabToRespawn, RespawnLocation.transform.position, prefabToRespawn.transform.rotation);
     }
 
     protected IEnumerator DelayRespawn(float waitTime)
@@ -29,7 +29,7 @@ public class RespawnPoint : MonoBehaviour
 
     bool VerifyIsToRespawn()
     {
-        int prefabsInScene = GameObject.FindGameObjectsWithTag(prefab.tag).Length;
+        int prefabsInScene = GameObject.FindGameObjectsWithTag(prefabToRespawn.tag).Length;
 
         if (prefabsInScene == remainingNumberToRespawn)
             return true;
