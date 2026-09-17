@@ -1,5 +1,8 @@
+using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Animations;
 
 public class MagicFurniture : MonoBehaviour
 {
@@ -12,8 +15,11 @@ public class MagicFurniture : MonoBehaviour
     [SerializeField] protected float waitTime;
     [SerializeField] protected int activateCost;
     [SerializeField] protected bool isTargetOnSpot;
-    protected Coroutine startCoroutineOnce;
+    protected GameObject myMagicAura;
     protected bool isActivated;
+    private Coroutine startCoroutineOnce01;
+    private Coroutine startCoroutineOnce02;
+    private Coroutine startCoroutineOnce03;
 
     /// <summary>
     /// Verify if target is on spot
@@ -23,23 +29,25 @@ public class MagicFurniture : MonoBehaviour
     {
         if (targetPrefab.CompareTag(other.tag))
         {
-            isTargetOnSpot = true;
             if (!isActivated)
             {
+                isTargetOnSpot = true;
+
                 if (GameManager.Instance.magicAmount >= activateCost)
                 {
-                    if (startCoroutineOnce == null)
-                        startCoroutineOnce = StartCoroutine(ActivateAfterTime(waitTime));
+                    if (startCoroutineOnce01 == null)
+                        startCoroutineOnce01 = StartCoroutine(ActivateAfterTime(waitTime));
                 }
                 else
                     Debug.Log("No Mana");
             }
+
         }
         // else
         // {
         //     isTargetOnSpot = false;
-        //     if (startCoroutineOnce != null)
-        //         StopCoroutine(startCoroutineOnce);
+        //     if (startCoroutineOnce01 != null)
+        //         StopCoroutine(startCoroutineOnce01);
         // }
     }
 
@@ -52,8 +60,11 @@ public class MagicFurniture : MonoBehaviour
         if (targetPrefab.CompareTag(other.tag))
         {
             isTargetOnSpot = false;
-            if (startCoroutineOnce != null)
-                StopCoroutine(startCoroutineOnce);
+            if (startCoroutineOnce01 != null)
+            {
+                StopCoroutine(startCoroutineOnce01);
+                startCoroutineOnce01 = null;
+            }
         }
     }
 
@@ -66,9 +77,83 @@ public class MagicFurniture : MonoBehaviour
     {
         if (isTargetOnSpot)
         {
+            Debug.Log("Starting coroutine");
             yield return new WaitForSeconds(waitTime);
             GameEvents.TriggerOnFillBar(-activateCost);
             isActivated = true;
+            startCoroutineOnce01 = null;
         }
+    }
+
+    /// <summary>
+    /// Verify if there is an MagicAura as child and return her game object
+    /// </summary>
+    /// <param name="auraTag">the tag of the magic aura to return</param>
+    /// <returns></returns>
+    protected virtual IEnumerator CheckForMagicAura(String auraTag)
+    {
+        int objectsSearchedThisFrame = 0;
+        int searchLimitPerFrame = 500;
+
+        foreach (Transform child in transform)
+        {
+            if (child.CompareTag("Magic"))
+            {
+                myMagicAura = child.gameObject;
+                break;
+            }
+
+            objectsSearchedThisFrame++;
+
+            if (objectsSearchedThisFrame >= searchLimitPerFrame)
+            {
+                objectsSearchedThisFrame = 0;
+                yield return null;
+            }
+        }
+
+        yield return null;
+    }
+
+    /// <summary>
+    /// Switch to activate the magic aura of furniture. 
+    /// (Magic aura is used to activate magic effect of the furniture when in contact with player or other object)
+    /// </summary>
+    /// <param name="auraTag">the tag of magic aura</param>
+    /// <param name="activation">set the aura Active</param>
+    protected virtual void MagicAuraActivation(String auraTag, bool activation)
+    {
+        if (startCoroutineOnce02 == null)
+            startCoroutineOnce02 = StartCoroutine(CheckForMagicAura(auraTag));
+
+        if (myMagicAura)
+        {
+            myMagicAura.SetActive(activation);
+            myMagicAura = null;
+            startCoroutineOnce02 = null;
+        }
+    }
+
+    /// <summary>
+    /// enabled the use of the furniture spell again even if it was already used before.
+    /// </summary>
+    /// <param name="timeToWait">After how much time is to reactivate</param>
+    protected virtual void ReactivateFurniture(int timeToWait)
+    {
+        if (startCoroutineOnce03 == null)
+            startCoroutineOnce03 = StartCoroutine(WaitToReactivateFurniture(timeToWait));
+    }
+
+    /// <summary>
+    /// Wait for seconds before enable the use of furniture spell again
+    /// </summary>
+    /// <param name="timeToWait">amount of time to wait</param>
+    /// <returns></returns>
+    protected virtual IEnumerator WaitToReactivateFurniture(int timeToWait)
+    {
+        yield return new WaitForSeconds(timeToWait);
+
+        isActivated = false;
+        startCoroutineOnce03 = null;
     }
 }

@@ -99,8 +99,8 @@ MonoBehaviour:
   isTargetOnSpot: 0
   speedAbduction: 5
   destinationAbduction: {fileID: 1171816426949775724}
-  TagsToAbduct: {fileID: 3934350859892798646, guid: f6e00f03c18d16d408261db73025c317, type: 3}
-  objectToAbduct: {fileID: 0}
+  tagsToAbduct: {fileID: 3934350859892798646, guid: f6e00f03c18d16d408261db73025c317, type: 3}
+  gateToOpen: {fileID: 0}
 --- !u!54 &5983930170234323239
 Rigidbody:
   m_ObjectHideFlags: 0

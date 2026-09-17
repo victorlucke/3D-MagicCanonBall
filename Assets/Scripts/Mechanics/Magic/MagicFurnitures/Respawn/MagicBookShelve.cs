@@ -6,12 +6,19 @@ public class MagicBookShelve : MagicFurniture
 {
     [Header("MagicBookShelve Class")]
     [SerializeField] private List<GameObject> booksAvailable;
-    [SerializeField] private GameObject auraDeactivation;
+    [SerializeField] private int timeToReuseFurniture;
     private GameObject bookOnScene;
 
     void Update()
     {
-        CheckMagicActivation();
+        if (isActivated)
+        {
+            MagicAuraActivation("Magic", false);
+            if (!bookOnScene)
+                ReactivateFurniture(timeToReuseFurniture);
+        }
+        else
+            MagicAuraActivation("Magic", true);
     }
 
     protected override IEnumerator ActivateAfterTime(float waitTime)
@@ -40,17 +47,5 @@ public class MagicBookShelve : MagicFurniture
                     bookOnScene = Instantiate(bookSummoned, transform.position, bookSummoned.transform.rotation);
             }
         }
-    }
-
-    /// <summary>
-    /// Verify if invocation is on scene to deactivate the aura
-    /// </summary>
-    void CheckMagicActivation()
-    {
-        if (auraDeactivation)
-            if (bookOnScene)
-                auraDeactivation.SetActive(false);
-            else
-                auraDeactivation.SetActive(true);
     }
 }

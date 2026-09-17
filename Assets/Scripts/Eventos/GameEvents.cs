@@ -27,4 +27,7 @@ public static class GameEvents
     /// </summary>
     public static Action<float> OnFillBar;
     public static void TriggerOnFillBar(float addValue) => OnFillBar?.Invoke(addValue);
+
+    public static Action<GameObject> OnOpenMagicGate;
+    public static void TriggerOnOpenMagicGate(GameObject gateReference) => OnOpenMagicGate?.Invoke(gateReference);
 }

@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Security;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -7,34 +8,33 @@ public class MagicLibraryDesk : MagicFurniture
     [Header("MagicLibraryDesk Class")]
     [SerializeField] private float speedAbduction;
     [SerializeField] private GameObject destinationAbduction;
-    [SerializeField] private GameObject TagsToAbduct;
-    [SerializeField] private GameObject objectToAbduct;
-    // bool isPause;
+    [SerializeField] private GameObject tagsToAbduct;
+    [SerializeField] private GameObject gateToOpen;
+    private GameObject objectToAbduct;
+
+    void Awake()
+    {
+        MagicAuraActivation("Magic", false);
+    }
 
     void Update()
     {
-        // if (!isPause)
-        // {
-        //     Debug.Log("Target Tag " + TagsToAbduct.tag);
-        //     isPause = true;
-        // }
+        if (!isActivated && !objectToAbduct)
+            FindBook();
+        else if (!isActivated && objectToAbduct)
+            MagicAuraActivation("Magic", true);
 
-        // if (GameObject.FindWithTag(TagsToAbduct.tag))
-        // {
-        //     Debug.Log("GO name: " + GameObject.FindWithTag(TagsToAbduct.tag).name + " tag: " + GameObject.FindWithTag(TagsToAbduct.tag).tag);
-        // }
+        if (isActivated)
+            MagicAuraActivation("Magic", false);
     }
 
     protected override IEnumerator ActivateAfterTime(float waitTime)
     {
-        if (!objectToAbduct)
-        {
-            Debug.Log("abduction activate");
-            yield return StartCoroutine(base.ActivateAfterTime(waitTime));
+        Debug.Log("abduction activate");
+        yield return StartCoroutine(base.ActivateAfterTime(waitTime));
 
-            FindBook();
-            StartCoroutine(AbductBooks());
-        }
+        FindBook();
+        StartCoroutine(AbductBooks());
     }
 
     /// <summary>
@@ -42,8 +42,10 @@ public class MagicLibraryDesk : MagicFurniture
     /// </summary>
     void FindBook()
     {
-        if (GameObject.FindWithTag(TagsToAbduct.tag))
-            objectToAbduct = GameObject.FindWithTag(TagsToAbduct.tag);
+        if (GameObject.FindWithTag(tagsToAbduct.tag))
+            objectToAbduct = GameObject.FindWithTag(tagsToAbduct.tag);
+        else
+            objectToAbduct = null;
     }
 
     /// <summary>
@@ -101,8 +103,13 @@ public class MagicLibraryDesk : MagicFurniture
         }
     }
 
+    /// <summary>
+    /// Destroy the abducted item
+    /// </summary>
+    /// <param name="abductedObject">object abducted reference</param>
     void FinishAbduction(GameObject abductedObject)
     {
         Destroy(abductedObject);
+        GameEvents.TriggerOnOpenMagicGate(gateToOpen);
     }
 }

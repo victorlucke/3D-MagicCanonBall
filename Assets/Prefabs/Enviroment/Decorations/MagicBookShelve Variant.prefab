@@ -389,7 +389,7 @@ MonoBehaviour:
   - {fileID: 8290894921450665099, guid: d18d99eabf9f2374780d008f80a536d5, type: 3}
   - {fileID: 1720240153575027977, guid: e43cd718c3ff85b4582ccf69743e2909, type: 3}
   - {fileID: 4860010485789067056, guid: 5b3e413af6975834e9e70591031a3c8d, type: 3}
-  auraDeactivation: {fileID: 2976510898527525337}
+  timeToReuseFurniture: 5
 --- !u!4 &7505420200678020369 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4253459711602953642, guid: 34883640f89bba84885fe5885c21fa37, type: 3}
@@ -484,11 +484,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 69d9880f178befb4885aa73610daa325, type: 3}
---- !u!1 &2976510898527525337 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6153945960945095862, guid: 69d9880f178befb4885aa73610daa325, type: 3}
-  m_PrefabInstance: {fileID: 8946829311497391471}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7514693316804536134 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1468182388733913641, guid: 69d9880f178befb4885aa73610daa325, type: 3}
