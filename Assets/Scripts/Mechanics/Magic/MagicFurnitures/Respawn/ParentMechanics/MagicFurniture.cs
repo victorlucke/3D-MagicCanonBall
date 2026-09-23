@@ -1,25 +1,34 @@
 using System;
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Animations;
 
 public class MagicFurniture : MonoBehaviour
 {
     [Header("MagicFurniture Class")]
 
     /// <summary>
-    /// the target allowed to activate the magic fiture
+    /// the target allowed to activate the magic furniture
     /// </summary>
     [SerializeField] protected GameObject targetPrefab;
-    [SerializeField] protected float waitTime;
+    /// <summary>
+    /// time to wait before activating magic effect
+    /// </summary>
+    [SerializeField] protected float activationDelay;
     [SerializeField] protected int activateCost;
     [SerializeField] protected bool isTargetOnSpot;
     protected GameObject myMagicAura;
-    protected bool isActivated;
-    private Coroutine startCoroutineOnce01;
-    private Coroutine startCoroutineOnce02;
-    private Coroutine startCoroutineOnce03;
+    [SerializeField] protected bool isActivated;
+    protected Coroutine coroutineOnceActivateAfterTime;
+    protected Coroutine coroutineOnceCheckForMagicAura;
+    protected Coroutine coroutineOnceWaitToReactivateFurniture;
+
+    void Awake()
+    {
+        if (!GetComponent<Rigidbody>())
+            Debug.Log("Needs a RigdyBody");
+            
+        CheckForMagicAura("Magic");
+    }
 
     /// <summary>
     /// Verify if target is on spot
@@ -35,8 +44,8 @@ public class MagicFurniture : MonoBehaviour
 
                 if (GameManager.Instance.magicAmount >= activateCost)
                 {
-                    if (startCoroutineOnce01 == null)
-                        startCoroutineOnce01 = StartCoroutine(ActivateAfterTime(waitTime));
+                    if (coroutineOnceActivateAfterTime == null)
+                        coroutineOnceActivateAfterTime = StartCoroutine(ActivateAfterTime(activationDelay));
                 }
                 else
                     Debug.Log("No Mana");
@@ -46,8 +55,8 @@ public class MagicFurniture : MonoBehaviour
         // else
         // {
         //     isTargetOnSpot = false;
-        //     if (startCoroutineOnce01 != null)
-        //         StopCoroutine(startCoroutineOnce01);
+        //     if (coroutineOnceActivateAfterTime != null)
+        //         StopCoroutine(coroutineOnceActivateAfterTime);
         // }
     }
 
@@ -60,28 +69,29 @@ public class MagicFurniture : MonoBehaviour
         if (targetPrefab.CompareTag(other.tag))
         {
             isTargetOnSpot = false;
-            if (startCoroutineOnce01 != null)
+            if (coroutineOnceActivateAfterTime != null)
             {
-                StopCoroutine(startCoroutineOnce01);
-                startCoroutineOnce01 = null;
+                Debug.Log("Stop Coroutine base");
+                StopCoroutine(coroutineOnceActivateAfterTime);
+                coroutineOnceActivateAfterTime = null;
             }
         }
     }
 
     /// <summary>
-    /// Spend mana after wait time is over
+    /// Spend mana after wait time is over to activate
     /// </summary>
-    /// <param name="waitTime"></param>
+    /// <param name="activationDelay"></param>
     /// <returns></returns>
-    protected virtual IEnumerator ActivateAfterTime(float waitTime)
+    protected virtual IEnumerator ActivateAfterTime(float activationDelay)
     {
         if (isTargetOnSpot)
         {
-            Debug.Log("Starting coroutine");
-            yield return new WaitForSeconds(waitTime);
-            GameEvents.TriggerOnFillBar(-activateCost);
+            Debug.Log("Starting coroutine base");
+            yield return new WaitForSeconds(activationDelay);
             isActivated = true;
-            startCoroutineOnce01 = null;
+            GameEvents.TriggerOnFillBar(-activateCost);
+            Debug.Log("finished coroutine base");
         }
     }
 
@@ -112,6 +122,9 @@ public class MagicFurniture : MonoBehaviour
             }
         }
 
+        if (!myMagicAura)
+            Debug.Log("No Magic Aura Attached");
+
         yield return null;
     }
 
@@ -123,14 +136,14 @@ public class MagicFurniture : MonoBehaviour
     /// <param name="activation">set the aura Active</param>
     protected virtual void MagicAuraActivation(String auraTag, bool activation)
     {
-        if (startCoroutineOnce02 == null)
-            startCoroutineOnce02 = StartCoroutine(CheckForMagicAura(auraTag));
+        if (coroutineOnceCheckForMagicAura == null)
+            coroutineOnceCheckForMagicAura = StartCoroutine(CheckForMagicAura(auraTag));
 
         if (myMagicAura)
         {
             myMagicAura.SetActive(activation);
             myMagicAura = null;
-            startCoroutineOnce02 = null;
+            coroutineOnceCheckForMagicAura = null;
         }
     }
 
@@ -140,8 +153,8 @@ public class MagicFurniture : MonoBehaviour
     /// <param name="timeToWait">After how much time is to reactivate</param>
     protected virtual void ReactivateFurniture(int timeToWait)
     {
-        if (startCoroutineOnce03 == null)
-            startCoroutineOnce03 = StartCoroutine(WaitToReactivateFurniture(timeToWait));
+        if (coroutineOnceWaitToReactivateFurniture == null)
+            coroutineOnceWaitToReactivateFurniture = StartCoroutine(WaitToReactivateFurniture(timeToWait));
     }
 
     /// <summary>
@@ -154,6 +167,6 @@ public class MagicFurniture : MonoBehaviour
         yield return new WaitForSeconds(timeToWait);
 
         isActivated = false;
-        startCoroutineOnce03 = null;
+        coroutineOnceWaitToReactivateFurniture = null;
     }
 }

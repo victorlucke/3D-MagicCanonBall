@@ -31,7 +31,7 @@ public class MagicLibraryDesk : MagicFurniture
     protected override IEnumerator ActivateAfterTime(float waitTime)
     {
         Debug.Log("abduction activate");
-        yield return StartCoroutine(base.ActivateAfterTime(waitTime));
+        yield return base.ActivateAfterTime(waitTime);
 
         FindBook();
         StartCoroutine(AbductBooks());

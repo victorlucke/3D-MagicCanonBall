@@ -3,9 +3,9 @@ using UnityEngine;
 
 public class RespawnChest : RespawnPoint
 {
-    protected static int priorityChest;
+    protected static int bigestPriorityChest;
     [Header("RespawnChest Class")]
-    public bool isRespawnEnabled;
+    //public bool isRespawnEnabled;
     [SerializeField] private GameObject chestCover;
     [SerializeField] private float timeToOpenChest;
     [SerializeField] private float maxAngleOpenChest;
@@ -21,7 +21,7 @@ public class RespawnChest : RespawnPoint
     // Update is called once per frame
     void Update()
     {
-        if (isActivated && thisChestPriority == priorityChest)
+        if (isActivated && thisChestPriority == bigestPriorityChest)
             StartCoroutine(DelayRespawn(respawnTimer));
     }
 
@@ -31,12 +31,15 @@ public class RespawnChest : RespawnPoint
     /// <returns></returns>
     protected override IEnumerator ActivateAfterTime(float waitTime)
     {
-        yield return StartCoroutine(base.ActivateAfterTime(waitTime));
+        yield return base.ActivateAfterTime(waitTime);
 
+        Debug.Log("Start coroutine chestRespaswn");
         StartCoroutine(OpenChest());
-        priorityChest++;
-        thisChestPriority = priorityChest;
+        bigestPriorityChest++;
+        thisChestPriority = bigestPriorityChest;
+        MagicAuraActivation("Magic", false);
         yield return null;
+        Debug.Log("finish coroutine chestRespawn");
     }
 
     /// <summary>

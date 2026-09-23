@@ -10,7 +10,8 @@ public abstract class CollectObject : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             IncrementValue();
-            gameObject.SetActive(false);
+            Destroy(gameObject);
+            //gameObject.SetActive(false);
             //GameManager.Instance.AddCount();
         }
     }

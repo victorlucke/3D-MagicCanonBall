@@ -23,7 +23,7 @@ public class MagicBookShelve : MagicFurniture
 
     protected override IEnumerator ActivateAfterTime(float waitTime)
     {
-        yield return StartCoroutine(base.ActivateAfterTime(waitTime));
+        yield return base.ActivateAfterTime(waitTime);
 
         SummonMagicBook();
         yield return null;

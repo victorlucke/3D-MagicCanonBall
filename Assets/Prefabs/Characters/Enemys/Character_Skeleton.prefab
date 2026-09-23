@@ -1444,7 +1444,7 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.4338879
   m_Height: 1.7419066
@@ -1508,7 +1508,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyMovement
   playerController: {fileID: 0}
   playerTransform: {fileID: 0}
-  speed: 0
 --- !u!114 &6220473574394790278
 MonoBehaviour:
   m_ObjectHideFlags: 0

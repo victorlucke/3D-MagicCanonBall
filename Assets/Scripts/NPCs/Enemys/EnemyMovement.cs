@@ -1,4 +1,3 @@
-using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -6,13 +5,19 @@ public class EnemyMovement : MonoBehaviour
 {
     [Header("ENEMY MOVEMENT CLASS")]
     [Header("Movement Controller")]
-    public PlayerController playerController;
-    public Transform playerTransform;
-    //public float speed;
-    private NavMeshAgent navMeshAgent;
+    public Transform NewDiversionDestination
+    {
+        get { return _newDiversionDestination; }
+        set { _newDiversionDestination = value; }
+    }
+    protected PlayerController playerController;
+    protected Transform playerTransform;
     protected private Animator animator;
     protected bool sawEnemy;
+    [SerializeField] private Transform _newDiversionDestination;
+    private NavMeshAgent navMeshAgent;
     private bool startChasing;
+    
 
     void Awake()
     {
@@ -35,7 +40,11 @@ public class EnemyMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        StartPursue(playerController.playerMove);
+        if (!_newDiversionDestination)
+            StartPursue(playerController.playerMove);
+        else
+            MakeDetour();
+
     }
 
     /// <summary>
@@ -46,7 +55,7 @@ public class EnemyMovement : MonoBehaviour
         if (isMoved && !startChasing)
             startChasing = true;
 
-        if (playerTransform != null && startChasing)
+        if (playerTransform && startChasing)
         {
             float currentSpeed = navMeshAgent.velocity.magnitude;
 
@@ -54,6 +63,22 @@ public class EnemyMovement : MonoBehaviour
 
             if (navMeshAgent.enabled)
                 navMeshAgent.SetDestination(playerTransform.position);
+        }
+    }
+
+    /// <summary>
+    /// Detor from the player chase to go toward another position case it exist in '_newDiversionDestination'
+    /// </summary>
+    protected virtual void MakeDetour()
+    {
+        if (_newDiversionDestination)
+        {
+            float currentSpeed = navMeshAgent.velocity.magnitude;
+
+            AnimatorCurrentSpeed("Speed", currentSpeed);
+
+            if (navMeshAgent.enabled)
+                navMeshAgent.SetDestination(_newDiversionDestination.position);
         }
     }
 

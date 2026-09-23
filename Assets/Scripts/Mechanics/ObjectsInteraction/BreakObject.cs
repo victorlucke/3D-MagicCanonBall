@@ -4,33 +4,55 @@ using UnityEngine;
 
 public class BreakObject : BasicFunctionalities
 {
+    public bool IsToBreakOnTouch;
     /// <summary>
     /// this mechanic should be use with EventListener
     /// </summary>
     public bool isInsideParents;
     public GameObject[] objectsToBreak;
     public List<string> tagOfObjectBreakers;
-    public bool isToBreak;
-    public bool IsTargtingMe;
-    public bool isToStopLog;
+    private bool isToBreak;
+    private bool IsTargtingMe;
+    //public bool isToStopLog;
+
+    /// <summary>
+    /// this is intent to be used with cannonFire Action and aiming Action to check if this objet is being aimed
+    /// </summary>
+    /// <param name="currentTarget"></param>
     public void VerifyIsTargtingMe(GameObject currentTarget)
     {
         IsTargtingMe = currentTarget == gameObject;
     }
 
+    /// <summary>
+    /// this is intent to be used with cannonFire Action and aiming Action to verify if cannon shoted at this object
+    /// </summary>
+    /// <param name="objectColliding"></param>
     public void VerifyIsToBreak(GameObject objectColliding)
     {
         if (IsTargtingMe && tagOfObjectBreakers.Contains(objectColliding.tag))
             isToBreak = true;
-
     }
 
+    /// <summary>
+    /// This is used to check if the object should break only by touch of the objctBreaker
+    /// </summary>
+    public void VerifyBreakOnTouch(GameObject objectInCollision)
+    {
+        if (IsToBreakOnTouch && tagOfObjectBreakers.Contains(objectInCollision.tag))
+            isToBreak = true;
+    }
+
+    /// <summary>
+    /// start break on collision
+    /// </summary>
+    /// <param name="collision"></param>
     void OnCollisionEnter(Collision collision)
     {
+        VerifyBreakOnTouch(collision.gameObject);
+
         if (isToBreak)
-        {
             StartBreak();
-        }
     }
 
     /// <summary>
@@ -43,6 +65,10 @@ public class BreakObject : BasicFunctionalities
         StartCoroutine(WaitToRemoveParentCollider());
     }
 
+    /// <summary>
+    /// wait miliseconds before remove collider soo the object colliding dont pass through
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator WaitToRemoveParentCollider()
     {
         yield return new WaitForSeconds(0.5f);

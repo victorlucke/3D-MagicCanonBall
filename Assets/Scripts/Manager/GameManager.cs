@@ -22,9 +22,8 @@ public class GameManager : MonoBehaviour
             return UIManager.Instance.barValue;
         }
     }
-
     private GameStatus currentGameStatus;
-    private GameDificulty currentDificulty;
+    [SerializeField] private GameDificulty currentDificulty;
 
     void Awake()
     {

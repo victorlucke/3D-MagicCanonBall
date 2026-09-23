@@ -7,6 +7,7 @@ public class ChangeDificultyZone : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        GameManager.Instance.ChangeDificulty(zoneDificulty);
+        if (other.CompareTag("Player"))
+            GameManager.Instance.ChangeDificulty(zoneDificulty);
     }
 }
