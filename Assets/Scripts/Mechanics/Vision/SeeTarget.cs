@@ -1,18 +1,24 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
+using UnityEditor;
 using UnityEngine;
 
 public class SeeTarget : MonoBehaviour
 {
-    public float VisionRange;
-    public GameObject EyeObj;
+    [Header("SeeTarget Class")]
     public String TargetTag;
+    [SerializeField] private LayerMask TargetLayer;
+    [SerializeField] private LayerMask LayersBlockingVision;
+    [SerializeField] private float VisionRange;
+    [SerializeField] private GameObject EyeObj;
     public bool sawEnemy { get { return _sawEnemy; } }
     public bool targetInRange { get { return _targetInRange; } set { _targetInRange = value; } }
     public GameObject targetObject { get { return _targetObject; } set { _targetObject = value; } }
     private bool _sawEnemy;
     private bool _targetInRange;
+    private LayerMask layersToCheck;
     private GameObject _targetObject;
     private String nameOfRangeDetector;
 
@@ -23,6 +29,8 @@ public class SeeTarget : MonoBehaviour
     void Awake()
     {
         nameOfRangeDetector = "VisionRangeDetector";
+        // add each layerMask.value (bit value) converted to its logaritmin to add it to layersToCheck
+        layersToCheck = LayerMask.GetMask(LayerMask.LayerToName((int)Mathf.Log(TargetLayer.value, 2)), LayerMask.LayerToName((int)Mathf.Log(LayersBlockingVision.value, 2)));
     }
 
     void Start()
@@ -32,15 +40,31 @@ public class SeeTarget : MonoBehaviour
 
     void Update()
     {
-        if (_targetInRange)
-            Debug.Log("target in range");
-        if (_targetObject)
-            Debug.Log("Target name "+_targetObject.name);
+        LookAtTarget();
     }
 
-    void CheckTargetDistance()
+    /// <summary>
+    /// launch an ray in direction of target, if there isnt any obstacle in the way LayersBlockingVision it sees the target
+    /// </summary>
+    void LookAtTarget()
     {
+        if (_targetInRange && _targetObject)
+        {
+            Vector3 EyePosition = EyeObj.transform.position;
+            Vector3 directionToLook = _targetObject.transform.position - EyePosition;
+            RaycastHit hit;
+            bool isInVisionRay = Physics.Raycast(EyePosition, directionToLook, out hit, 30f, layersToCheck);
 
+            Debug.DrawRay(EyePosition, directionToLook, Color.red, 30f);
+
+            if (isInVisionRay)
+            {
+                if (hit.collider.gameObject.layer == (int)Mathf.Log(TargetLayer.value, 2))
+                    _sawEnemy = true;
+                else
+                    _sawEnemy = false;
+            }
+        }
     }
 
     /// <summary>

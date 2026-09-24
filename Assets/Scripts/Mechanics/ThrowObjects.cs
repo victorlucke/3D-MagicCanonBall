@@ -92,26 +92,38 @@ public class ThrowObjects : MonoBehaviour
 
             while (timeElapsed < duration)
             {
-                timeElapsed += Time.deltaTime;
-                float linearProgress = timeElapsed / duration;
+                //Case object was picket up while traveling
+                if (MyObject)
+                {
+                    timeElapsed += Time.deltaTime;
+                    float linearProgress = timeElapsed / duration;
 
-                // 1. Linearly interpolate the X and Z positions
-                Vector3 currentPos = Vector3.Lerp(startPoint, endPoint, linearProgress);
+                    // 1. Linearly interpolate the X and Z positions
+                    Vector3 currentPos = Vector3.Lerp(startPoint, endPoint, linearProgress);
 
-                // 2. Calculate the parabolic height offset
-                // Formula: 4 * height * progress * (1 - progress)
-                float heightOffset = 4f * arcHeight * linearProgress * (1f - linearProgress);
+                    // 2. Calculate the parabolic height offset
+                    // Formula: 4 * height * progress * (1 - progress)
+                    float heightOffset = 4f * arcHeight * linearProgress * (1f - linearProgress);
 
-                // 3. Apply the height to the object
-                currentPos.y += heightOffset;
-                MyObject.transform.position = currentPos;
+                    // 3. Apply the height to the object
+                    currentPos.y += heightOffset;
+                    MyObject.transform.position = currentPos;
 
-                yield return null;
+                    yield return null;
+                }
+                else
+                {
+                    break;
+                }
             }
 
-            // Ensure final position snaps accurately to the target
-            MyObject.transform.position = endPoint;
-            MyObject.transform.rotation = Quaternion.Euler(Vector3.zero);
+            //Case object was picket up while traveling
+            if (MyObject)
+            {
+                // Ensure final position snaps accurately to the target
+                MyObject.transform.position = endPoint;
+                MyObject.transform.rotation = Quaternion.Euler(Vector3.zero);
+            }
 
             yield return new WaitForSeconds(ThrowWaitTime);
 

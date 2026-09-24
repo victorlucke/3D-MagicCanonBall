@@ -368,15 +368,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d60544289565ad42a3e09922dffde35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SeeTarget
-  TargetTag: Player
-  TargetLayer:
-    serializedVersion: 2
-    m_Bits: 512
-  LayersBlockingVision:
-    serializedVersion: 2
-    m_Bits: 8192
   VisionRange: 50
   EyeObj: {fileID: 295986626}
+  TargetTag: Player
 --- !u!1001 &384749841
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1043,7 +1037,7 @@ GameObject:
   - component: {fileID: 1302857237}
   - component: {fileID: 1302857236}
   - component: {fileID: 1302857235}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Quad floor
   m_TagString: Ground
   m_Icon: {fileID: 0}

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4725355246369057867}
   - component: {fileID: 5901877475755814953}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: WallBaseBlock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -75,6 +75,10 @@ PrefabInstance:
     - target: {fileID: 299564714296829301, guid: 90f3f378b452496429d027e375ed0e76, type: 3}
       propertyPath: m_Name
       value: WallBase
+      objectReference: {fileID: 0}
+    - target: {fileID: 299564714296829301, guid: 90f3f378b452496429d027e375ed0e76, type: 3}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 1108892839835025359, guid: 90f3f378b452496429d027e375ed0e76, type: 3}
       propertyPath: m_LocalScale.x
@@ -154,6 +158,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: WallStone
       objectReference: {fileID: 0}
+    - target: {fileID: 8329366941297514852, guid: 8d2621a7a1ea9ab49a32e728f0639d34, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: 8708848658715231198, guid: 8d2621a7a1ea9ab49a32e728f0639d34, type: 3}
       propertyPath: m_LocalScale.x
       value: 30
@@ -231,6 +239,10 @@ PrefabInstance:
     - target: {fileID: 8329366941297514852, guid: 8d2621a7a1ea9ab49a32e728f0639d34, type: 3}
       propertyPath: m_Name
       value: WallStone
+      objectReference: {fileID: 0}
+    - target: {fileID: 8329366941297514852, guid: 8d2621a7a1ea9ab49a32e728f0639d34, type: 3}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 8708848658715231198, guid: 8d2621a7a1ea9ab49a32e728f0639d34, type: 3}
       propertyPath: m_LocalScale.x
@@ -310,6 +322,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: WallBase
       objectReference: {fileID: 0}
+    - target: {fileID: 299564714296829301, guid: 90f3f378b452496429d027e375ed0e76, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: 1108892839835025359, guid: 90f3f378b452496429d027e375ed0e76, type: 3}
       propertyPath: m_LocalScale.x
       value: 30
@@ -387,6 +403,10 @@ PrefabInstance:
     - target: {fileID: 3571200142489072580, guid: 8c3b4f721ed865e4dabd164b4b798a13, type: 3}
       propertyPath: m_Name
       value: WallStone
+      objectReference: {fileID: 0}
+    - target: {fileID: 3571200142489072580, guid: 8c3b4f721ed865e4dabd164b4b798a13, type: 3}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 4234689007601248638, guid: 8c3b4f721ed865e4dabd164b4b798a13, type: 3}
       propertyPath: m_LocalScale.x
@@ -466,6 +486,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: WallStone
       objectReference: {fileID: 0}
+    - target: {fileID: 8329366941297514852, guid: 8d2621a7a1ea9ab49a32e728f0639d34, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: 8708848658715231198, guid: 8d2621a7a1ea9ab49a32e728f0639d34, type: 3}
       propertyPath: m_LocalScale.x
       value: 30
@@ -543,6 +567,10 @@ PrefabInstance:
     - target: {fileID: 8329366941297514852, guid: 8d2621a7a1ea9ab49a32e728f0639d34, type: 3}
       propertyPath: m_Name
       value: WallStone
+      objectReference: {fileID: 0}
+    - target: {fileID: 8329366941297514852, guid: 8d2621a7a1ea9ab49a32e728f0639d34, type: 3}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 8708848658715231198, guid: 8d2621a7a1ea9ab49a32e728f0639d34, type: 3}
       propertyPath: m_LocalScale.x
