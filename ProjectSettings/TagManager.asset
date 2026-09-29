@@ -11,6 +11,7 @@ TagManager:
   - PressurePlate
   - Magic
   - MagicBook
+  - MagicFood
   layers:
   - Default
   - TransparentFX

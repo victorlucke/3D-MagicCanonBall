@@ -8,6 +8,7 @@ public class SlowProjectileZone : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
+        Debug.Log(movingProjectile);
         movingProjectile = true;
 
         if (other.gameObject.GetComponent<Rigidbody>())

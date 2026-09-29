@@ -6,16 +6,18 @@ using UnityEngine;
 /// </summary>
 public class VisionRangeTrigger : MonoBehaviour
 {
+    [Header("VisionRangeTrigger Class")]
     private SeeTarget seeTargetComponent;
     private GameObject currentTargetObject;
     private bool isInRange;
+
     void Start()
     {
         //Verify if essential component exist in parent
         if (GetComponentInParent<SeeTarget>())
             seeTargetComponent = GetComponentInParent<SeeTarget>();
-        else
-            Debug.Log("Essential component donst exist 'SeeTarget'");
+        else if(!seeTargetComponent)
+            Debug.Log(gameObject.name + " in " + gameObject.transform.parent.name + " Essential component donst exist 'SeeTarget'");
     }
 
     void Update()
@@ -40,14 +42,13 @@ public class VisionRangeTrigger : MonoBehaviour
     /// <param name="other"></param>
     void OnTriggerStay(Collider other)
     {
-        if (seeTargetComponent)
+        if (seeTargetComponent && seeTargetComponent.TargetPrefabToSee)
         {
-            if (other.CompareTag(seeTargetComponent.TargetTag))
+            if (other.CompareTag(seeTargetComponent.TargetPrefabToSee.tag))
             {
                 isInRange = true;
                 currentTargetObject = other.gameObject;
             }
-
         }
     }
 
@@ -59,7 +60,7 @@ public class VisionRangeTrigger : MonoBehaviour
     {
         if (seeTargetComponent)
         {
-            if (other.CompareTag(seeTargetComponent.TargetTag))
+            if (other.CompareTag(seeTargetComponent.TargetPrefabToSee.tag))
             {
                 isInRange = false;
                 currentTargetObject = null;

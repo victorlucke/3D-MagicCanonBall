@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Drawing;
 using UnityEngine;
 
 public class MagicBlower : MagicFurniture
@@ -10,8 +9,9 @@ public class MagicBlower : MagicFurniture
     float sizeX;
     float sizeZ;
 
-    void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         sizeY = transform.localScale.y;
         sizeX = transform.localScale.x;
         sizeZ = transform.localScale.z;

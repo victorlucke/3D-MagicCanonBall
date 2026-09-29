@@ -1,11 +1,6 @@
-using System;
 using System.Collections;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Unity.VisualScripting;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UIElements;
 
 public class ThrowObjects : MonoBehaviour
 {
@@ -16,13 +11,7 @@ public class ThrowObjects : MonoBehaviour
     public float ThrowWaitTime;
     private GameObject target;
     private GameObject objectInstance;
-    private InputAction pressE;
     private bool isRunning;
-
-    void Awake()
-    {
-        pressE = InputSystem.actions.FindAction("Interact");
-    }
 
     void Update()
     {
@@ -58,7 +47,7 @@ public class ThrowObjects : MonoBehaviour
     /// <param name="tagToFind">Tag of the target</param>
     GameObject FindTarget(string tagToFind)
     {
-        GameObject targetObject = GameObject.FindWithTag("Player");
+        GameObject targetObject = GameObject.FindWithTag(tagToFind);
         return targetObject;
     }
 

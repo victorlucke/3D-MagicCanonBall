@@ -96,12 +96,12 @@ public class GameManager : MonoBehaviour
     public void ChangeDificulty(GameDificulty newDificulty)
     {
         currentDificulty = newDificulty;
-        Debug.Log(currentDificulty);
+        //Debug.Log(currentDificulty);
     }
 
     public float DificultyMultiplayer()
     {
-        Debug.Log("running");
+        //Debug.Log("running");
         if (currentDificulty == GameDificulty.hard)
             return 3;
         else if (currentDificulty == GameDificulty.medium)

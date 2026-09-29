@@ -101,9 +101,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1468b587801f7d54e8da85e4b1bee5fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Mage
-  playerController: {fileID: 0}
-  playerTransform: {fileID: 0}
-  speed: 0
-  knowingSpellTest: []
-  spellSlotTest: []
+  TargetPrefab: {fileID: 5625579872930438857, guid: f43f2dda930c859409312022f7e610f5, type: 3}
+  TargetLayer:
+    serializedVersion: 2
+    m_Bits: 512
+  LayersBlockingVision:
+    serializedVersion: 2
+    m_Bits: 8192
+  VisionRange: 30
+  EyeObj: {fileID: 7881783969053323527}
+  spellSlots: []
   spellCoolDown: 5
+--- !u!1 &7881783969053323527 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -4855129337964817313, guid: f7fcb1cb3098f284da95df9f8b258b3b, type: 3}
+  m_PrefabInstance: {fileID: 5908341548328494424}
+  m_PrefabAsset: {fileID: 0}

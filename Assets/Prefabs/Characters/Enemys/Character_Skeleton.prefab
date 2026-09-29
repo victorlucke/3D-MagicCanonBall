@@ -1397,10 +1397,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1009910873593459530}
-  - component: {fileID: 4671445247542485421}
   - component: {fileID: -3538566355087956439}
   - component: {fileID: -3748403205806948940}
-  - component: {fileID: 6423847790437666483}
+  - component: {fileID: 4671445247542485421}
+  - component: {fileID: -2362635131434898455}
   - component: {fileID: 6220473574394790278}
   m_Layer: 0
   m_Name: Character_Skeleton
@@ -1427,29 +1427,6 @@ Transform:
   - {fileID: 3979580514173259311}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &4671445247542485421
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8079444773405177413}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.4338879
-  m_Height: 1.7419066
-  m_Direction: 1
-  m_Center: {x: -0.007933438, y: 0.75030875, z: -0.026444852}
 --- !u!95 &-3538566355087956439
 Animator:
   serializedVersion: 7
@@ -1494,7 +1471,30 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &6423847790437666483
+--- !u!136 &4671445247542485421
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8079444773405177413}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.4338879
+  m_Height: 1.7419066
+  m_Direction: 1
+  m_Center: {x: -0.007933438, y: 0.75030875, z: -0.026444852}
+--- !u!114 &-2362635131434898455
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1503,11 +1503,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 8079444773405177413}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b01c3f1ff1743574eaf681dffbf57027, type: 3}
+  m_Script: {fileID: 11500000, guid: 629598da92dc66545a1b9657600afa42, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemyMovement
-  playerController: {fileID: 0}
-  playerTransform: {fileID: 0}
+  m_EditorClassIdentifier: Assembly-CSharp::NavMeshMovement
+  TargetPrefab: {fileID: 5625579872930438857, guid: f43f2dda930c859409312022f7e610f5, type: 3}
+  TargetLayer:
+    serializedVersion: 2
+    m_Bits: 512
+  LayersBlockingVision:
+    serializedVersion: 2
+    m_Bits: 8192
+  VisionRange: 15
+  EyeObj: {fileID: 8428791101239988969}
 --- !u!114 &6220473574394790278
 MonoBehaviour:
   m_ObjectHideFlags: 0

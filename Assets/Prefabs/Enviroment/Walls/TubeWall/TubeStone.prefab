@@ -46,9 +46,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorStone
       objectReference: {fileID: 0}
+    - target: {fileID: 6333325979779692843, guid: 220e61e4cde4a414889b5fa6caa84270, type: 3}
+      propertyPath: thisFloorType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7775351211034182560, guid: 220e61e4cde4a414889b5fa6caa84270, type: 3}
       propertyPath: m_LocalScale.x
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7775351211034182560, guid: 220e61e4cde4a414889b5fa6caa84270, type: 3}
       propertyPath: m_LocalScale.y
@@ -160,8 +164,29 @@ PrefabInstance:
       propertyPath: m_Name
       value: SemiTube
       objectReference: {fileID: 0}
+    - target: {fileID: 6209256426027623628, guid: e568101b2b07eb841a55e96c74f81bf8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.389954
+      objectReference: {fileID: 0}
+    - target: {fileID: 6209256426027623628, guid: e568101b2b07eb841a55e96c74f81bf8, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.5100479
+      objectReference: {fileID: 0}
+    - target: {fileID: 6209256426027623628, guid: e568101b2b07eb841a55e96c74f81bf8, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 6209256426027623628, guid: e568101b2b07eb841a55e96c74f81bf8, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 6209256426027623628, guid: e568101b2b07eb841a55e96c74f81bf8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 5488956514606503411, guid: e568101b2b07eb841a55e96c74f81bf8, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e568101b2b07eb841a55e96c74f81bf8, type: 3}
@@ -221,6 +246,30 @@ PrefabInstance:
     - target: {fileID: 4450241213971444169, guid: e568101b2b07eb841a55e96c74f81bf8, type: 3}
       propertyPath: m_Name
       value: SemiTube (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9107015966160866327, guid: e568101b2b07eb841a55e96c74f81bf8, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2.489952
+      objectReference: {fileID: 0}
+    - target: {fileID: 9107015966160866327, guid: e568101b2b07eb841a55e96c74f81bf8, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 9107015966160866327, guid: e568101b2b07eb841a55e96c74f81bf8, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9107015966160866327, guid: e568101b2b07eb841a55e96c74f81bf8, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 9107015966160866327, guid: e568101b2b07eb841a55e96c74f81bf8, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9107015966160866327, guid: e568101b2b07eb841a55e96c74f81bf8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

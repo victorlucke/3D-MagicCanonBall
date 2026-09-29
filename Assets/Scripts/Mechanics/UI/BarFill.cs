@@ -72,7 +72,7 @@ public class BarFill : MonoBehaviour
     /// </summary>
     public void FillBar()
     {
-        Debug.Log("enchendo" + finalValue);
+        //Debug.Log("enchendo" + finalValue);
         if (currentCoroutine != null)
         {
             StopCoroutine(currentCoroutine);
@@ -88,7 +88,7 @@ public class BarFill : MonoBehaviour
     /// </summary>
     public void EmptyBar()
     {
-        Debug.Log("esvaziando" + finalValue);
+        //Debug.Log("esvaziando" + finalValue);
         if (currentCoroutine != null)
         {
             StopCoroutine(currentCoroutine);
