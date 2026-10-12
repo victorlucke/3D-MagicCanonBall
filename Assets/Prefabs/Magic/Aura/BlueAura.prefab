@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6427262155965207367}
   - component: {fileID: 8029814079878106642}
   - component: {fileID: 2177325591009573416}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Quad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -101,7 +101,7 @@ GameObject:
   - component: {fileID: 5333720836280852049}
   - component: {fileID: 2771251172759658939}
   - component: {fileID: 5887244455068806470}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Quad (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -191,7 +191,7 @@ GameObject:
   - component: {fileID: 8464121816760521411}
   - component: {fileID: 133002970319418387}
   - component: {fileID: 1988194890928503447}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Cylinder001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -280,7 +280,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1468182388733913641}
   - component: {fileID: 630510865678368724}
-  m_Layer: 0
+  - component: {fileID: -8569153708943627640}
+  m_Layer: 14
   m_Name: BlueAura
   m_TagString: Magic
   m_Icon: {fileID: 0}
@@ -326,3 +327,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.6768177, y: 1.1764958, z: 1.6712506}
   m_Center: {x: -0.003539236, y: 0.5621542, z: 0.07431477}
+--- !u!208 &-8569153708943627640
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6153945960945095862}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5

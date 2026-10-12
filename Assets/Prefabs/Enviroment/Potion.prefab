@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6438241117067829663}
   - component: {fileID: 4847671189896581659}
   - component: {fileID: 747394773482666632}
+  - component: {fileID: 5814861241295265310}
   m_Layer: 0
   m_Name: Potion
   m_TagString: Pickup
@@ -144,3 +145,19 @@ MonoBehaviour:
   XRotate: 10
   YRotate: 35
   ZRotate: 10
+--- !u!208 &5814861241295265310
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 163617556293284183}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.179, y: 0.287, z: 0.18900001}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.296, z: 0}
+  m_TimeToStationary: 0.5

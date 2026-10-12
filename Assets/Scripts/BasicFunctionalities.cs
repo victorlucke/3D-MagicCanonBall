@@ -65,14 +65,18 @@ public class BasicFunctionalities : MonoBehaviour
 
         if (myAudioEffect)
         {
-            AudioManager.Instance.PlayClipEffect(gameObject, myAudioEffect, true);
+            AudioManager.Instance.PlayClipEffect(sourceObject, myAudioEffect, true);
         }
         else
-            Debug.Log("No AudioClip in " + gameObject.name);
+            Debug.Log("No AudioClip in " + sourceObject.name);
     }
 
+    /// <summary>
+    /// Stop sound in specified audio source
+    /// </summary>
+    /// <param name="myAudioSource"></param>
     protected void StopSoundEffect(AudioSource myAudioSource)
     {
-        AudioManager.Instance.StopClipEffect(gameObject);
+        myAudioSource.Stop();
     }
 }

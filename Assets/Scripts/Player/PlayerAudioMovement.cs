@@ -9,6 +9,7 @@ using UnityEngine;
 //Metal .4 pitch
 public class PlayerAudioMovement : BasicFunctionalities
 {
+    [Header("PlayerAudioMovement Class")]
     public PlayerController playerController;
     public Rigidbody playerRigidbody;
     public AudioSource audioSource;

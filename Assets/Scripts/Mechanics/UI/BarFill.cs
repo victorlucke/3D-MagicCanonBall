@@ -7,51 +7,36 @@ public class BarFill : MonoBehaviour
     public float newMinValue;
     public float newMaxValue;
     public float speedOfBarFill;
+    private Slider thisBarFill;
     private float finalValue;
     private float firstValue;
-    private bool isToStop;
-    private UIManager uIManager;
     private Coroutine currentCoroutine;
-
-    void OnEnable()
-    {
-        GameEvents.OnFillBar += ChangeBarValue;
-    }
-
-    void OnDisable()
-    {
-        GameEvents.OnFillBar -= ChangeBarValue;
-    }
+    private Coroutine noManaCoroutine;
 
     void Awake()
     {
-        uIManager = UIManager.Instance;
-        firstValue = uIManager.barValue;
-    }
+        thisBarFill = GetComponent<Slider>();
+        
+        firstValue = thisBarFill.value;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        uIManager.magicBar.minValue = newMinValue;
-        uIManager.magicBar.maxValue = newMaxValue;
+        thisBarFill.minValue = newMinValue;
+        thisBarFill.maxValue = newMaxValue;
     }
 
     void Update()
     {
-        CheckBarValue();
+        //ChangeBarValue(GameManager.Instance.manaAmount);
+        CheckBarValue(GameManager.Instance.manaAmount);
+        if (GameManager.Instance.NoMana) NoMana();
     }
 
-    public void CheckBarValue()
-    {
-            if (finalValue > uIManager.barValue)
-                FillBar();
-            else if (finalValue < uIManager.barValue)
-                EmptyBar();
-    }
-
+    /// <summary>
+    /// Save the final value of bar, making dont exceed max or min values. Final value wil be used later to update bar
+    /// </summary>
+    /// <param name="newValue"></param>
     public void ChangeBarValue(float newValue)
     {
-        if (uIManager.barValue == firstValue)
+        if (thisBarFill.value == firstValue)
         {
             finalValue = firstValue + newValue;
         }
@@ -68,9 +53,21 @@ public class BarFill : MonoBehaviour
     }
 
     /// <summary>
+    /// Chack if final value has changed to upddate bar value
+    /// </summary>
+    public void CheckBarValue(float myFinalValue)
+    {
+        if (myFinalValue > thisBarFill.value)
+            FillBar(myFinalValue);
+        else if (myFinalValue < thisBarFill.value)
+            EmptyBar(myFinalValue);
+    }
+
+    /// <summary>
     /// Used with an GameEvent, to add value every time the event is called
     /// </summary>
-    public void FillBar()
+    /// <param name="myFinalValue"></param>
+    public void FillBar(float myFinalValue)
     {
         //Debug.Log("enchendo" + finalValue);
         if (currentCoroutine != null)
@@ -78,15 +75,16 @@ public class BarFill : MonoBehaviour
             StopCoroutine(currentCoroutine);
         }
 
-        if (finalValue <= newMaxValue)
-            currentCoroutine = StartCoroutine(IncreaseOverTime(finalValue));
+        if (myFinalValue <= newMaxValue)
+            currentCoroutine = StartCoroutine(IncreaseOverTime(myFinalValue));
 
     }
 
     /// <summary>
     /// called by an GameEvent, to subtract value from the slider bar
     /// </summary>
-    public void EmptyBar()
+    /// <param name="myFinalValue"></param>
+    public void EmptyBar(float myFinalValue)
     {
         //Debug.Log("esvaziando" + finalValue);
         if (currentCoroutine != null)
@@ -94,54 +92,99 @@ public class BarFill : MonoBehaviour
             StopCoroutine(currentCoroutine);
         }
 
-        if (finalValue >= newMinValue)
-            currentCoroutine = StartCoroutine(DecreaseOverTime(finalValue));
+        if (myFinalValue >= newMinValue)
+            currentCoroutine = StartCoroutine(DecreaseOverTime(myFinalValue));
     }
 
     /// <summary>
     /// increase value of bar over speed * time
     /// </summary>
-    /// <param name="finalValue">the current bar value + increment</param>
+    /// <param name="myFinalValue">the current bar value + increment</param>
     /// <returns></returns>
-    public IEnumerator IncreaseOverTime(float finalValue)
+    public IEnumerator IncreaseOverTime(float myFinalValue)
     {
-        if (uIManager.barValue < newMaxValue)
+        if (thisBarFill.value < newMaxValue)
         {
             float currentValue;
-            currentValue = uIManager.barValue;
+            currentValue = thisBarFill.value;
 
-            while (currentValue < finalValue)
+            while (currentValue < myFinalValue)
             {
                 currentValue += 0.1f * speedOfBarFill * Time.deltaTime;
 
-                uIManager.barValue = currentValue;
+                thisBarFill.value = currentValue;
 
-                if (uIManager.barValue > finalValue)
-                    uIManager.barValue = finalValue;
+                if (thisBarFill.value > myFinalValue)
+                    thisBarFill.value = myFinalValue;
 
                 yield return null;
             }
         }
     }
 
-    public IEnumerator DecreaseOverTime(float finalValue)
+    /// <summary>
+    /// Decrease value of bar over speed * time
+    /// </summary>
+    /// <param name="myFinalValue">the current bar value - decrement</param>
+    /// <returns></returns>
+    public IEnumerator DecreaseOverTime(float myFinalValue)
     {
-        if (uIManager.barValue > newMinValue)
+        if (thisBarFill.value > newMinValue)
         {
             float currentValue;
-            currentValue = uIManager.barValue;
+            currentValue = thisBarFill.value;
 
-            while (currentValue > finalValue)
+            while (currentValue > myFinalValue)
             {
                 currentValue -= 0.1f * speedOfBarFill * Time.deltaTime;
 
-                uIManager.barValue = currentValue;
+                thisBarFill.value = currentValue;
 
-                if (uIManager.barValue < finalValue)
-                    uIManager.barValue = finalValue;
+                if (thisBarFill.value < myFinalValue)
+                    thisBarFill.value = myFinalValue;
 
                 yield return null;
             }
         }
+    }
+
+    /// <summary>
+    /// Start blink bar color only when the bar stop blink the last time
+    /// </summary>
+    private void NoMana()
+    {
+        GameManager.Instance.NoMana = false;
+        if (noManaCoroutine == null)
+        {
+            noManaCoroutine = StartCoroutine(ChangeManaColor());
+        }
+    }
+
+    /// <summary>
+    /// Make bar blink red over time
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator ChangeManaColor()
+    {
+        Image myImage;
+        Color defaultColor;
+        Color warningColor;
+
+        myImage = GetComponentInChildren<Image>();
+
+        defaultColor = Color.white;
+        warningColor = Color.red;
+
+        UIManager.Instance.ChangeImageColor(myImage, warningColor);
+
+        yield return new WaitForSeconds(.5f);
+        UIManager.Instance.ChangeImageColor(myImage, defaultColor);
+
+        yield return new WaitForSeconds(.5f);
+        UIManager.Instance.ChangeImageColor(myImage, warningColor);
+
+        yield return new WaitForSeconds(.5f);
+        UIManager.Instance.ChangeImageColor(myImage, defaultColor);
+        noManaCoroutine = null;
     }
 }

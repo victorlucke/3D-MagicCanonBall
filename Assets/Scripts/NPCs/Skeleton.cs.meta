@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: a9f45dd13566fb4459d5ce58cbbe5d71
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - targetPrefabToSee: {fileID: 5625579872930438857, guid: f43f2dda930c859409312022f7e610f5, type: 3}
+  - eyeObj: {instanceID: 0}
+  - lastParent: {instanceID: 0}
+  - moveLocationDirection: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

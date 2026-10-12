@@ -12,6 +12,7 @@ TagManager:
   - Magic
   - MagicBook
   - MagicFood
+  - Gun
   layers:
   - Default
   - TransparentFX
@@ -23,11 +24,11 @@ TagManager:
   - Stone
   - Wood
   - Player
-  - 
+  - Projectile
   - 
   - 
   - Breakable
-  - 
+  - Magic
   - 
   - 
   - 

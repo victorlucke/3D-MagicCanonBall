@@ -44,3 +44,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5ac14fdd54280448bf142a128b05361, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIManager
+  magicBar: {fileID: 0}
+  menusUI: {fileID: 1496630065209966441, guid: 8539d20fe6dae0e49ab71702615e073f, type: 3}

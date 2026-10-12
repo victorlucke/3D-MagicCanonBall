@@ -33,13 +33,13 @@ public class RespawnChest : RespawnPoint
     {
         yield return base.ActivateAfterTime(waitTime);
 
-        Debug.Log("Start coroutine chestRespaswn");
+        //Debug.Log("Start coroutine chestRespaswn");
         StartCoroutine(OpenChest());
         bigestPriorityChest++;
         thisChestPriority = bigestPriorityChest;
         MagicAuraActivation("Magic", false);
         yield return null;
-        Debug.Log("finish coroutine chestRespawn");
+        //Debug.Log("finish coroutine chestRespawn");
     }
 
     /// <summary>

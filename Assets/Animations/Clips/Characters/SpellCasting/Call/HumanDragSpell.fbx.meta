@@ -62,7 +62,7 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0
+      - time: 0.46822742
         functionName: CastSpell
         data: 
         objectReferenceParameter: {fileID: 6187285916708512812, guid: d658e95a703b8ae458f1598848aab4b8, type: 3}

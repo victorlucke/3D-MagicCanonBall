@@ -15,8 +15,8 @@ public class MagicFurniture : MonoBehaviour
     [Tooltip("prefab of the aura (trigger) used to activate effect")]
     [SerializeField] protected GameObject TriggerPrefab;
     protected GameObject myMagicAura;
-    [SerializeField] protected bool isTargetOnSpot;
-    [SerializeField] protected bool isActivated;
+    protected bool isTargetOnSpot;
+    protected bool isActivated;
     protected Coroutine coroutineOnceActivateAfterTime;
     protected Coroutine coroutineOnceCheckForMagicAura;
     protected Coroutine coroutineOnceWaitToReactivateFurniture;
@@ -44,13 +44,12 @@ public class MagicFurniture : MonoBehaviour
             {
                 isTargetOnSpot = true;
 
-                if (GameManager.Instance.magicAmount >= activateCost)
+                if (GameManager.Instance.manaAmount >= activateCost)
                 {
                     if (coroutineOnceActivateAfterTime == null)
                         coroutineOnceActivateAfterTime = StartCoroutine(ActivateAfterTime(activationDelay));
                 }
-                else
-                    Debug.Log("No Mana");
+                else GameManager.Instance.NoMana = true;
             }
         }
         // else
@@ -91,6 +90,7 @@ public class MagicFurniture : MonoBehaviour
             //Debug.Log("Starting coroutine base");
             yield return new WaitForSeconds(activationDelay);
             isActivated = true;
+            GameManager.Instance.manaAmount -= activateCost;
             GameEvents.TriggerOnFillBar(-activateCost);
             //Debug.Log("finished coroutine base");
         }

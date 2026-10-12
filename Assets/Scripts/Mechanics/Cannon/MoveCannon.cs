@@ -55,7 +55,7 @@ public class MoveCannon : MonoBehaviour
     }
 
     /// <summary>
-    /// Verify every condition to start moving
+    /// Rotate cannon in place and point up down with player movement keys
     /// </summary>
     void VerifyMoveCondition()
     {
@@ -178,7 +178,7 @@ public class MoveCannon : MonoBehaviour
     /// <param name="rotateX">positive, negative value</param>
     /// <param name="rotateY">positive, negative value</param>
     /// <param name="rotateZ">positive, negative value</param>
-    void Rotate(float rotateX, float rotateY, float rotateZ)
+    public void Rotate(float rotateX, float rotateY, float rotateZ)
     {
         Vector3 rotateDirection = new Vector3(rotateX, rotateY, rotateZ);
         Vector3 currentRotationAngle = rotateDirection * rotationSpeed * Time.deltaTime;

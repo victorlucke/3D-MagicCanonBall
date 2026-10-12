@@ -122,12 +122,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 629598da92dc66545a1b9657600afa42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NavMeshMovement
-  TargetPrefab: {fileID: 5625579872930438857, guid: f43f2dda930c859409312022f7e610f5, type: 3}
-  TargetLayer:
-    serializedVersion: 2
-    m_Bits: 512
-  LayersBlockingVision:
+  targetPrefabToSee: {fileID: 5625579872930438857, guid: f43f2dda930c859409312022f7e610f5, type: 3}
+  layersBlockingVision:
     serializedVersion: 2
     m_Bits: 0
-  VisionRange: 300
-  EyeObj: {fileID: 820806624280212637}
+  visionRange: 15
+  eyeObj: {fileID: 820806624280212637}
+  _blokedVision: 0

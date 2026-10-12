@@ -46,11 +46,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AudioManager
   musicClips:
-  - {fileID: 8300000, guid: 68555d1896b9aac418853a35be8b19f4, type: 3}
-  - {fileID: 8300000, guid: ac81e521cc4fffd4cb560d4ddc70d306, type: 3}
-  - {fileID: 8300000, guid: 6b99e4ca54feb1c499bd45b2c95dfde1, type: 3}
-  - {fileID: 8300000, guid: 845f28f9ae11b4b4181d3f627c5c4a1f, type: 3}
-  - {fileID: 8300000, guid: b7da48c15e710a741842583fac3307c7, type: 3}
+  - {fileID: 8300000, guid: a0f933ccaf9b2274d9660f30877834ea, type: 3}
+  - {fileID: 8300000, guid: b822a9ffb94dbee44b2d8ee9e339edf2, type: 3}
+  - {fileID: 8300000, guid: d1570724489266e4db2b9abeda79f81a, type: 3}
+  - {fileID: 8300000, guid: 46d14e9f2535110409d7611b0fd2f810, type: 3}
+  - {fileID: 8300000, guid: 37134f32f860f2d4e98bc269a43336c6, type: 3}
 --- !u!82 &144575642530902034
 AudioSource:
   m_ObjectHideFlags: 0

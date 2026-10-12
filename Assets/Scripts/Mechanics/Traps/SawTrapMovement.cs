@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class SawTrapMovement : MonoBehaviour
@@ -7,6 +10,8 @@ public class SawTrapMovement : MonoBehaviour
     public float moveSpeed;
     public enum ChoseAxis {x,y,z}
     public ChoseAxis choseAxisToMove;
+    [Tooltip("Tags to be affected by saw (destroy)")]
+    [SerializeField] private List<String> tagsAffected; 
     Vector3 objectSize;
     float objectLength;
     bool isGoingFoward;
@@ -23,6 +28,19 @@ public class SawTrapMovement : MonoBehaviour
         MoveSaw(objectLength, choseAxisToMove);
     }
 
+    void OnCollisionEnter(Collision collision)
+    {
+        if (tagsAffected.Contains(collision.gameObject.tag))
+        {
+            Destroy(collision.gameObject);
+        }
+    }
+
+    /// <summary>
+    /// Move Saw Object foward an bacward based on length of Saw base.
+    /// </summary>
+    /// <param name="lengthToCover">total length of Saw base</param>
+    /// <param name="axisToMove">Direction in axi to move</param>
     void MoveSaw(float lengthToCover, ChoseAxis axisToMove)
     {
         float halfLength = lengthToCover / 2;

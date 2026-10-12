@@ -28,6 +28,21 @@ public static class GameEvents
     public static Action<float> OnFillBar;
     public static void TriggerOnFillBar(float addValue) => OnFillBar?.Invoke(addValue);
 
+    /// <summary>
+    /// Save wich gate should be open
+    /// </summary>
     public static Action<GameObject> OnOpenMagicGate;
     public static void TriggerOnOpenMagicGate(GameObject gateReference) => OnOpenMagicGate?.Invoke(gateReference);
+
+    /// <summary>
+    /// Detec wich target is being hit
+    /// </summary>
+    public static Action<GameObject> OnHitTarget;
+    public static void TriggerOnHitTarget(GameObject myTargetHit) => OnHitTarget?.Invoke(myTargetHit);
+
+    /// <summary>
+    /// Area Effect
+    /// </summary>
+    public static Action<GameObject, FisicalEffectsManager.AvaibleEffects> OnFisicalEffect;
+    public static void TriggerOnFisicalEffect(GameObject myTarget, FisicalEffectsManager.AvaibleEffects chosenEffect) => OnFisicalEffect?.Invoke(myTarget, chosenEffect);
 }

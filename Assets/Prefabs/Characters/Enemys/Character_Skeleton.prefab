@@ -1400,6 +1400,7 @@ GameObject:
   - component: {fileID: -3538566355087956439}
   - component: {fileID: -3748403205806948940}
   - component: {fileID: 4671445247542485421}
+  - component: {fileID: -2151217815177891348}
   - component: {fileID: -2362635131434898455}
   - component: {fileID: 6220473574394790278}
   m_Layer: 0
@@ -1494,7 +1495,7 @@ CapsuleCollider:
   m_Height: 1.7419066
   m_Direction: 1
   m_Center: {x: -0.007933438, y: 0.75030875, z: -0.026444852}
---- !u!114 &-2362635131434898455
+--- !u!114 &-2151217815177891348
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1503,18 +1504,35 @@ MonoBehaviour:
   m_GameObject: {fileID: 8079444773405177413}
   m_Enabled: 1
   m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9f45dd13566fb4459d5ce58cbbe5d71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Skeleton
+  targetPrefabToSee: {fileID: 5625579872930438857, guid: f43f2dda930c859409312022f7e610f5, type: 3}
+  layersBlockingVision:
+    serializedVersion: 2
+    m_Bits: 8192
+  visionRange: 15
+  eyeObj: {fileID: 8428791101239988969}
+  lastParent: {fileID: 0}
+  moveLocationDirection: {fileID: 0}
+--- !u!114 &-2362635131434898455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8079444773405177413}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 629598da92dc66545a1b9657600afa42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NavMeshMovement
-  TargetPrefab: {fileID: 5625579872930438857, guid: f43f2dda930c859409312022f7e610f5, type: 3}
-  TargetLayer:
-    serializedVersion: 2
-    m_Bits: 512
-  LayersBlockingVision:
+  targetPrefabToSee: {fileID: 5625579872930438857, guid: f43f2dda930c859409312022f7e610f5, type: 3}
+  layersBlockingVision:
     serializedVersion: 2
     m_Bits: 8192
-  VisionRange: 15
-  EyeObj: {fileID: 8428791101239988969}
+  visionRange: 15
+  eyeObj: {fileID: 8428791101239988969}
 --- !u!114 &6220473574394790278
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1522,7 +1540,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8079444773405177413}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fd2547ddfdfcfa04cad24d285ffa7a16, type: 3}
   m_Name: 

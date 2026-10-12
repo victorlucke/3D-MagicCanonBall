@@ -49,7 +49,7 @@ public class FootstepsManager : BasicFunctionalities
 
     void FixedUpdate()
     {
-        DetectFloorType();
+        //DetectFloorType();
     }
 
     void DetectFloorType()

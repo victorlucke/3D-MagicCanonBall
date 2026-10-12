@@ -1,10 +1,13 @@
 using System.Collections;
+using UnityEditor.U2D.Sprites;
 using UnityEngine;
 
-public class MagicBlower : MagicFurniture
+public class MagicBlower : MagicAreaEffectFurniture
 {
     [Header("Blower Class")]
     [SerializeField] private float blowSpeed;
+    [SerializeField] private GameObject blowEffectObject;
+    [SerializeField] private GameObject furnaceEffectObject;
     float sizeY;
     float sizeX;
     float sizeZ;
@@ -32,6 +35,8 @@ public class MagicBlower : MagicFurniture
         bool isDone = false;
         Debug.Log("Start Coroutine Blow");
 
+        VFXStart();
+
         while (!isDone)
         {
             Debug.Log("Loop Blow");
@@ -56,15 +61,34 @@ public class MagicBlower : MagicFurniture
 
         isActivated = false;
     }
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
 
+    /// <summary>
+    /// Start particle effects
+    /// </summary>
+    private void VFXStart()
+    {
+        ParticleSystem blowParticle;
+        ParticleSystem furnaceParticle;
+
+        blowParticle = blowEffectObject.GetComponent<ParticleSystem>();
+        furnaceParticle = furnaceEffectObject.GetComponent<ParticleSystem>();
+
+        ConfigParticles(blowParticle);
+        ConfigParticles(furnaceParticle);
+
+        blowParticle.Play();
+        furnaceParticle.Play();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void ConfigParticles(ParticleSystem myParticle)
     {
+        var MainModule = myParticle.main;
+        float duration = FisicalEffectsManager.Instance.effectStandardDuration;
 
+        if (MainModule.duration < duration)
+        {
+            myParticle.Stop();
+            MainModule.duration = duration;
+        }
     }
 }

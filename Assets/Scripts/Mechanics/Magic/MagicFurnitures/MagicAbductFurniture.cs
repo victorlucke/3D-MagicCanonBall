@@ -2,6 +2,9 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
+/// <summary>
+/// abduct a number objects, when its done, open a gate.
+/// </summary>
 public class MagicAbductFurniture : MagicFurniture
 {
     [Header("MagicAbductFurniture Class")]
@@ -14,7 +17,7 @@ public class MagicAbductFurniture : MagicFurniture
     [SerializeField] private int AmountToAbduct;
     [Tooltip("wich object will be destroyed after abduction (can be empty)")]
     [SerializeField] private GameObject gateToOpen;
-    private int currentToAbducted;
+    [SerializeField] private int currentToAbducted;
     private GameObject objectToAbduct;
 
     protected override void Awake()
@@ -38,24 +41,36 @@ public class MagicAbductFurniture : MagicFurniture
         VerifyForAbduction();
     }
 
+    /// <summary>
+    /// Check objects to abduct in scene based on currentToAbducted left, to reactivate furniture abduction until its done.
+    /// </summary>
     private void VerifyForAbduction()
     {
         if (!isActivated && !objectToAbduct)
-            FindToAbduct();
-        else if (!isActivated && objectToAbduct)
-            MagicAuraActivation(TriggerPrefab.tag, true);
-
-        if (isActivated)
         {
-            MagicAuraActivation(TriggerPrefab.tag, false);
+            FindToAbduct();
 
-            if (currentToAbducted > 0)
-            {
-                currentToAbducted--;
-                isActivated = false;
-            }
-            else GameEvents.TriggerOnOpenMagicGate(gateToOpen);
+            if (objectToAbduct)
+                MagicAuraActivation(TriggerPrefab.tag, true);
         }
+
+        if (isActivated && objectToAbduct)
+            MagicAuraActivation(TriggerPrefab.tag, false);
+            
+        else if (isActivated && !objectToAbduct)
+        {
+            if (currentToAbducted > 0) isActivated = false;
+
+            else OpenGate();
+        }
+    }
+
+    /// <summary>
+    /// Call event action OpenGate in Game Events
+    /// </summary>
+    private void OpenGate()
+    {
+        GameEvents.TriggerOnOpenMagicGate(gateToOpen);
     }
 
     protected override IEnumerator ActivateAfterTime(float waitTime)
@@ -139,6 +154,7 @@ public class MagicAbductFurniture : MagicFurniture
     /// <param name="abductedObject">object abducted reference</param>
     void DestroyAbducted()
     {
+        currentToAbducted--;
         Destroy(objectToAbduct);
     }
 }

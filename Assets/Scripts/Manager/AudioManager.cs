@@ -6,8 +6,8 @@ public class AudioManager : MonoBehaviour
 {
     public static AudioManager Instance;
     public List<AudioClip> musicClips;
-    public enum PlayMusic { Winner, Lose, Phase1, Phase2, Phase3 }
-    private Dictionary<string, AudioClip> musicLoopDicionary = new Dictionary<string, AudioClip>();
+    public enum PlayMusic { Winner, Over, Phase1, Phase2, Phase3, Menu }
+    private Dictionary<string, AudioClip> gameMusics = new Dictionary<string, AudioClip>();
     private AudioSource myAudioSource;
 
     void Awake()
@@ -15,7 +15,7 @@ public class AudioManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
+            DontDestroyOnLoad(Instance);
         }
         else
             Destroy(gameObject);
@@ -23,6 +23,8 @@ public class AudioManager : MonoBehaviour
         SaveAllMusics();
 
         myAudioSource = GetComponent<AudioSource>();
+
+        ChangeMusic(PlayMusic.Menu);
     }
 
     /// <summary>
@@ -32,9 +34,9 @@ public class AudioManager : MonoBehaviour
     {
         foreach (AudioClip clip in musicClips)
         {
-            if (!musicLoopDicionary.ContainsKey(clip.name))
+            if (!gameMusics.ContainsKey(clip.name))
             {
-                musicLoopDicionary.Add(clip.name, clip);
+                gameMusics.Add(clip.name, clip);
             }
         }
     }
@@ -44,16 +46,36 @@ public class AudioManager : MonoBehaviour
     /// </summary>
     public void ChangeMusic(PlayMusic newPlayMusic)
     {
-        myAudioSource.Stop();
+        AudioClip currentMusic;
+        AudioClip newMusic;
+
+        currentMusic = myAudioSource.clip;
+        newMusic = null;
 
         switch (newPlayMusic)
         {
+            case PlayMusic.Menu:
+                newMusic = gameMusics["MenuMusic"];
+                break;
             case PlayMusic.Phase1:
-                myAudioSource.clip = musicLoopDicionary["Phase1Music"];
+                newMusic = gameMusics["Phase1Music"];
+                break;
+            case PlayMusic.Phase2:
+                newMusic = gameMusics["Phase2Music"];
+                break;
+            case PlayMusic.Phase3:
+                newMusic = gameMusics["Phase3Music"];
                 break;
             case PlayMusic.Winner:
-                myAudioSource.clip = musicLoopDicionary["WinnerMusic"];
+                newMusic = gameMusics["WinnerMusic"];
                 break;
+        }
+
+        if (newMusic != currentMusic)
+        {
+            myAudioSource.Stop();
+            myAudioSource.clip = newMusic;
+            myAudioSource.Play();
         }
     }
 

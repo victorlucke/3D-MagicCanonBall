@@ -36,7 +36,7 @@ public class PlayerController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        finalPhase.SetActive(false);
+        //finalPhase.SetActive(false);
 
         // SetCountText();
 
@@ -186,7 +186,10 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            GameManager.Instance.GameOver();
+            if (LayerMask.LayerToName(gameObject.layer) == "Player")
+                GameManager.Instance.GameOver();
+            else if (LayerMask.LayerToName(gameObject.layer) == "Projectile")
+                GameEvents.TriggerOnHitTarget(collision.gameObject);
         }
     }
 
@@ -197,5 +200,11 @@ public class PlayerController : MonoBehaviour
             if (!onGround)
                 onGround = true;
         }
+    }
+
+    void OnDestroy()
+    {
+        CameraShakerHandler.Shake(enemyShakeData);
+        GameManager.Instance.GameOver();
     }
 }

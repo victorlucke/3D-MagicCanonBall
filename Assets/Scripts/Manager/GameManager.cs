@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -7,23 +8,18 @@ public class GameManager : MonoBehaviour
 
     public enum GameDificulty { easy, medium, hard }
     public enum GamePhase { phase1, phase2, phase3 }
-    public enum GameStatus { Unpause, Pause, Win, Over }
+    public enum GameStatus { Unpause, Pause, Win, Over, Menu }
     public static event Action<int> OnCountChanged;
     public static event Action OnGameOver;
-    public int maxCount;
     public int count { get; private set; }
     /// <summary>
-    /// return amount of magic in the current magic bar
+    /// return amount of mana in the current magic bar
     /// </summary>
-    public float magicAmount
-    {
-        get
-        {
-            return UIManager.Instance.barValue;
-        }
-    }
-    private GameStatus currentGameStatus;
-    [SerializeField] private GameDificulty currentDificulty;
+    [SerializeField][Range(0, 10)] public float manaAmount;
+    public bool NoMana { get; set; }
+    public GameStatus CurrentGameStatus { get { return _currentGameStatus; } }
+    [SerializeField]private GameStatus _currentGameStatus;
+    private GameDificulty currentDificulty;
 
     void Awake()
     {
@@ -35,9 +31,9 @@ public class GameManager : MonoBehaviour
         else
             Destroy(gameObject);
 
-        currentGameStatus = GameStatus.Pause;
+        //MenuGame();
 
-        maxCount = GameObject.FindGameObjectsWithTag("Pickup").Length;
+        //maxCount = GameObject.FindGameObjectsWithTag("Pickup").Length;
     }
 
     /// <summary>
@@ -71,15 +67,31 @@ public class GameManager : MonoBehaviour
         ChangeGameStatus(GameStatus.Unpause);
     }
 
+    public void MenuGame()
+    {
+        ChangeGameStatus(GameStatus.Menu);
+    }
+
+    /// <summary>
+    /// Load game in specified Scene
+    /// </summary>
+    /// <param name="mySceneID"></param>
+    public void RestartGame(int mySceneID)
+    {
+        ResetData();
+        ChangeGameStatus(GameStatus.Menu);
+        SceneManager.LoadScene(mySceneID);
+    }
+
     /// <summary>
     /// Change the current game timeScale based on GameStatus
     /// </summary>
     /// <param name="newGameStatus">Pause, Unpause</param>
     void ChangeGameStatus(GameStatus newGameStatus)
     {
-        currentGameStatus = newGameStatus;
+        _currentGameStatus = newGameStatus;
 
-        switch (currentGameStatus)
+        switch (_currentGameStatus)
         {
             case GameStatus.Pause:
                 Time.timeScale = 0;
@@ -87,8 +99,12 @@ public class GameManager : MonoBehaviour
             case GameStatus.Unpause:
                 Time.timeScale = 1;
                 break;
+            case GameStatus.Menu:
+                Time.timeScale = 0;
+                break;
             case GameStatus.Over:
                 OnGameOver?.Invoke();
+                Debug.Log("Game Over");
                 break;
         }
     }
@@ -108,5 +124,10 @@ public class GameManager : MonoBehaviour
             return 2;
         else
             return 1;
+    }
+
+    private void ResetData()
+    {
+        manaAmount = 0;
     }
 }
