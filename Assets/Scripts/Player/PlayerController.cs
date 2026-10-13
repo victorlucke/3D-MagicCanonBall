@@ -96,6 +96,11 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
+        if(GameManager.Instance.CurrentGameStatus == GameManager.GameStatus.Cutscene)
+            gameObject.tag = "Invencible";
+            else
+            gameObject.tag = "Player";
+            
         if (onGround)
         {
             movePlayer(movementX, 0, movementY);

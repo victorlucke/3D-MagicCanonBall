@@ -7,19 +7,25 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
 
     public enum GameDificulty { easy, medium, hard }
-    public enum GamePhase { phase1, phase2, phase3 }
-    public enum GameStatus { Unpause, Pause, Win, Over, Menu }
-    public static event Action<int> OnCountChanged;
+    public enum GamePhase { phase1, phase2, phase3, Boss, End }
+    public enum GameStatus { Unpause, Pause, Win, Over, Menu, Cutscene }
     public static event Action OnGameOver;
-    public int count { get; private set; }
     /// <summary>
     /// return amount of mana in the current magic bar
     /// </summary>
-    [SerializeField][Range(0, 10)] public float manaAmount;
+    [Range(0, 10)] public float manaAmount;
     public bool NoMana { get; set; }
     public GameStatus CurrentGameStatus { get { return _currentGameStatus; } }
-    [SerializeField]private GameStatus _currentGameStatus;
+    public GamePhase CurrentGamePhase { get { return _currentGamePhase; } set { _currentGamePhase = value; } }
+    public bool IsRespawnEnabled { get { return _isRespawnEnabled; } set { _isRespawnEnabled = value; } }
+    [SerializeField] private GameStatus _currentGameStatus;
+    [SerializeField] private GamePhase _currentGamePhase;
+    [SerializeField]private bool _isRespawnEnabled;
     private GameDificulty currentDificulty;
+
+    //old stuf
+    public static event Action<int> OnCountChanged;
+    public int count { get; private set; }
 
     void Awake()
     {
@@ -56,7 +62,8 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void PauseGame()
     {
-        ChangeGameStatus(GameStatus.Pause);
+        if (_currentGameStatus != GameStatus.Menu)
+            ChangeGameStatus(GameStatus.Pause);
     }
 
     /// <summary>
@@ -72,6 +79,11 @@ public class GameManager : MonoBehaviour
         ChangeGameStatus(GameStatus.Menu);
     }
 
+    public void Cutscene()
+    {
+        ChangeGameStatus(GameStatus.Cutscene);
+    }
+
     /// <summary>
     /// Load game in specified Scene
     /// </summary>
@@ -81,6 +93,35 @@ public class GameManager : MonoBehaviour
         ResetData();
         ChangeGameStatus(GameStatus.Menu);
         SceneManager.LoadScene(mySceneID);
+    }
+
+    public void ChangeDificulty(GameDificulty newDificulty)
+    {
+        currentDificulty = newDificulty;
+        //Debug.Log(currentDificulty);
+    }
+
+    public float DificultyMultiplayer()
+    {
+        //Debug.Log("running");
+        if (currentDificulty == GameDificulty.hard)
+            return 3;
+        else if (currentDificulty == GameDificulty.medium)
+            return 2;
+        else
+            return 1;
+    }
+
+    public void ChangeGamePhase(GamePhase myGamePhase)
+    {
+        _currentGamePhase = myGamePhase;
+
+        switch (_currentGamePhase)
+        {
+            case GamePhase.Boss:
+                Time.timeScale = 0;
+                break;
+        }
     }
 
     /// <summary>
@@ -109,25 +150,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void ChangeDificulty(GameDificulty newDificulty)
-    {
-        currentDificulty = newDificulty;
-        //Debug.Log(currentDificulty);
-    }
-
-    public float DificultyMultiplayer()
-    {
-        //Debug.Log("running");
-        if (currentDificulty == GameDificulty.hard)
-            return 3;
-        else if (currentDificulty == GameDificulty.medium)
-            return 2;
-        else
-            return 1;
-    }
-
     private void ResetData()
     {
         manaAmount = 0;
+        _currentGameStatus = GameStatus.Menu;
+        _currentGamePhase = GamePhase.phase1;
+        _isRespawnEnabled = false;
     }
 }

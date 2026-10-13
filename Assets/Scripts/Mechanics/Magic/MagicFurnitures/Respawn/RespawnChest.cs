@@ -23,6 +23,9 @@ public class RespawnChest : RespawnPoint
     {
         if (isActivated && thisChestPriority == bigestPriorityChest)
             StartCoroutine(DelayRespawn(respawnTimer));
+
+        if (bigestPriorityChest > 0)
+            GameManager.Instance.IsRespawnEnabled = true;
     }
 
     /// <summary>

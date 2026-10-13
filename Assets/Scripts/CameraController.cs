@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -6,11 +7,15 @@ public class CameraController : MonoBehaviour
 {
     public GameObject player;
     public List<Transform> cutscenesTransform;
-    [SerializeField] private bool isToChange;
+    private GameObject bossObject;
+    [SerializeField] private bool isCutsceneGoing;
+    [SerializeField] private bool isCutsceneOver;
     private Vector3 offset;
     private Vector3 rotationInGame;
     private InputAction changeCameraAction;
-    [SerializeField] private bool isChangingPosition;
+
+    private bool isToChange;
+    private bool isChangingPosition;
 
     void Awake()
     {
@@ -21,11 +26,27 @@ public class CameraController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        FindPlayer();
+        player = FindObject("Player");
     }
 
     // Update is called once per frame
     void LateUpdate()
+    {
+        if (GameManager.Instance.CurrentGamePhase != GameManager.GamePhase.Boss)
+            LocatePlayer();
+        else
+        {
+            if (!isCutsceneOver)
+                LocateBoss();
+
+            if (isCutsceneOver)
+            {
+                LocatePlayer();
+            }
+        }
+    }
+
+    void LocatePlayer()
     {
         if (player != null)
         {
@@ -38,15 +59,44 @@ public class CameraController : MonoBehaviour
             //     isToChange = MoveCamera(cutscenesTransform[0], true);
         }
         else
-            FindPlayer();
+            player = FindObject("Player");
     }
 
-    void FindPlayer()
+    void LocateBoss()
     {
-        if (GameObject.FindWithTag("Player") != null)
+        GameManager.Instance.Cutscene();
+
+        bossObject = FindObject("Boss");
+
+        if (bossObject != null)
         {
-            player = GameObject.FindWithTag("Player").gameObject;
+            isCutsceneGoing = MoveCameraToward(bossObject.transform, true);
+
+            if (!isCutsceneGoing)
+            {
+                isCutsceneOver = true;
+                GameManager.Instance.PauseGame();
+            }
+            else isCutsceneOver = false;
         }
+        else
+        {
+            Debug.Log("Cant find boss");
+            isCutsceneGoing = false;
+            isCutsceneOver = true;
+        }
+    }
+
+    GameObject FindObject(String myTagToSeach)
+    {
+        GameObject myObject;
+
+        myObject = null;
+
+        if (GameObject.FindWithTag(myTagToSeach) != null)
+            myObject = GameObject.FindWithTag(myTagToSeach).gameObject;
+
+        return myObject;
     }
 
     void PositionCamera()
@@ -61,7 +111,7 @@ public class CameraController : MonoBehaviour
     /// <param name="newTransforms"></param>
     /// <param name="rotate">is also to rotate to face the object (else use gameplay rotation)</param>
     /// <returns></returns>
-    bool MoveCamera(Transform newTransforms, bool rotate)
+    bool MoveCameraToward(Transform newTransforms, bool rotate)
     {
         bool isMoving = true;
         float speed = 5;

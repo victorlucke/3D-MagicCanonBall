@@ -34,9 +34,7 @@ public class NavMeshMovement : SeeTarget
         SetMovementAnimation();
 
         if (!_newDiversionDestination)
-        {
             TryPursueTarget(currentTargetDetected);
-        }
         else
             MakeDetour(_newDiversionDestination);
     }
@@ -51,7 +49,7 @@ public class NavMeshMovement : SeeTarget
 
         myTargetTransform = null;
 
-        if(myTargetObj) myTargetTransform = myTargetObj.transform;
+        if (myTargetObj) myTargetTransform = myTargetObj.transform;
 
         if (sawEnemy && myTargetTransform)
         {
@@ -83,7 +81,7 @@ public class NavMeshMovement : SeeTarget
             }
             else Debug.Log("Cant find any transform to pursue in " + gameObject.name);
         }
-        
+
         return null;
     }
 

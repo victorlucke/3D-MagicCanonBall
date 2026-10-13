@@ -13,6 +13,8 @@ TagManager:
   - MagicBook
   - MagicFood
   - Gun
+  - Boss
+  - Invencible
   layers:
   - Default
   - TransparentFX

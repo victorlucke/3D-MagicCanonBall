@@ -28,8 +28,12 @@ public class MenuController : MonoBehaviour
 
     void Update()
     {
-        if(pauseAction.IsPressed())
+        if (pauseAction.IsPressed())
             PauseMenu();
+
+        if (GameManager.Instance.CurrentGameStatus == GameManager.GameStatus.Pause)
+            if (!pauseMenuObject.activeSelf)
+                PauseMenu();
     }
 
     public void MainMenu()
@@ -59,13 +63,15 @@ public class MenuController : MonoBehaviour
     /// </summary>
     void GameOverMenu()
     {
-        UIManager.Instance.AccessMenu(gameObject, overMenuObject);
+        if (!GameManager.Instance.IsRespawnEnabled)
+            UIManager.Instance.AccessMenu(gameObject, overMenuObject);
         GameManager.Instance.UnpauseGame();
     }
 
     void PauseMenu()
     {
-        UIManager.Instance.AccessMenu(gameObject, pauseMenuObject);
         GameManager.Instance.PauseGame();
+        if (GameManager.Instance.CurrentGameStatus == GameManager.GameStatus.Pause)
+            UIManager.Instance.AccessMenu(gameObject, pauseMenuObject);
     }
 }
