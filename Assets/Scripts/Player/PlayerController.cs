@@ -92,15 +92,12 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         DetectMouseClick();
+
+        Invencible();
     }
 
     void FixedUpdate()
     {
-        if(GameManager.Instance.CurrentGameStatus == GameManager.GameStatus.Cutscene)
-            gameObject.tag = "Invencible";
-            else
-            gameObject.tag = "Player";
-            
         if (onGround)
         {
             movePlayer(movementX, 0, movementY);
@@ -110,6 +107,14 @@ public class PlayerController : MonoBehaviour
         }
 
         VerifyFallingDeath();
+    }
+
+    void Invencible()
+    {
+        if(GameManager.Instance.CurrentGameStatus != GameManager.GameStatus.Unpause)
+            gameObject.tag = "Invencible";
+            else
+            gameObject.tag = "Player";
     }
 
     /// <summary>
@@ -151,7 +156,7 @@ public class PlayerController : MonoBehaviour
     {
         if (transform.position.y < 0)
         {
-            GameManager.Instance.GameOver();
+            GameManager.Instance.StatusGameOver();
         }
     }
 
@@ -192,7 +197,7 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Enemy"))
         {
             if (LayerMask.LayerToName(gameObject.layer) == "Player")
-                GameManager.Instance.GameOver();
+                GameManager.Instance.StatusGameOver();
             else if (LayerMask.LayerToName(gameObject.layer) == "Projectile")
                 GameEvents.TriggerOnHitTarget(collision.gameObject);
         }
@@ -210,6 +215,6 @@ public class PlayerController : MonoBehaviour
     void OnDestroy()
     {
         CameraShakerHandler.Shake(enemyShakeData);
-        GameManager.Instance.GameOver();
+        GameManager.Instance.StatusGameOver();
     }
 }

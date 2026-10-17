@@ -8,14 +8,15 @@ using UnityEngine.UIElements;
 /// remember to add more rays in LookAtTarget, in each corner of the target. Top Bot Left Right, soo you can try to see it not only
 /// by its center.
 /// </summary>
-public abstract class SeeTarget : MonoBehaviour
+public abstract class SeeTarget : Health
 {
     [Header("SeeTarget Class")]
     //[SerializeField] private LayerMask targetLayer;
     [Tooltip("Prefab representing tag to search")]
     [SerializeField] private GameObject targetPrefabToSee;
+    [Tooltip("Currently only 1 can be selected")]
     [SerializeField] private LayerMask layersBlockingVision;
-    [SerializeField] private float visionRange;
+    [SerializeField] protected float visionRange;
     [SerializeField] private GameObject eyeObj;
     public bool sawEnemy { get { return _sawEnemy; } }
     public bool blokedVision { get { return _blokedVision; } set { _blokedVision = value; } }

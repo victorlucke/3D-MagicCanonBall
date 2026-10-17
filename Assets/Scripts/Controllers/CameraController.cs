@@ -7,10 +7,10 @@ public class CameraController : MonoBehaviour
 {
     public GameObject player;
     public List<Transform> cutscenesTransform;
-    private GameObject bossObject;
     [SerializeField] private bool isCutsceneGoing;
     [SerializeField] private bool isCutsceneOver;
     private Vector3 offset;
+    private Vector3 offsetZoom;
     private Vector3 rotationInGame;
     private InputAction changeCameraAction;
 
@@ -20,6 +20,7 @@ public class CameraController : MonoBehaviour
     void Awake()
     {
         offset = new Vector3(0, 10, -10);
+        offsetZoom = new Vector3(3, 0, -3);
         rotationInGame = new Vector3(45, 0, 0);
         changeCameraAction = InputSystem.actions.FindAction("Interact");
     }
@@ -32,9 +33,7 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
-        if (GameManager.Instance.CurrentGamePhase != GameManager.GamePhase.Boss)
-            LocatePlayer();
-        else
+        if (GameManager.Instance.CurrentGamePhase == GameManager.GamePhase.Boss)
         {
             if (!isCutsceneOver)
                 LocateBoss();
@@ -43,9 +42,16 @@ public class CameraController : MonoBehaviour
             {
                 LocatePlayer();
             }
-        }
+        } 
+        else if(GameManager.Instance.CurrentGamePhase == GameManager.GamePhase.End)
+            LocateEndTarget();
+            
+        else LocatePlayer();
     }
 
+    /// <summary>
+    /// Detect object with Player tag save it and move towards him.
+    /// </summary>
     void LocatePlayer()
     {
         if (player != null)
@@ -62,9 +68,32 @@ public class CameraController : MonoBehaviour
             player = FindObject("Player");
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    void LocateEndTarget()
+    {
+        GameObject endGameObject;
+
+        endGameObject = FindObject("EndGame");
+
+        if(endGameObject != null)
+        {
+            bool isThisCamMoving;
+            isThisCamMoving = MoveCameraToward(endGameObject.transform, false);
+
+            if(!isThisCamMoving) GameManager.Instance.StatusGameWin();
+        }
+    }
+
+    /// <summary>
+    /// Locate object with Boss tag and move towards it.
+    /// </summary>
     void LocateBoss()
     {
-        GameManager.Instance.Cutscene();
+        GameObject bossObject;
+
+        GameManager.Instance.StatusCutscene();
 
         bossObject = FindObject("Boss");
 
@@ -75,7 +104,7 @@ public class CameraController : MonoBehaviour
             if (!isCutsceneGoing)
             {
                 isCutsceneOver = true;
-                GameManager.Instance.PauseGame();
+                GameManager.Instance.StatusUnpauseGame();
             }
             else isCutsceneOver = false;
         }
@@ -115,7 +144,7 @@ public class CameraController : MonoBehaviour
     {
         bool isMoving = true;
         float speed = 5;
-        Vector3 newCamPosition = newTransforms.position + offset;
+        Vector3 newCamPosition = newTransforms.position + offsetZoom;
 
         if (rotate)
         {

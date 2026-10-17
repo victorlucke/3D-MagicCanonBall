@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
     public bool IsRespawnEnabled { get { return _isRespawnEnabled; } set { _isRespawnEnabled = value; } }
     [SerializeField] private GameStatus _currentGameStatus;
     [SerializeField] private GamePhase _currentGamePhase;
-    [SerializeField]private bool _isRespawnEnabled;
+    [SerializeField] private bool _isRespawnEnabled;
     private GameDificulty currentDificulty;
 
     //old stuf
@@ -52,15 +52,16 @@ public class GameManager : MonoBehaviour
         OnCountChanged?.Invoke(count);
     }
 
-    public void GameOver()
+    public void StatusGameOver()
     {
-        ChangeGameStatus(GameStatus.Over);
+        if (_currentGameStatus != GameStatus.Over)
+            ChangeGameStatus(GameStatus.Over);
     }
 
     /// <summary>
     /// Pause Game
     /// </summary>
-    public void PauseGame()
+    public void StatusPauseGame()
     {
         if (_currentGameStatus != GameStatus.Menu)
             ChangeGameStatus(GameStatus.Pause);
@@ -69,17 +70,17 @@ public class GameManager : MonoBehaviour
     /// <summary>
     /// Unpause game
     /// </summary>
-    public void UnpauseGame()
+    public void StatusUnpauseGame()
     {
         ChangeGameStatus(GameStatus.Unpause);
     }
 
-    public void MenuGame()
+    public void StatusMenuGame()
     {
         ChangeGameStatus(GameStatus.Menu);
     }
 
-    public void Cutscene()
+    public void StatusCutscene()
     {
         ChangeGameStatus(GameStatus.Cutscene);
     }
@@ -88,11 +89,17 @@ public class GameManager : MonoBehaviour
     /// Load game in specified Scene
     /// </summary>
     /// <param name="mySceneID"></param>
-    public void RestartGame(int mySceneID)
+    public void StatusRestartGame(int mySceneID)
     {
         ResetData();
         ChangeGameStatus(GameStatus.Menu);
         SceneManager.LoadScene(mySceneID);
+    }
+
+    public void StatusGameWin()
+    {
+        if (_currentGameStatus != GameStatus.Win)
+            ChangeGameStatus(GameStatus.Win);
     }
 
     public void ChangeDificulty(GameDificulty newDificulty)
@@ -119,7 +126,8 @@ public class GameManager : MonoBehaviour
         switch (_currentGamePhase)
         {
             case GamePhase.Boss:
-                Time.timeScale = 0;
+                break;
+            case GamePhase.End:
                 break;
         }
     }
@@ -130,23 +138,31 @@ public class GameManager : MonoBehaviour
     /// <param name="newGameStatus">Pause, Unpause</param>
     void ChangeGameStatus(GameStatus newGameStatus)
     {
-        _currentGameStatus = newGameStatus;
-
-        switch (_currentGameStatus)
+        if (_currentGameStatus != GameStatus.Over && _currentGameStatus != GameStatus.Win)
         {
-            case GameStatus.Pause:
-                Time.timeScale = 0;
-                break;
-            case GameStatus.Unpause:
-                Time.timeScale = 1;
-                break;
-            case GameStatus.Menu:
-                Time.timeScale = 0;
-                break;
-            case GameStatus.Over:
-                OnGameOver?.Invoke();
-                Debug.Log("Game Over");
-                break;
+            _currentGameStatus = newGameStatus;
+
+            switch (_currentGameStatus)
+            {
+                case GameStatus.Pause:
+                    Time.timeScale = 0;
+                    break;
+                case GameStatus.Unpause:
+                    Time.timeScale = 1;
+                    break;
+                case GameStatus.Menu:
+                    Time.timeScale = 0;
+                    break;
+                case GameStatus.Over:
+                    OnGameOver?.Invoke();
+                    Debug.Log("Game Over");
+                    break;
+                case GameStatus.Cutscene:
+                    break;
+                case GameStatus.Win:
+                    break;
+            }
+
         }
     }
 

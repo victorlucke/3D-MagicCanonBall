@@ -23,7 +23,7 @@ public class MenuController : MonoBehaviour
     void Start()
     {
         UIManager.Instance.AccessMenu(gameObject, mainMenuObject);
-        GameManager.Instance.MenuGame();
+        GameManager.Instance.StatusMenuGame();
     }
 
     void Update()
@@ -38,7 +38,7 @@ public class MenuController : MonoBehaviour
 
     public void MainMenu()
     {
-        GameManager.Instance.RestartGame(0);
+        GameManager.Instance.StatusRestartGame(0);
     }
 
     /// <summary>
@@ -46,7 +46,7 @@ public class MenuController : MonoBehaviour
     /// </summary>
     public void RestartPhase()
     {
-        GameManager.Instance.RestartGame(0);
+        GameManager.Instance.StatusRestartGame(0);
     }
 
     /// <summary>
@@ -55,7 +55,7 @@ public class MenuController : MonoBehaviour
     public void LeaveMenu()
     {
         UIManager.Instance.DeactivateAllMenus(gameObject);
-        GameManager.Instance.UnpauseGame();
+        GameManager.Instance.StatusUnpauseGame();
     }
 
     /// <summary>
@@ -65,13 +65,13 @@ public class MenuController : MonoBehaviour
     {
         if (!GameManager.Instance.IsRespawnEnabled)
             UIManager.Instance.AccessMenu(gameObject, overMenuObject);
-        GameManager.Instance.UnpauseGame();
+        GameManager.Instance.StatusUnpauseGame();
     }
 
     void PauseMenu()
     {
-        GameManager.Instance.PauseGame();
         if (GameManager.Instance.CurrentGameStatus == GameManager.GameStatus.Pause)
             UIManager.Instance.AccessMenu(gameObject, pauseMenuObject);
+        GameManager.Instance.StatusPauseGame();
     }
 }

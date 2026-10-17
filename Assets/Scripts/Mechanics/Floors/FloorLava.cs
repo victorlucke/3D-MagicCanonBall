@@ -12,7 +12,7 @@ public class FloorLava : Floors
     {
         if(playerObject != null)
         {
-            GameManager.Instance.GameOver();
+            GameManager.Instance.StatusGameOver();
         }
     }
 }

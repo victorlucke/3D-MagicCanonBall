@@ -13,10 +13,7 @@ public class RespawnChest : RespawnPoint
     private float distanceOutAngle;
     private int thisChestPriority;
 
-    void Awake()
-    {
-        //isRespawnEnabled = false;
-    }
+    private Coroutine DelayRespawnOnce;
 
     // Update is called once per frame
     void Update()

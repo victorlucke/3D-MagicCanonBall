@@ -12,7 +12,6 @@ public class Mage : NavMeshMovement
     public int spellCoolDown;
     private bool isCastCooldown;
     private bool isCastingAlready;
-    private bool isHurt;
 
     void OnEnable()
     {
@@ -37,7 +36,7 @@ public class Mage : NavMeshMovement
     {
         ResetHurtState();
         LookAtTarget();
-        
+
         if (currentTargetDetected)
             TryCastSpellsOnTarget(currentTargetDetected.transform);
     }
@@ -69,8 +68,8 @@ public class Mage : NavMeshMovement
     {
         if (timesBeingHit >= 3)
         {
-            isHurt = true;
-            AnimatorHurted(isHurt);
+            isUnhealth = false;
+            AnimatorHurted(isUnhealth);
         }
     }
 
@@ -79,9 +78,9 @@ public class Mage : NavMeshMovement
     /// </summary>
     void TryCastSpellsOnTarget(Transform myTargetLocation)
     {
-        AnimatorHurted(isHurt);
+        AnimatorHurted(isUnhealth);
 
-        if (!isHurt && myTargetLocation)
+        if (!isUnhealth && myTargetLocation)
         {
             UpdateSpellSlotRange((int)GameManager.Instance.DificultyMultiplayer());
             ChangeAnimationSpellsOnTarget(sawEnemy, myTargetLocation);
@@ -238,13 +237,16 @@ public class Mage : NavMeshMovement
     /// <param name="spell">prefab of the spell you want to cast</param>
     public void CastSpell(GameObject spell)
     {
-        if (currentTargetDetected.transform != null)
+        if (GameManager.Instance.CurrentGameStatus != GameManager.GameStatus.Cutscene)
         {
-            if (CheckSpellSlots(spellSlots) >= 0)
+            if (currentTargetDetected.transform != null)
             {
-                spellSlots[CheckSpellSlots(spellSlots)] = Instantiate(spell, currentTargetDetected.transform.position, spell.transform.rotation);
+                if (CheckSpellSlots(spellSlots) >= 0)
+                {
+                    spellSlots[CheckSpellSlots(spellSlots)] = Instantiate(spell, currentTargetDetected.transform.position, spell.transform.rotation);
+                }
             }
-        }
+        }else Debug.Log("Game in Cutscene, cant cast spell");
     }
 
     /// <summary>
@@ -261,6 +263,7 @@ public class Mage : NavMeshMovement
                 return i;
             }
         }
+
         return -1;
     }
 }

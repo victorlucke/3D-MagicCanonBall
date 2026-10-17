@@ -12,15 +12,6 @@ public abstract class RespawnPoint : MagicFurniture
     protected GameObject respawnReference;
 
     /// <summary>
-    /// respawn the prefabToRespawn Object in respawnLocation
-    /// </summary>
-    protected void Respawn()
-    {
-        if (VerifyIsToRespawn())
-            respawnReference = Instantiate(prefabToRespawn, respawnLocation.transform.position, prefabToRespawn.transform.rotation);
-    }
-
-    /// <summary>
     /// wait some time before iniciate respawn
     /// </summary>
     /// <param name="waitTime">time to wait</param>
@@ -47,5 +38,14 @@ public abstract class RespawnPoint : MagicFurniture
             return true;
 
         else return false;
+    }
+
+    /// <summary>
+    /// respawn the prefabToRespawn Object in respawnLocation
+    /// </summary>
+    protected void Respawn()
+    {
+        if (VerifyIsToRespawn())
+            respawnReference = Instantiate(prefabToRespawn, respawnLocation.transform.position, prefabToRespawn.transform.rotation);
     }
 }
